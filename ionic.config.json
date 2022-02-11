@@ -1,0 +1,7 @@
+{
+  "name": "memberz-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
