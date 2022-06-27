@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Discover Organisations
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list lines="full">
+    <!-- <ion-list-header>Recommended Organisations</ion-list-header> -->
+
+    <ion-item detail="false" button *ngFor="let organisation of (organisations$ | async)">
+      <ngx-avatar slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatar>
+
+      <ion-label>
+        <h6>{{ organisation.name }}</h6>
+        <p class="mb-0">{{ organisation.organisation_type.name }}</p>
+      </ion-label>
+
+      <ion-button slot="end">Join</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-content fullscreen="true">
+
+  <ion-list lines="none">
+    <ion-item class="welcome-item">
+      <ngx-avatar [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="start"></ngx-avatar>
+      <ion-label>
+        {{ 'Welcome' }} {{ user?.member?.first_name }}!
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
+    <ion-card *ngFor="let membership of memberships">
+      <ion-card-header color="primary">
+        <ion-card-subtitle>{{ membership.organisation?.name }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-justify-content-start">
+              <h5>{{ membership.category?.name }}</h5>
+            </ion-col>
+            <ion-col class="ion-text-end"><h5>{{ membership.organisation_no }}</h5></ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col class="ion-justify-content-start">
+              <h5>Membership Expires:</h5>
+            </ion-col>
+            <ion-col size="4" class="ion-text-end">
+              <h5><ion-text color="success">NEVER</ion-text></h5>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="ion-padding ion-text-center ion-align-items-center">
+      <ion-spinner name="crescent" class="ion-margin-end"></ion-spinner>
+      <ion-text>Loading Your Memberships</ion-text>
+    </div>
+  </ng-template>
+
+
+  <div class="ion-padding">
+    <ion-button expand="block" (click)="discover()">{{ 'See More Organisations' }}</ion-button>
+  </div>
+</ion-content>
