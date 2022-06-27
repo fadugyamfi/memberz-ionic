@@ -8,7 +8,7 @@ export class StorageService {
   public keys: string[] = [];
   public engine = localStorage;
 
-  constructor() {}
+  constructor() { }
 
   /**
    * Changes the storage engine to localStorage
@@ -102,10 +102,21 @@ export class StorageService {
       try {
         const result = JSON.parse(this.engine.getItem(key));
         return this.isResultExpired(result) === false;
-      } catch (e) {}
+      } catch (e) { }
     }
 
     return false;
+  }
+
+  /**
+   * Removes all data from storage except the items specified
+   *
+   * @param exceptions Array of keys to exclude
+   */
+  public clearAll(exceptions: string[]) {
+    this.keys
+      .filter(key => exceptions.indexOf(key) === -1)
+      .forEach(key => this.remove(key));
   }
 
   /**
@@ -119,22 +130,12 @@ export class StorageService {
 
   /**
    * Store an internal cache of items in localstorage
+   *
    * @param key Identifier of item stored
    */
-  private storeKey(key: string) {
+  private storeKey(key: string): void {
     if (this.keys.indexOf(key) === -1) {
       this.keys.push(key);
     }
-  }
-
-  /**
-   * Removes all data from storage except the items specified
-   *
-   * @param exceptions Array of keys to exclude
-   */
-  public clearAll(exceptions: string[]) {
-    this.keys
-      .filter(key => exceptions.indexOf(key) === -1)
-      .forEach(key => this.remove(key));
   }
 }

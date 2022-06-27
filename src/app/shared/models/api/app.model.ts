@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import * as moment from 'moment';
 
 export class AppModel {

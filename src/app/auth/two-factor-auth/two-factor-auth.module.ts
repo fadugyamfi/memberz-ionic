@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AuthPageRoutingModule } from './auth-routing.module';
+import { TwoFactorAuthPageRoutingModule } from './two-factor-auth-routing.module';
 
-import { AuthPage } from './auth.page';
+import { TwoFactorAuthPage } from './two-factor-auth.page';
 
 @NgModule({
   imports: [
@@ -14,10 +14,8 @@ import { AuthPage } from './auth.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    AuthPageRoutingModule
+    TwoFactorAuthPageRoutingModule
   ],
-  declarations: [
-    AuthPage,
-  ]
+  declarations: [TwoFactorAuthPage]
 })
-export class AuthPageModule {}
+export class TwoFactorAuthPageModule {}

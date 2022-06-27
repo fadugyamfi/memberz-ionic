@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserNotLoggedInGuard } from '../shared/guards/user-not-logged-in.guard';
 
 import { AuthPage } from './auth.page';
-import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: AuthPage
-  // },
   {
     path: 'login',
-    component: LoginComponent
+    component: AuthPage,
+    canActivate: [UserNotLoggedInGuard]
   },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  }
+  },
+  {
+    path: '2fa',
+    loadChildren: () => import('./two-factor-auth/two-factor-auth.module').then( m => m.TwoFactorAuthPageModule),
+    canActivate: [UserNotLoggedInGuard]
+  },
 ];
 
 @NgModule({

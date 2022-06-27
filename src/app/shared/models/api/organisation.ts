@@ -1,3 +1,6 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/naming-convention */
 
 import { AppModel } from './app.model';
 import { OrganisationSubscription } from './organisation-subscription';
@@ -11,32 +14,32 @@ export class Organisation extends AppModel {
   public email: string;
   public phone: string;
   public logo: string;
-  private _activeSubscription: OrganisationSubscription;
-  private _organisationType: OrganisationType;
   public country_id: number;
   public currency_id: number;
   public slug: string;
   public address: string;
   public city: string;
   public state: string;
+  private _activeSubscription: OrganisationSubscription;
+  private _organisationType: OrganisationType;
 
   constructor(data) {
     super(data);
-  }
-
-  set active_subscription(value) {
-    this._activeSubscription = value ? new OrganisationSubscription(value) : null;
   }
 
   get active_subscription(): OrganisationSubscription {
     return this._activeSubscription;
   }
 
-  set organisation_type(value) {
-    this._organisationType = value ? new OrganisationType(value) : null;
+  set active_subscription(value) {
+    this._activeSubscription = value ? new OrganisationSubscription(value) : null;
   }
 
   get organisation_type(): OrganisationType {
     return this._organisationType;
+  }
+
+  set organisation_type(value) {
+    this._organisationType = value ? new OrganisationType(value) : null;
   }
 }

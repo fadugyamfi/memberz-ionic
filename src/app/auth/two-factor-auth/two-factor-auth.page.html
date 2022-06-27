@@ -1,14 +1,13 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar>
-    <ion-title>auth</ion-title>
+    <ion-title>two-factor-auth</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content>
-
   <div class="fullheight xc vcs">
 
-    <ion-card class="w-90">
+    <ion-card class="w-100" [formGroup]="twoFactorAuthForm">
       <ion-card-content>
 
         <ion-grid>
@@ -17,13 +16,10 @@
               <ion-grid>
                 <ion-row class="ion-align-items-center ion-justify-content-center">
                   <ion-col>
-                    <ion-input placeholder="Username"></ion-input>
-                  </ion-col>
-                </ion-row>
-
-                <ion-row class="ion-align-items-center ion-justify-content-center">
-                  <ion-col>
-                    <ion-input type="password" placeholder="Password"></ion-input>
+                    <ion-item>
+                      <ion-label position="stacked">Two Factor Auth Code</ion-label>
+                      <ion-input formControlName="code"></ion-input>
+                    </ion-item>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -36,17 +32,8 @@
     </ion-card>
 
     <div class="w-90">
-      <ion-button expand="block" (click)="doLogin()">Login</ion-button>
+      <ion-button expand="block" type="submit" (click)="validate()">Submit</ion-button>
     </div>
 
   </div>
-
-
-
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Footer</ion-title>
-  </ion-toolbar>
-</ion-footer>

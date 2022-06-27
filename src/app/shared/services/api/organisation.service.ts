@@ -84,4 +84,10 @@ export class OrganisationService extends APIService<Organisation> {
 
     return this.updateWithUpload(organisation, params, url);
   }
+
+  getRecommended(): Observable<Organisation[]> {
+    return this.get(`${this.url}/recommended`).pipe(
+      map((response: any[]) => response.map(data => new Organisation(data)))
+    );
+  }
 }

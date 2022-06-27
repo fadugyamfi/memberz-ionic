@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../shared/services/api/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,9 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthPage implements OnInit {
 
-  constructor() { }
+  public loginForm: FormGroup;
+  public emailLogin = false;
 
-  ngOnInit() {
+  constructor(
+    public router: Router,
+    private fb: FormBuilder,
+    public authService: AuthService
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', Validators.required],
+      rememberMe: [true]
+    });
+  }
+
+  ngOnInit() { }
+
+  // Simple Login
+  doLogin() {
+    const login = this.loginForm.value;
+
+    if (!this.emailLogin) {
+      // login.username = login.username.e164Number;
+    }
+
+    this.authService.login(login.username, login.password, login.remember_me);
   }
 
 }

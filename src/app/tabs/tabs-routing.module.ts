@@ -8,8 +8,8 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'discover',
-        loadChildren: () => import('../discover/discover.module').then(m => m.DiscoverPageModule)
+        path: 'events',
+        loadChildren: () => import('../events/events.module').then(m => m.EventsPageModule)
       },
       {
         path: 'profile',
@@ -20,15 +20,19 @@ const routes: Routes = [
         loadChildren: () => import('../payments/payments.module').then(m => m.PaymentsPageModule)
       },
       {
+        path: 'memberships',
+        loadChildren: () => import('../your-memberships/your-memberships.module').then(m => m.YourMembershipsPageModule)
+      },
+      {
         path: '',
-        redirectTo: '/tabs/pages/discover',
+        redirectTo: '/tabs/pages/memberships',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/pages/discover',
+    redirectTo: '/tabs/pages/memberships',
     pathMatch: 'full'
   }
 ];

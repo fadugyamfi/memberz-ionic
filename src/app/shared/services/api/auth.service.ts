@@ -39,7 +39,6 @@ export class AuthService extends APIService<MemberAccount> {
     public storage: StorageService,
     public router: Router,
     public organisationService: OrganisationService,
-    // public modalService: NgbModal,
     public translate: TranslateService
   ) {
     super(http, events, storage);
@@ -102,9 +101,12 @@ export class AuthService extends APIService<MemberAccount> {
   }
 
 
-  public validateTwoFactorAuthLogin(username: string, password: string, rememberMe: boolean = false, code: string) {
+  public validateTwoFactorAuthLogin(code: string) {
+    const login = this.storage.get('loginUser');
+    const rememberMe = this.storage.get('remember_me');
+
     const DURATION = rememberMe ? this.DAYS_TO_REMEMBER_USER : 1;
-    const params = { username, password, code };
+    const params = { username: login.username, password: login.password, code };
 
     return this.post(`${this.url}/2fa-validate`, params).subscribe({
       next: (res) => {
@@ -121,13 +123,13 @@ export class AuthService extends APIService<MemberAccount> {
     });
   }
 
-  public performLogin(res, DURATION, rememberMe) {
+  public performLogin(res: object, DURATION: number, rememberMe: boolean) {
     this.storage.remove('loginUser');
     this.storage.remove('remember_me');
     this.storage.set('auth', res, DURATION, 'day');
 
     this.me(rememberMe).subscribe({
-      next: () => this.router.navigate(['/portal/home']),
+      next: () => this.router.navigate(['/tabs']),
       error: () => {
         Swal.fire(
           this.translate.instant('Account Info Not Found'),
@@ -228,7 +230,6 @@ export class AuthService extends APIService<MemberAccount> {
 
   public clearAndRedirect() {
     Swal.close();
-    // this.modalService.dismissAll();
     this.clearSession();
     this.router.navigate(['/auth/login']);
   }
