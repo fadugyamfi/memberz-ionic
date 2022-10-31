@@ -6,6 +6,7 @@ import { EventsPage } from './events.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { EventsPageRoutingModule } from './events-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { EventsPageRoutingModule } from './events-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    EventsPageRoutingModule
+    EventsPageRoutingModule,
+    SharedModule
   ],
   declarations: [EventsPage]
 })

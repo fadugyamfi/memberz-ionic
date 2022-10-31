@@ -7,6 +7,8 @@ import { ProfilePage } from './profile.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    ProfilePageRoutingModule
+    ProfilePageRoutingModule,
+    SharedModule,
+    NgxScannerQrcodeModule
   ],
   declarations: [ProfilePage]
 })

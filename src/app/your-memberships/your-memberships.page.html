@@ -1,4 +1,3 @@
-
 <ion-menu contentId="main-content">
   <ion-header>
     <ion-toolbar>
@@ -20,7 +19,8 @@
         </ion-label>
       </ion-title>
 
-      <ngx-avatar [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding"></ngx-avatar>
+      <ngx-avatar [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
+      </ngx-avatar>
     </ion-toolbar>
 
     <ion-toolbar>
@@ -38,34 +38,28 @@
 
   <ion-content class="pb-50" [ngClass]="{ 'd-block': showMemberships(), 'd-none': !showMemberships() }">
     <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
-      <ion-card *ngFor="let membership of memberships">
-        <ion-card-header color="primary">
-          <ion-card-subtitle>{{ membership.organisation?.name }}</ion-card-subtitle>
-        </ion-card-header>
+      <ion-card *ngFor="let membership of memberships" class="shadow-sm">
 
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-                <h5>{{ membership.category?.name }}</h5>
-              </ion-col>
-              <ion-col class="ion-text-end">
-                <h5>{{ membership.organisation_no }}</h5>
-              </ion-col>
-            </ion-row>
+        <ng-container *ngIf="membership?.organisation_no">
+          <ion-card-content class="ion-no-padding">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3">
+                  <qr-code  [value]="'omi-' + membership?.organisation_no" size="80" errorCorrectionLevel="M"></qr-code>
+                </ion-col>
 
-            <ion-row>
-              <ion-col class="ion-justify-content-start">
-                <h5>Membership Expires:</h5>
-              </ion-col>
-              <ion-col size="4" class="ion-text-end">
-                <h5>
-                  <ion-text color="success">NEVER</ion-text>
-                </h5>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
+                <ion-col class="ion-padding-top">
+                  <div class="fw-semibold text-dark">{{ membership.organisation?.name }}</div>
+                  <div class="">{{ membership.category?.name }}</div>
+                  <div class="">{{ membership.organisation_no }}</div>
+                  <!-- <div>Expires: <ion-text color="success">NEVER</ion-text></div> -->
+                </ion-col>
+              </ion-row>
+
+            </ion-grid>
+          </ion-card-content>
+        </ng-container>
+
       </ion-card>
     </ng-container>
 

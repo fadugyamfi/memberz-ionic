@@ -4,22 +4,37 @@
 
 import * as moment from 'moment';
 import { AppModel } from './app.model';
+import { Organisation } from './organisation';
 import { OrganisationCalendar } from './organisation-calendar';
 
 export class OrganisationEvent extends AppModel {
 
-  public id: any;
+  public id: string|number;
+  public organisation_id: number;
   public event_name: string;
   public short_description: string;
   public long_description: string;
   public start_dt: any;
   public end_dt: any;
+  private _organisation: Organisation;
   public _organisation_calendar;
   public all_day: boolean;
   public sessions: any;
+  public venue: string;
+  public photo: string;
+  public photo_thumbnail: string;
+  public photo_url: string;
 
   constructor(data) {
     super(data);
+  }
+
+  get organisation() {
+    return this._organisation;
+  }
+
+  set organisation(value) {
+    this._organisation = value ? new Organisation(value) : null;
   }
 
   get organisation_calendar(): OrganisationCalendar {
