@@ -19,8 +19,8 @@
         </ion-label>
       </ion-title>
 
-      <ngx-avatar [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
-      </ngx-avatar>
+      <ngx-avatars [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
+      </ngx-avatars>
     </ion-toolbar>
 
     <ion-toolbar>
@@ -76,7 +76,7 @@
     <ng-container *ngIf="(organisations$ | async) as organisations; else orgLoading">
       <ion-list lines="full">
         <ion-item detail="false" button *ngFor="let organisation of organisations">
-          <ngx-avatar slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatar>
+          <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatars>
 
           <ion-label>
             <h6>{{ organisation.name }}</h6>
