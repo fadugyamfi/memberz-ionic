@@ -15,7 +15,7 @@
     <!-- <ion-list-header>Recommended Organisations</ion-list-header> -->
 
     <ion-item detail="false" button *ngFor="let organisation of (organisations$ | async)">
-      <ngx-avatar slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatar>
+      <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatars>
 
       <ion-label>
         <h6>{{ organisation.name }}</h6>

@@ -1,13 +1,63 @@
-<ion-header [translucent]="false">
-  <ion-toolbar>
-    <ion-title>
-      Your Events
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu contentId="event-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
 
-<ion-content [fullscreen]="true">
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="event-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+      <ion-title>
+        <ion-label>
+          Your Events
+        </ion-label>
+      </ion-title>
+
+      <ngx-avatars [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
+      </ngx-avatars>
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+
+    <ng-container *ngIf="(events$ | async) as events; else loading">
+      <ion-list lines="full">
+        <ion-item *ngIf="events.length === 0">
+          <ion-label class="ion-text-center">
+            No Upcoming Events
+          </ion-label>
+        </ion-item>
+
+        <ng-container *ngIf="events.length > 0">
+          <ion-item detail="true" button *ngFor="let event of events" (click)="loadEventDetails(event)">
+              <ion-label color="dark">
+                <h5 class="fw-semibold">{{ event.event_name }}</h5>
+                <p>{{ event.dates }} - {{ event.times }}</p>
+                <p>{{ event.venue }}</p>
+              </ion-label>
+          </ion-item>
+        </ng-container>
+
+      </ion-list>
+    </ng-container>
 
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+    <ng-template #loading>
+      <div class="ion-padding ion-text-center ion-align-items-center">
+        <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+        <ion-text>Loading Upcoming Events</ion-text>
+      </div>
+    </ng-template>
+
+  </ion-content>
+</div>

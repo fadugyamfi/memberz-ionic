@@ -13,29 +13,28 @@ import { AppComponent } from './app.component';
 
 // AoT requires an exported function for factories
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-export function HttpLoaderFactory(http: HttpClient) {
+export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot({
-      mode: 'ios'
+      mode: 'md'
     }),
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: (createTranslateLoader),
         deps: [HttpClient]
       },
     }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -7,6 +7,7 @@ import { OrganisationMember } from '../../models/api/organisation-member';
 import { StorageService } from '../storage.service';
 import { OrganisationService } from './organisation.service';
 import { Observable } from 'rxjs';
+import { Organisation } from '../../models/api/organisation';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,17 @@ export class OrganisationMemberService extends APIService<OrganisationMember> {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const params = { member_id: memberId, contain: 'organisation' };
 
-    return this.get(`${this.url}`, params).pipe(
+    return this.get(`/members/${memberId}/memberships`, params).pipe(
       map((response: ApiResponse) => response.data.map(data => new OrganisationMember(data)))
+    );
+  }
+
+  getUserOrganisations(memberId: number): Observable<Organisation[]> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const params = { member_id: memberId, contain: 'organisation' };
+
+    return this.get(`/members/${memberId}/organisations`, params).pipe(
+      map((response: ApiResponse) => response.data.map(data => new Organisation(data)))
     );
   }
 

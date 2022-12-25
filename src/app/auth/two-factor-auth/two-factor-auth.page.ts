@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
@@ -13,11 +13,11 @@ import { StorageService } from '../../shared/services/storage.service';
 })
 export class TwoFactorAuthPage implements OnInit {
 
-  public twoFactorAuthForm: FormGroup;
+  public twoFactorAuthForm: UntypedFormGroup;
 
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public storage: StorageService,
     public translate: TranslateService,
     public authService: AuthService

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/api/auth.service';
 
@@ -10,12 +10,12 @@ import { AuthService } from '../shared/services/api/auth.service';
 })
 export class AuthPage implements OnInit {
 
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
   public emailLogin = false;
 
   constructor(
     public router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public authService: AuthService
   ) {
     this.loginForm = this.fb.group({
