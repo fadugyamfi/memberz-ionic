@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
+import { NgxScannerQrcodeComponent, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { OrganisationEvent } from '../../shared/models/api/organisation-event';
@@ -97,9 +97,11 @@ export class EventDetailsPage implements OnInit {
     this.scanning = false;
   }
 
-  async onCodeScanned(code: string) {
+  async onCodeScanned(code: ScannerQRCodeResult) {
 
-    if( this.capturing || code == null || code === '' || !this.isValidMemberCode(code) ) {
+    console.log(code);
+
+    if( this.capturing || code == null || !this.isValidMemberCode(code.data) ) {
       return;
     }
 
@@ -115,7 +117,7 @@ export class EventDetailsPage implements OnInit {
     Swal.showLoading();
 
     this.eventService.registerMemberByQRCode({
-      membership_uuid: code,
+      membership_uuid: code.data,
       organisation_id: this.attendanceSession.organisation_id,
       organisation_event_session_id: this.attendanceSession.id,
       organisation_event_id: this.attendanceSession.organisation_event_id

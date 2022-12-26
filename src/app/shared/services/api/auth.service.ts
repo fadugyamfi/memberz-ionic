@@ -91,7 +91,7 @@ export class AuthService extends APIService<MemberAccount> {
       error: () => {
         Swal.fire(
           this.translate.instant('Login Failed'),
-          this.translate.instant('Username or Password may be incorrect') + '.' + this.translate.instant('Please try again'),
+          this.translate.instant('Username or Password may be incorrect') + '. ' + this.translate.instant('Please try again'),
           'error'
         );
         this.requesting = false;
