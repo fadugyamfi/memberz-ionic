@@ -1,0 +1,44 @@
+<ion-modal #ionModal [isOpen]="true" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="onCancel()">Back</ion-button>
+        </ion-buttons>
+        <ion-title>Find Member</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <form [formGroup]="searchForm" (submit)="onSearch()">
+        <ion-item>
+          <ion-input #search type="text" name="term" formControlName="term"
+                     placeholder="By phone number, membership id or name"></ion-input>
+
+          <div class="d-flex justify-content-end py-3">
+            <ion-button type="submit" fill="clear">
+              <ion-icon name="search"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-item>
+      </form>
+
+      <ion-list lines="full">
+        <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
+          <ion-item *ngFor="let membership of memberships">
+            <ngx-avatars slot="start" [src]="membership.member.thumbnail()" [name]="membership.name()" size="40"></ngx-avatars>
+
+            <ion-label>{{ membership.member.lastThenFirstName() }}</ion-label>
+          </ion-item>
+        </ng-container>
+
+        <ng-template #loading>
+          <ion-item class="ion-text-center">
+            <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+            <ion-text>Searching</ion-text>
+          </ion-item>
+        </ng-template>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

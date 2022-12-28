@@ -1,0 +1,22 @@
+<h4 class="ion-text-center">Scan Member Code To Register</h4>
+
+<!-- For camera -->
+<section>
+  <ngx-scanner-qrcode #scanner (event)="onCodeScanned($event)"></ngx-scanner-qrcode>
+</section>
+
+<!-- data  -->
+<!-- <p class="data ion-text-center">{{ scanner.data | async }}</p> -->
+
+<!-- Loading -->
+<p class="ion-text-center" *ngIf="scanner.isLoading">
+  <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+  Readying Scanner
+</p>
+
+<!-- start -->
+<div class="ion-text-center">
+  <ion-button expand="block" (click)="hideScanner()">
+    Close
+  </ion-button>
+</div>

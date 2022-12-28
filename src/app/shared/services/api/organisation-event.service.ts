@@ -31,11 +31,7 @@ export class OrganisationEventService extends APIService<OrganisationEvent> {
   }
 
   public getAttendees(event: OrganisationEvent, options = {}): Observable<OrganisationEventAttendee[]> {
-    const headers = {
-      'X-Tenant-Id': event.organisation?.uuid
-    };
-
-    return this.get(`${this.url}/${event.id}/attendees`, options, headers).pipe(
+    return this.get(`${this.url}/${event.id}/attendees`, options).pipe(
       map((response: ApiResponse) => response.data.map(data => new OrganisationEventAttendee(data)))
     );
   }

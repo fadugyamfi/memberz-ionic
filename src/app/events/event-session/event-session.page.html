@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="getEventDetailsURL()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ session?.session_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="scanning">
+  <app-card-scanner (scan)="onCodeScanned($event)" (close)="onHideScanner()"></app-card-scanner>
+</ion-content>
+
+<ion-content>
+  <ion-list lines="full">
+    <ion-list-header>
+      <ion-label>Registration</ion-label>
+
+      <ion-button (click)="scanQRCode()" color="primary">
+        <ion-icon name="camera" class="me-1"></ion-icon>
+        <ion-text>Scan</ion-text>
+      </ion-button>
+
+      <ion-button (click)="searchMemberships()" color="primary">
+        <ion-icon name="search" class="me-1"></ion-icon>
+        <ion-text>Search</ion-text>
+      </ion-button>
+    </ion-list-header>
+
+    <ion-list-header>
+      <ion-label>Recent Attendees</ion-label>
+    </ion-list-header>
+
+    <ng-container *ngIf="recentAttendees; else loading">
+      <ion-item *ngFor="let attendee of recentAttendees">
+        <ion-label>{{ attendee.member.lastThenFirstName() }}</ion-label>
+      </ion-item>
+    </ng-container>
+
+    <ng-template #loading>
+      <ion-item class="ion-text-center">
+        <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+        <ion-text>Loading Attendees</ion-text>
+      </ion-item>
+    </ng-template>
+  </ion-list>
+</ion-content>
+
+<app-member-search *ngIf="searching" (close)="searching = false"></app-member-search>

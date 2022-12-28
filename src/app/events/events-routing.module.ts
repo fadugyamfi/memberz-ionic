@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: ':id',
     loadChildren: () => import('./event-details/event-details.module').then( m => m.EventDetailsPageModule)
+  },
+  {
+    path: ':id/sessions/:session_id',
+    loadChildren: () => import('./event-session/event-session.module').then( m => m.EventSessionPageModule)
   }
 ];
 
