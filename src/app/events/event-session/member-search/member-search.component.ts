@@ -19,8 +19,10 @@ export class MemberSearchComponent implements OnInit {
   @ViewChild('search', { static: false }) searchElement: IonInput;
 
   @Output() close: EventEmitter<any> = new EventEmitter();
+  @Output() register: EventEmitter<any> = new EventEmitter();
 
   public memberships$: Observable<OrganisationMember[]> = of([]);
+  public open = true;
 
   constructor(
     public membershipService: OrganisationMemberService
@@ -51,5 +53,10 @@ export class MemberSearchComponent implements OnInit {
 
   onSearch() {
     this.memberships$ = this.membershipService.findMembers(this.searchForm.value, 1, 30);
+  }
+
+  onSelect(membership: OrganisationMember) {
+    this.modal.dismiss(null, 'searched');
+    setTimeout(() => this.register.emit(membership), 200);
   }
 }

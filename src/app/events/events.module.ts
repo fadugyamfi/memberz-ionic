@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { EventsPageRoutingModule } from './events-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ExploreContainerComponentModule,
     EventsPageRoutingModule,
-    SharedModule
+    SharedModule,
+    MainMenuComponent
   ],
   declarations: [EventsPage]
 })

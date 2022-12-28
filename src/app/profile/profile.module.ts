@@ -9,6 +9,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
     ExploreContainerComponentModule,
     ProfilePageRoutingModule,
     SharedModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
+    MainMenuComponent
   ],
   declarations: [ProfilePage]
 })

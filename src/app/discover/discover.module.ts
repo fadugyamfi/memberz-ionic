@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { DiscoverPageRoutingModule } from './discover-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     FormsModule,
     ExploreContainerComponentModule,
-    DiscoverPageRoutingModule
+    DiscoverPageRoutingModule,
+    MainMenuComponent
   ],
   declarations: [DiscoverPage]
 })

@@ -8,6 +8,7 @@ import { YourMembershipsPageRoutingModule } from './your-memberships-routing.mod
 
 import { YourMembershipsPage } from './your-memberships.page';
 import { SharedModule } from '../shared/shared.module';
+import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     IonicModule,
     YourMembershipsPageRoutingModule,
-    SharedModule
+    SharedModule,
+    MainMenuComponent
   ],
   declarations: [YourMembershipsPage]
 })

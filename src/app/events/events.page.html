@@ -1,13 +1,4 @@
-<ion-menu contentId="event-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-
-  </ion-content>
-</ion-menu>
+<app-main-menu [contentId]="'event-content'"></app-main-menu>
 
 <div class="ion-page" id="event-content">
   <ion-header>
@@ -40,11 +31,11 @@
 
         <ng-container *ngIf="events.length > 0">
           <ion-item detail="true" button *ngFor="let event of events" (click)="loadEventDetails(event)">
-              <ion-label color="dark">
-                <h5 class="fw-semibold">{{ event.event_name }}</h5>
-                <p>{{ event.dates }} - {{ event.times }}</p>
-                <p>{{ event.venue }}</p>
-              </ion-label>
+            <ion-label color="dark">
+              <h2 class="fw-semibold">{{ event.event_name }}</h2>
+              <p>{{ event.dates }} - {{ event.times }}</p>
+              <p>{{ event.venue }}</p>
+            </ion-label>
           </ion-item>
         </ng-container>
 

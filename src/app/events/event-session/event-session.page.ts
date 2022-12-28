@@ -5,9 +5,15 @@ import Swal from 'sweetalert2';
 import { OrganisationEvent } from '../../shared/models/api/organisation-event';
 import { OrganisationEventAttendee } from '../../shared/models/api/organisation-event-attendee';
 import { OrganisationEventSession } from '../../shared/models/api/organisation-event-session';
+import { OrganisationMember } from '../../shared/models/api/organisation-member';
+import { OrganisationEventAttendeeService } from '../../shared/services/api/organisation-event-attendee.service';
 import { OrganisationEventSessionService } from '../../shared/services/api/organisation-event-session.service';
 import { OrganisationEventService } from '../../shared/services/api/organisation-event.service';
 import { OrganisationService } from '../../shared/services/api/organisation.service';
+
+const Alert = Swal.mixin({
+  heightAuto: false
+});
 
 @Component({
   selector: 'app-event-session',
@@ -30,6 +36,7 @@ export class EventSessionPage implements OnInit {
     public eventService: OrganisationEventService,
     public organisationService: OrganisationService,
     public sessionService: OrganisationEventSessionService,
+    public attendeeService: OrganisationEventAttendeeService,
     public route: ActivatedRoute,
     public router: Router
   ) { }
@@ -54,7 +61,7 @@ export class EventSessionPage implements OnInit {
         return;
       }
 
-      this.sessionService.getById(sessionId).subscribe({
+      this.sessionService.getById(sessionId, { count: ['attendees'].join(',') }).subscribe({
         next: (session) => {
           this.session = session;
           this.fetchAttendees();
@@ -99,32 +106,29 @@ export class EventSessionPage implements OnInit {
     }
 
     if( this.captures.indexOf(code) > -1 ) {
-      Swal.fire('Registered', 'Please try again later', 'error');
+      Alert.fire('Already Registered', 'Please register a different guest', 'error');
       return;
     }
 
-    // this.capturing = true;
-    // this.hideScanner();
-
-    Swal.fire('Registering', 'Please wait...', 'info');
-    Swal.showLoading();
+    Alert.fire('Registering', 'Please wait...', 'info');
+    Alert.showLoading();
 
     this.eventService.registerMemberByQRCode({
       membership_uuid: code,
-      organisation_id: this.attendanceSession.organisation_id,
-      organisation_event_session_id: this.attendanceSession.id,
-      organisation_event_id: this.attendanceSession.organisation_event_id
+      organisation_id: this.session.organisation_id,
+      organisation_event_session_id: this.session.id,
+      organisation_event_id: this.session.organisation_event_id
     }).subscribe({
       next: (attendee: OrganisationEventAttendee) => {
         this.captures.push(code);
         this.recentAttendees.unshift(attendee);
 
-        Swal.fire('Registered', `${attendee.member.name()} registed successfully`, 'info');
-        Swal.hideLoading();
+        Alert.fire('Registered', `${attendee.member.name()} registed successfully`, 'info');
+        Alert.hideLoading();
       },
       error: (error) => {
-        Swal.fire('Registration Failed', `${error.error.message}`, 'error');
-        Swal.hideLoading();
+        Alert.fire('Registration Failed', `${error.error.message}`, 'error');
+        Alert.hideLoading();
       }
     });
 
@@ -152,6 +156,11 @@ export class EventSessionPage implements OnInit {
     this.recentAttendees.unshift(attendee);
   }
 
+  onMemberSelected(membership: OrganisationMember) {
+    this.searching = false;
+    this.onCodeScanned( membership.uuid );
+  }
+
   isAttendanceSessionSet() {
     return this.attendanceSession != null;
   }
@@ -159,5 +168,25 @@ export class EventSessionPage implements OnInit {
   setAttendanceSession(session) {
     this.attendanceSession = session;
     this.fetchAttendees();
+  }
+
+  removeAttendee(attendee: OrganisationEventAttendee) {
+    Alert.fire({
+      title: 'Remove Attendee',
+      text: 'Are you sure you want to remove this attendee from this event session?',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      showCancelButton: true
+    }).then(
+      (response) => {
+        if( response.isConfirmed ) {
+          this.attendeeService.remove(attendee);
+
+          const index = this.recentAttendees.findIndex(item => item.id === attendee.id);
+          this.recentAttendees.splice(index, 1);
+        }
+      }
+    );
   }
 }

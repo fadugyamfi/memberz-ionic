@@ -1,4 +1,4 @@
-<ion-modal #ionModal [isOpen]="true" (willDismiss)="onWillDismiss($event)">
+<ion-modal #ionModal [isOpen]="open" (willDismiss)="onWillDismiss($event)">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -25,7 +25,7 @@
 
       <ion-list lines="full">
         <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
-          <ion-item *ngFor="let membership of memberships">
+          <ion-item *ngFor="let membership of memberships" (click)="onSelect(membership)">
             <ngx-avatars slot="start" [src]="membership.member.thumbnail()" [name]="membership.name()" size="40"></ngx-avatars>
 
             <ion-label>{{ membership.member.lastThenFirstName() }}</ion-label>
