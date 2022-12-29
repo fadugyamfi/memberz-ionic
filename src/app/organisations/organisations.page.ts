@@ -9,11 +9,11 @@ import { OrganisationMemberService } from '../shared/services/api/organisation-m
 import { OrganisationService } from '../shared/services/api/organisation.service';
 
 @Component({
-  selector: 'app-your-memberships',
-  templateUrl: './your-memberships.page.html',
-  styleUrls: ['./your-memberships.page.scss'],
+  selector: 'app-organisations',
+  templateUrl: './organisations.page.html',
+  styleUrls: ['./organisations.page.scss'],
 })
-export class YourMembershipsPage implements OnInit {
+export class OrganisationsPage implements OnInit {
 
   public memberships$: Observable<OrganisationMember[]>;
   public user: MemberAccount;
@@ -29,17 +29,11 @@ export class YourMembershipsPage implements OnInit {
 
   ngOnInit() {
     this.loadUser();
-    this.fetchUserMemberships();
     this.fetchUserOrganisations();
   }
 
   loadUser() {
     this.user = this.authService.getLoggedInUser();
-  }
-
-  fetchUserMemberships() {
-    const user = this.authService.getLoggedInUser();
-    this.memberships$ = this.membershipService.getUserMemberships( user.member_id );
   }
 
   fetchUserOrganisations() {
@@ -61,5 +55,10 @@ export class YourMembershipsPage implements OnInit {
 
   setContent(event) {
     this.content = event.target.value;
+  }
+
+  loadOrganisation(organisation: Organisation) {
+    this.organisationService.setSelectedModel(organisation);
+    this.router.navigate(['/tabs/pages/organisations', organisation.id]);
   }
 }

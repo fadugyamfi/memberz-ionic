@@ -21,7 +21,11 @@ const routes: Routes = [
       },
       {
         path: 'memberships',
-        loadChildren: () => import('../your-memberships/your-memberships.module').then(m => m.YourMembershipsPageModule)
+        loadChildren: () => import('../memberships/memberships.module').then(m => m.MembershipsPageModule)
+      },
+      {
+        path: 'organisations',
+        loadChildren: () => import('../organisations/organisations.module').then( m => m.OrganisationsPageModule)
       },
       {
         path: '',

@@ -21,6 +21,10 @@
 
   <ion-content [fullscreen]="true">
 
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ng-container *ngIf="(events$ | async) as events; else loading">
       <ion-list lines="full">
         <ion-item *ngIf="events.length === 0">

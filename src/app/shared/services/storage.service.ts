@@ -38,7 +38,7 @@ export class StorageService {
   public set(key: string, value: any, duration: any = 1, unit = 'days') {
     const data = {
       created: moment().valueOf(),
-      data: typeof value === 'object' ? JSON.stringify(value) : value.toString(),
+      data: value,
       expires: moment().add(duration, unit).valueOf()
     };
 
@@ -69,12 +69,12 @@ export class StorageService {
       return null;
     }
 
-    try {
-      return JSON.parse(result.data);
-    } catch (e) {
-      // this.engine.removeItem(key);
-      return result && result.data;
-    }
+    return result && result.data;
+    // try {
+    //   return JSON.parse(result.data);
+    // } catch (e) {
+    //   // this.engine.removeItem(key);
+    // }
   }
 
   /**

@@ -18,7 +18,7 @@
       </ngx-avatars>
     </ion-toolbar>
 
-    <ion-toolbar>
+    <!-- <ion-toolbar>
       <ion-segment value="organisations" (ionChange)="setContent($event)">
         <ion-segment-button value="organisations">
           Organisations
@@ -28,12 +28,27 @@
           Memberships
         </ion-segment-button>
       </ion-segment>
-    </ion-toolbar>
+    </ion-toolbar> -->
   </ion-header>
 
-  <ion-content class="pb-50" [ngClass]="{ 'd-block': showMemberships(), 'd-none': !showMemberships() }">
+  <ion-content class="pb-50" >
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
-      <ion-card *ngFor="let membership of memberships" class="shadow-sm">
+      <ion-list lines="full">
+        <ion-item detail="true" button *ngFor="let membership of memberships" (click)="loadMembership(membership)">
+          <ngx-avatars slot="start" [src]="membership.organisation?.logo" [name]="membership.organisation?.name" size="40"></ngx-avatars>
+
+          <ion-label>
+            <h6 class="fw-semibold">{{ membership.organisation?.name }}</h6>
+            <p class="mb-0">{{ membership.category?.name }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <!-- <ion-card *ngFor="let membership of memberships" class="shadow-sm">
 
         <ng-container *ngIf="membership?.organisation_no">
           <ion-card-content class="ion-no-padding">
@@ -47,7 +62,7 @@
                   <div class="fw-semibold text-dark">{{ membership.organisation?.name }}</div>
                   <div class="">{{ membership.category?.name }}</div>
                   <div class="">{{ membership.organisation_no }}</div>
-                  <!-- <div>Expires: <ion-text color="success">NEVER</ion-text></div> -->
+                  <div>Expires: <ion-text color="success">NEVER</ion-text></div>
                 </ion-col>
               </ion-row>
 
@@ -55,7 +70,7 @@
           </ion-card-content>
         </ng-container>
 
-      </ion-card>
+      </ion-card> -->
     </ng-container>
 
     <ng-template #loading>
@@ -66,11 +81,11 @@
     </ng-template>
   </ion-content>
 
-  <ion-content class="ion-padding-top" [ngClass]="{ 'd-block': showOrganisations(), 'd-none': !showOrganisations() }">
+  <!-- <ion-content class="ion-padding-top" [ngClass]="{ 'd-block': showOrganisations(), 'd-none': !showOrganisations() }">
 
     <ng-container *ngIf="(organisations$ | async) as organisations; else orgLoading">
       <ion-list lines="full">
-        <ion-item detail="false" button *ngFor="let organisation of organisations">
+        <ion-item detail="true" button *ngFor="let organisation of organisations">
           <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatars>
 
           <ion-label>
@@ -94,5 +109,5 @@
     <div class="ion-padding">
       <ion-button expand="block" (click)="discover()">{{ 'See More Organisations' }}</ion-button>
     </div>
-  </ion-content>
+  </ion-content> -->
 </div>

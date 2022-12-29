@@ -4,21 +4,25 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { YourMembershipsPageRoutingModule } from './your-memberships-routing.module';
+import { OrganisationsPageRoutingModule } from './organisations-routing.module';
 
-import { YourMembershipsPage } from './your-memberships.page';
+import { OrganisationsPage } from './organisations.page';
 import { SharedModule } from '../shared/shared.module';
 import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    YourMembershipsPageRoutingModule,
+    OrganisationsPageRoutingModule,
     SharedModule,
     MainMenuComponent
   ],
-  declarations: [YourMembershipsPage]
+  declarations: [
+    OrganisationsPage,
+    DashboardComponent
+  ]
 })
-export class YourMembershipsPageModule {}
+export class OrganisationsPageModule {}

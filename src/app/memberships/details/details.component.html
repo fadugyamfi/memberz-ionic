@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/pages/memberships"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Membership Details</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ngx-avatars slot="start" [src]="organisation?.logo" [name]="organisation?.name" size="40" class="ms-4"></ngx-avatars>
+    <ion-title size="small">{{ organisation?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="shadow-sm" *ngIf="membership">
+      <ion-card-content class="ion-no-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <qr-code  [value]="membership?.uuid" size="80" errorCorrectionLevel="M"></qr-code>
+            </ion-col>
+
+            <ion-col class="ion-padding-top">
+              <!-- <div class="fw-semibold text-dark">{{ membership.organisation?.name }}</div> -->
+              <div class="">{{ membership.category?.name }}</div>
+              <div class="">{{ membership.organisation_no }}</div>
+              <div>Expires: <ion-text color="success">NEVER</ion-text></div>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-card-content>
+
+  </ion-card>
+</ion-content>
