@@ -1,5 +1,12 @@
 <h4 class="ion-text-center">Scan Member Code To Register</h4>
 
+<!-- start -->
+<div class="ion-text-center">
+  <ion-button expand="block" (click)="hideScanner()">
+    Close
+  </ion-button>
+</div>
+
 <!-- For camera -->
 <section>
   <ngx-scanner-qrcode #scanner (event)="onCodeScanned($event)"></ngx-scanner-qrcode>
@@ -13,10 +20,3 @@
   <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
   Readying Scanner
 </p>
-
-<!-- start -->
-<div class="ion-text-center">
-  <ion-button expand="block" (click)="hideScanner()">
-    Close
-  </ion-button>
-</div>
