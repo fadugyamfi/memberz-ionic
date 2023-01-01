@@ -246,11 +246,22 @@ export class APIService<T extends AppModel> {
   }
 
   public getSelectedModel(): any {
-    return this.selectedModel;
+    let model = this.selectedModel;
+
+    if( !model ) {
+      model = this.storage.get(`${this.model_name.toLowerCase()}_selected`);
+    }
+
+    return model;
   }
 
-  public setSelectedModel(model) {
+  public setSelectedModel(model, cache = false) {
     this.selectedModel = model;
+
+    if( cache ) {
+      this.storage.set(`${this.model_name.toLowerCase()}_selected`, model);
+    }
+
     this.events.trigger(`${this.model_name}:selected`, model);
   }
 

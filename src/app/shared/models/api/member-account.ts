@@ -42,11 +42,11 @@ export class MemberAccount extends AppModel {
   }
 
   photoURL() {
-    return this.member.member_image && this.member.member_image[0] && this.member.member_image[0].url;
+    return this.member.profile_photo && this.member.profile_photo.url;
   }
 
   thumbPhotoURL() {
-    return this.member.member_image && this.member.member_image[0] && this.member.member_image[0].thumb_url;
+    return this.member.profile_photo && this.member.profile_photo.thumb_url;
   }
 
   isOrganisationAdmin(organisation_id: number) {

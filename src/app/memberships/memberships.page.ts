@@ -78,8 +78,9 @@ export class MembershipsPage implements OnInit {
   }
 
   loadMembership(membership: OrganisationMember) {
-    this.membershipService.setSelectedModel(membership);
-    this.organisationService.setSelectedModel(membership.organisation);
+    this.membershipService.setSelectedModel(membership, true);
+    this.organisationService.setSelectedModel(membership.organisation, true);
+    this.organisationService.setActiveOrganisation(membership.organisation);
     this.router.navigate(['/tabs/pages/memberships', membership.id]);
   }
 

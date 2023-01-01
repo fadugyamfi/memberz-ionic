@@ -10,6 +10,10 @@ import { MembershipsPage } from './memberships.page';
 import { SharedModule } from '../shared/shared.module';
 import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
 import { DetailsComponent } from './details/details.component';
+import { GroupsComponent } from './groups/groups.component';
+import { AnniversariesComponent } from './anniversaries/anniversaries.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { DirectoryComponent } from './directory/directory.component';
 
 @NgModule({
   imports: [
@@ -22,7 +26,11 @@ import { DetailsComponent } from './details/details.component';
   ],
   declarations: [
     MembershipsPage,
-    DetailsComponent
+    DetailsComponent,
+    GroupsComponent,
+    AnniversariesComponent,
+    PaymentsComponent,
+    DirectoryComponent
   ]
 })
 export class MembershipsPageModule {}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Organisation } from '../../shared/models/api/organisation';
@@ -14,11 +15,13 @@ export class DetailsComponent implements OnInit {
 
   public organisation: Organisation;
   public membership: OrganisationMember;
+  public content = 'membership';
 
   constructor(
     public organisationService: OrganisationService,
     public membershipService: OrganisationMemberService,
-    public router: Router
+    public router: Router,
+
   ) { }
 
   ngOnInit() {
@@ -40,5 +43,25 @@ export class DetailsComponent implements OnInit {
     if( !this.membership ) {
       this.router.navigate(['/tabs/pages/memberships']);
     }
+
+
   }
+
+  setContent(event) {
+    this.content = event.target.value;
+  }
+
+  showMembership() {
+    return this.content === 'membership';
+  }
+
+  showPayments() {
+    return this.content === 'payments';
+  }
+
+  showDirectory() {
+    return this.content === 'directory';
+  }
+
+
 }

@@ -4,34 +4,72 @@
       <ion-back-button defaultHref="/tabs/pages/memberships"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Membership Details</ion-title>
+    <ion-title size="small">{{ organisation?.name }}</ion-title>
+
+    <ngx-avatars slot="end" [src]="organisation?.logo" [name]="organisation?.name" size="40" class="me-3"
+                 [round]="true"></ngx-avatars>
   </ion-toolbar>
 
+
   <ion-toolbar>
-    <ngx-avatars slot="start" [src]="organisation?.logo" [name]="organisation?.name" size="40" class="ms-4"></ngx-avatars>
-    <ion-title size="small">{{ organisation?.name }}</ion-title>
+    <ion-segment value="membership" (ionChange)="setContent($event)">
+      <ion-segment-button value="directory">
+        Directory
+      </ion-segment-button>
+
+      <ion-segment-button value="membership">
+        Membership
+      </ion-segment-button>
+
+      <ion-segment-button value="payments">
+        Payments
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card class="shadow-sm" *ngIf="membership">
-      <ion-card-content class="ion-no-padding">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="3">
-              <qr-code  [value]="membership?.uuid" size="80" errorCorrectionLevel="M"></qr-code>
-            </ion-col>
+<ion-content *ngIf="showDirectory()">
+  <app-membership-directory [membership]="membership"></app-membership-directory>
+</ion-content>
 
-            <ion-col class="ion-padding-top">
-              <!-- <div class="fw-semibold text-dark">{{ membership.organisation?.name }}</div> -->
-              <div class="">{{ membership.category?.name }}</div>
-              <div class="">{{ membership.organisation_no }}</div>
-              <div>Expires: <ion-text color="success">NEVER</ion-text></div>
-            </ion-col>
-          </ion-row>
 
-        </ion-grid>
-      </ion-card-content>
-
+<ion-content *ngIf="showMembership()">
+  <ion-card class="shadow-sm">
+    <ion-card-content class="ion-no-padding d-flex ion-justify-content-center">
+      <qr-code [value]="membership?.uuid" size="200" errorCorrectionLevel="M"></qr-code>
+    </ion-card-content>
+    <ion-card-header>
+      <ion-card-title>Membership No: {{ membership?.organisation_no }}</ion-card-title>
+      <ion-card-subtitle>Category: {{ membership?.category?.name }}</ion-card-subtitle>
+    </ion-card-header>
   </ion-card>
+
+  <ion-accordion-group value="groups">
+    <ion-accordion value="groups">
+      <ion-item slot="header" color="light">
+        <ion-icon name="people-outline" class="me-2"></ion-icon>
+        <ion-label>Your Groups</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <app-membership-groups [membership]="membership"></app-membership-groups>
+      </div>
+    </ion-accordion>
+
+    <!-- Anniversaries Group -->
+    <ion-accordion value="anniversaries">
+      <ion-item slot="header" color="light">
+        <ion-icon name="calendar-outline" class="me-2"></ion-icon>
+        <ion-label>Your Anniversaries</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <app-membership-anniversaries [membership]="membership"></app-membership-anniversaries>
+      </div>
+    </ion-accordion>
+
+  </ion-accordion-group>
+
+</ion-content>
+
+<ion-content *ngIf="showPayments()">
+  <app-membership-payments [membership]="membership"></app-membership-payments>
 </ion-content>

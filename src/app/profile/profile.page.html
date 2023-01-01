@@ -4,7 +4,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+        <ion-menu-button menu="profile-content"></ion-menu-button>
       </ion-buttons>
 
       <ion-title>
@@ -13,7 +13,7 @@
         </ion-label>
       </ion-title>
 
-      <ngx-avatars [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
+      <ngx-avatars [src]="user?.member?.thumbnail()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
       </ngx-avatars>
     </ion-toolbar>
 
@@ -27,7 +27,7 @@
       </ion-card-header>
 
       <ion-card-content class="ion-text-center">
-        <qr-code [value]="user?.id" size="180" errorCorrectionLevel="M"></qr-code>
+        <qr-code [value]="user?.username" size="180" errorCorrectionLevel="M"></qr-code>
       </ion-card-content>
     </ion-card>
 

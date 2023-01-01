@@ -1,0 +1,27 @@
+<ion-item-group *ngIf="(anniversaries$ | async) as anniversaries; else loading">
+  <ng-container *ngIf="anniversaries.length > 0; else noGroups">
+    <ion-item *ngFor="let anniversary of anniversaries">
+      <ion-label>
+        <p>{{ anniversary.organisation_anniversary?.name }}</p>
+        <h2>{{ anniversary.value | date: 'mediumDate' }}</h2>
+      </ion-label>
+    </ion-item>
+  </ng-container>
+
+  <ng-template #noGroups>
+    <ion-item>
+      <ion-label>
+        <h2>No anniversaries recorded for your membership</h2>
+      </ion-label>
+    </ion-item>
+  </ng-template>
+</ion-item-group>
+
+<ng-template #loading>
+  <ion-item>
+    <ion-label>
+      <ion-skeleton-text [animated]="true" style="width:50%"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-label>
+  </ion-item>
+</ng-template>

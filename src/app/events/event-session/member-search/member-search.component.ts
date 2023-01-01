@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { IonInput, IonModal } from '@ionic/angular';
+import { IonInput, IonModal, IonSearchbar } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { OrganisationMember } from '../../../shared/models/api/organisation-member';
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
@@ -16,7 +16,7 @@ export class MemberSearchComponent implements OnInit {
   public searchForm: UntypedFormGroup;
 
   @ViewChild('ionModal') modal: IonModal;
-  @ViewChild('search', { static: false }) searchElement: IonInput;
+  @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
 
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Output() register: EventEmitter<any> = new EventEmitter();
@@ -29,17 +29,9 @@ export class MemberSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.createForm();
-
     setTimeout(() => { // this will make the execution after the above boolean has changed
-      this.searchElement.setFocus();
+      this.searchbar.setFocus();
     }, 100);
-  }
-
-  createForm() {
-    this.searchForm = new UntypedFormGroup({
-      term: new UntypedFormControl(''),
-    });
   }
 
   onCancel() {
@@ -51,8 +43,8 @@ export class MemberSearchComponent implements OnInit {
 
   }
 
-  onSearch() {
-    this.memberships$ = this.membershipService.findMembers(this.searchForm.value, 1, 30);
+  onSearch(event) {
+    this.memberships$ = this.membershipService.findMembers({ term: event.target.value }, 1, 30);
   }
 
   onSelect(membership: OrganisationMember) {

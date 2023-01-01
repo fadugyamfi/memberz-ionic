@@ -7,26 +7,25 @@
         </ion-buttons>
         <ion-title>Find Member</ion-title>
       </ion-toolbar>
+
+      <ion-toolbar>
+        <ion-searchbar #searchbar color="light" placeholder="By phone number, membership id or name" [debounce]="1000"
+                       (ionChange)="onSearch($event)" class="member-search-searchbar"></ion-searchbar>
+      </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <form [formGroup]="searchForm" (submit)="onSearch()">
-        <ion-item>
-          <ion-input #search type="text" name="term" formControlName="term"
-                     placeholder="By phone number, membership id or name"></ion-input>
-
-          <div class="d-flex justify-content-end py-3">
-            <ion-button type="submit" fill="clear">
-              <ion-icon name="search"></ion-icon>
-            </ion-button>
-          </div>
-        </ion-item>
-      </form>
 
       <ion-list lines="full">
+
         <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
+          <ion-list-header *ngIf="memberships.length > 0">
+            <ion-label>Select Member To Register</ion-label>
+          </ion-list-header>
+
           <ion-item *ngFor="let membership of memberships" (click)="onSelect(membership)">
-            <ngx-avatars slot="start" [src]="membership.member.thumbnail()" [name]="membership.name()" size="40"></ngx-avatars>
+            <ngx-avatars slot="start" [src]="membership.member.thumbnail()" [name]="membership.name()"
+                         size="40"></ngx-avatars>
 
             <ion-label>{{ membership.member.lastThenFirstName() }}</ion-label>
           </ion-item>

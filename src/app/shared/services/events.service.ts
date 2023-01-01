@@ -6,7 +6,7 @@ import { Subject, from, Subscription } from 'rxjs';
 })
 export class EventsService {
   private listeners = {};
-  private eventsSubject = new Subject();
+  private eventsSubject = new Subject<{name: any; args: any}>();
   private events = from(this.eventsSubject);
   private sub: Subscription;
 
@@ -24,7 +24,7 @@ export class EventsService {
     });
   }
 
-  on(name: string, listener: Function) {
+  on(name: string, listener) {
     if (!this.sub) {
       this.setupSubscription();
     }
