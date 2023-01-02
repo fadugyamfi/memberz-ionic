@@ -7,36 +7,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="scanning">
-  <app-card-scanner (scan)="onCodeScanned($event)" (close)="onHideScanner()"></app-card-scanner>
-</ion-content>
 
 <ion-content>
   <ion-list lines="full">
-    <ion-list-header lines="full" class="mb-3">
+    <ion-list-header lines="full">
       <ion-label class="d-flex align-items-center">
-        <ion-badge class="me-1">{{ session?.attendees_count || 0 }}</ion-badge>
-        <ion-text>Registered</ion-text>
+        <ion-text>Session Registration</ion-text>
       </ion-label>
-
-      <ion-button (click)="scanQRCode()" color="primary">
-        <ion-icon name="camera" class="me-1"></ion-icon>
-        <ion-text>Scan</ion-text>
-      </ion-button>
-
-      <ion-button (click)="searchMemberships()" color="primary">
-        <ion-icon name="search" class="me-1"></ion-icon>
-        <ion-text>Search</ion-text>
-      </ion-button>
+      <ion-badge class="me-1">{{ session?.attendees_count || 0 }} Registered</ion-badge>
     </ion-list-header>
 
-    <!-- <ion-list-header>
-      <ion-label>Recent Attendees</ion-label>
-    </ion-list-header> -->
+    <ion-list-header lines="full" class="p-0 mb-3">
+      <div class="ion-justify-content-between d-flex w-100">
+        <ion-button (click)="scanQRCode()" color="primary">
+          <ion-icon name="camera" class="me-1"></ion-icon>
+          <ion-text>Scan</ion-text>
+        </ion-button>
+
+        <ion-button (click)="searchMemberships()" color="primary">
+          <ion-icon name="search" class="me-1"></ion-icon>
+          <ion-text>Search</ion-text>
+        </ion-button>
+
+        <ion-button (click)="addMembership()" color="primary">
+          <ion-icon name="add" class="me-1"></ion-icon>
+          <ion-text>Add</ion-text>
+        </ion-button>
+      </div>
+    </ion-list-header>
 
     <ng-container *ngIf="recentAttendees; else loading">
       <ion-item *ngFor="let attendee of recentAttendees">
-        <ngx-avatars slot="start" [src]="attendee.member.thumbnail()" [name]="attendee.member.lastThenFirstName()" size="40"></ngx-avatars>
+        <ngx-avatars slot="start" [src]="attendee.member.thumbnail()" [name]="attendee.member.lastThenFirstName()"
+                     size="40"></ngx-avatars>
 
         <ion-label>{{ attendee.member.lastThenFirstName() }}</ion-label>
 
@@ -55,4 +58,9 @@
   </ion-list>
 </ion-content>
 
-<app-member-search *ngIf="searching" (close)="searching = false" (register)="onMemberSelected($event)"></app-member-search>
+<app-member-search *ngIf="searching" (close)="searching = false"
+                   (register)="onMemberSelected($event)"></app-member-search>
+
+<app-card-scanner *ngIf="scanning" (scan)="onCodeScanned($event)" (close)="onHideScanner()"></app-card-scanner>
+
+<app-add-membership *ngIf="adding" [eventSession]="session" (close)="onCloseAddModal()" (register)="onMemberAdded($event)"></app-add-membership>

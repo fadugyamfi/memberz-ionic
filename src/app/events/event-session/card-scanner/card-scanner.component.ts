@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { IonModal } from '@ionic/angular';
 import { NgxScannerQrcodeComponent, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
 
 @Component({
@@ -9,11 +10,13 @@ import { NgxScannerQrcodeComponent, ScannerQRCodeResult } from 'ngx-scanner-qrco
 })
 export class CardScannerComponent implements OnInit {
 
-  @ViewChild('scanner', { static: true }) scanner: NgxScannerQrcodeComponent;
+  @ViewChild('ionModal', { static: true }) modal: IonModal;
+  @ViewChild('scanner', { static: false }) scanner: NgxScannerQrcodeComponent;
 
   public captures = [];
   public capturing = false;
   public scanning = false;
+  public open = true;
 
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Output() scan: EventEmitter<string> = new EventEmitter();
@@ -25,6 +28,7 @@ export class CardScannerComponent implements OnInit {
   }
 
   async hideScanner() {
+    this.modal.dismiss(null, 'cancel');
     this.scanner.stop();
     this.close.emit();
   }
@@ -33,4 +37,7 @@ export class CardScannerComponent implements OnInit {
     this.scan.emit(code.data);
   }
 
+  onWillDismiss(event) {
+
+  }
 }

@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams, HttpEventType } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject, throwError } from 'rxjs';
 import { EventsService } from '../events.service';
 import { AppModel } from '../../models/api/app.model';
 import { environment } from '../../../../environments/environment';
@@ -372,29 +372,29 @@ export class APIService<T extends AppModel> {
     this.creating = this.saving = true;
 
     return this.post(`${this.url}`, model, qparams).pipe(
-      map((response: ApiResponse) => new this.model(response.data)))
-      .subscribe({
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        next: (model) => {
-          this.setSelectedModel(model);
+      map((response: ApiResponse) => new this.model(response.data)),
+
+      tap(responseModel => {
+        this.setSelectedModel(responseModel);
 
           if ( this.prependItems ) {
-            this.prependItem(model);
+            this.prependItem(responseModel);
           } else {
-            this.addItem(model);
+            this.addItem(responseModel);
           }
 
           this.clearCache();
-          this.events.trigger(`${this.model_name}:created`, model);
-        },
-        error: (error: HttpErrorResponse) => {
-          this.events.trigger(`${this.model_name}:create:error`, error);
-          this.triggerError(error);
-        },
-        complete: () => {
+          this.events.trigger(`${this.model_name}:created`, responseModel);
           this.creating = this.saving = false;
-        }
-      });
+      }),
+
+      catchError((error, caught: Observable<any>) => {
+        this.events.trigger(`${this.model_name}:create:error`, error);
+        this.triggerError(error);
+        this.creating = this.saving = false;
+        return throwError(() => error);
+      })
+    );
   }
 
   /**

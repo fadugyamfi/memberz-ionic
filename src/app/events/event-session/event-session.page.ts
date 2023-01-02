@@ -27,6 +27,7 @@ export class EventSessionPage implements OnInit {
 
   public scanning = false;
   public searching = false;
+  public adding = false;
   public captures = [];
 
   public event: OrganisationEvent;
@@ -99,6 +100,10 @@ export class EventSessionPage implements OnInit {
     this.searching = true;
   }
 
+  addMembership() {
+    this.adding = true;
+  }
+
   async onCodeScanned(code: string) {
 
     if( code == null || !this.isValidMemberCode(code) ) {
@@ -152,12 +157,21 @@ export class EventSessionPage implements OnInit {
     this.scanning = false;
   }
 
+  onCloseAddModal() {
+    this.adding = false;
+  }
+
   onMemberRegistered(attendee) {
     this.recentAttendees.unshift(attendee);
   }
 
   onMemberSelected(membership: OrganisationMember) {
     this.searching = false;
+    this.onCodeScanned( membership.uuid );
+  }
+
+  onMemberAdded(membership: OrganisationMember) {
+    this.adding = false;
     this.onCodeScanned( membership.uuid );
   }
 

@@ -11,21 +11,26 @@ import { CardScannerComponent } from './card-scanner/card-scanner.component';
 import { MemberSearchComponent } from './member-search/member-search.component';
 import { SharedModule } from '../../shared/shared.module';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { AddMembershipComponent } from './add-membership/add-membership.component';
+import { IonIntlTelInputModule } from 'ion-intl-tel-input/dist';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     EventSessionPageRoutingModule,
     SharedModule,
     NgxScannerQrcodeModule,
     ReactiveFormsModule,
+    IonIntlTelInputModule
   ],
   declarations: [
     EventSessionPage,
     CardScannerComponent,
-    MemberSearchComponent
+    MemberSearchComponent,
+    AddMembershipComponent
   ]
 })
 export class EventSessionPageModule {}

@@ -1,22 +1,23 @@
-<h4 class="ion-text-center">Scan Member Code To Register</h4>
+<ion-modal #ionModal [isOpen]="open" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="hideScanner()">Close</ion-button>
+        </ion-buttons>
+        <ion-title>Scan QR Code To Register</ion-title>
+      </ion-toolbar>
 
-<!-- start -->
-<div class="ion-text-center">
-  <ion-button expand="block" (click)="hideScanner()">
-    Close
-  </ion-button>
-</div>
+    </ion-header>
 
-<!-- For camera -->
-<section>
-  <ngx-scanner-qrcode #scanner (event)="onCodeScanned($event)"></ngx-scanner-qrcode>
-</section>
+    <ion-content>
+      <p class="ion-text-center" *ngIf="scanner.isLoading">
+        <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+        Readying Scanner
+      </p>
 
-<!-- data  -->
-<!-- <p class="data ion-text-center">{{ scanner.data | async }}</p> -->
+      <ngx-scanner-qrcode #scanner (event)="onCodeScanned($event)" ></ngx-scanner-qrcode>
 
-<!-- Loading -->
-<p class="ion-text-center" *ngIf="scanner.isLoading">
-  <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
-  Readying Scanner
-</p>
+    </ion-content>
+  </ng-template>
+</ion-modal>
