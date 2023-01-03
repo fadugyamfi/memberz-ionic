@@ -1,12 +1,12 @@
-<app-main-menu [contentId]="'main-content'"></app-main-menu>
+<!-- <app-main-menu [contentId]="'main-content'"></app-main-menu> -->
 
 
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <!-- <ion-buttons slot="start">
         <ion-menu-button menu="main-content"></ion-menu-button>
-      </ion-buttons>
+      </ion-buttons> -->
 
       <ion-title>
         <ion-label>
@@ -27,6 +27,11 @@
 
     <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
       <ion-list lines="full">
+
+        <ion-list-header lines="full">
+          <ion-label>Select an organisation to view membership details</ion-label>
+        </ion-list-header>
+
         <ion-item detail="true" button *ngFor="let membership of memberships" (click)="loadMembership(membership)">
           <ngx-avatars slot="start" [src]="membership.organisation?.logo" [name]="membership.organisation?.name" size="40"></ngx-avatars>
 

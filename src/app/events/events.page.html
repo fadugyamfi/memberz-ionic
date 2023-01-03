@@ -1,11 +1,11 @@
-<app-main-menu [contentId]="'event-content'"></app-main-menu>
+<!-- <app-main-menu [contentId]="'event-content'"></app-main-menu> -->
 
 <div class="ion-page" id="event-content">
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <!-- <ion-buttons slot="start">
         <ion-menu-button menu="event-content"></ion-menu-button>
-      </ion-buttons>
+      </ion-buttons> -->
 
       <ion-title>
         <ion-label>
@@ -17,15 +17,23 @@
       </ngx-avatars>
     </ion-toolbar>
 
+    <ion-toolbar>
+      <ion-segment value="upcoming" (ionChange)="setContent($event)">
+        <ion-segment-button value="upcoming">Upcoming</ion-segment-button>
+        <ion-segment-button value="past">Past</ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+
   </ion-header>
 
-  <ion-content [fullscreen]="true">
+  <!-- UPCOMING EVENTS -->
+  <ion-content [fullscreen]="true" *ngIf="showUpcoming()">
 
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <ng-container *ngIf="(events$ | async) as events; else loading">
+    <ng-container *ngIf="(upcomingEvents$ | async) as events; else loading">
       <ion-list lines="full">
         <ion-item *ngIf="events.length === 0">
           <ion-label class="ion-text-center">
@@ -51,6 +59,44 @@
       <div class="ion-padding ion-text-center ion-align-items-center">
         <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
         <ion-text>Loading Upcoming Events</ion-text>
+      </div>
+    </ng-template>
+
+  </ion-content>
+
+  <!-- PAST EVENTS -->
+  <ion-content [fullscreen]="true" *ngIf="showPast()">
+
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefreshOfPastEvents($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ng-container *ngIf="(pastEvents$ | async) as events; else loading">
+      <ion-list lines="full">
+        <ion-item *ngIf="events.length === 0">
+          <ion-label class="ion-text-center">
+            No Past Events
+          </ion-label>
+        </ion-item>
+
+        <ng-container *ngIf="events.length > 0">
+          <ion-item detail="true" button *ngFor="let event of events" (click)="loadEventDetails(event)">
+            <ion-label color="dark">
+              <h2 class="fw-semibold">{{ event.event_name }}</h2>
+              <p>{{ event.dates }} - {{ event.times }}</p>
+              <p>{{ event.venue }}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+
+      </ion-list>
+    </ng-container>
+
+
+    <ng-template #loading>
+      <div class="ion-padding ion-text-center ion-align-items-center">
+        <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+        <ion-text>Loading Past Events</ion-text>
       </div>
     </ng-template>
 

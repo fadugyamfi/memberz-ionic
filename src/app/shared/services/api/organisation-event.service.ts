@@ -49,6 +49,15 @@ export class OrganisationEventService extends APIService<OrganisationEvent> {
     );
   }
 
+  getUserPastEvents(memberId: number): Observable<OrganisationEvent[]> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const params = { member_id: memberId };
+
+    return this.get(`/members/${memberId}/past-events`, params).pipe(
+      map((response: ApiResponse) => response.data.map(data => new OrganisationEvent(data)))
+    );
+  }
+
   registerMemberByQRCode(request: EventAttendeeRequest, options = {}): Observable<OrganisationEventAttendee> {
     return this.post(`/events/${request.organisation_event_id}/register`, request).pipe(
       map((response: ApiResponse) => new OrganisationEventAttendee(response.data))

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../../services/api/auth.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -16,12 +17,14 @@ export class MainMenuComponent implements OnInit {
   @Input() contentId = '';
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public storage: StorageService
   ) { }
 
   ngOnInit() {}
 
   doLogout() {
     this.authService.logout();
+    this.storage.engine.clear();
   }
 }

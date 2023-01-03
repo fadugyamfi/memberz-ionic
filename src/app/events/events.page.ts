@@ -15,9 +15,13 @@ import { StorageService } from '../shared/services/storage.service';
 export class EventsPage implements OnInit {
 
   public user: MemberAccount;
-  public events$: Observable<OrganisationEvent[]>;
 
-  public cacheKey: string;
+  public upcomingEvents$: Observable<OrganisationEvent[]>;
+  public pastEvents$: Observable<OrganisationEvent[]>;
+
+  public content = 'upcoming';
+  public upcomingCacheKey: string;
+  public pastCacheKey: string;
 
   constructor(
     public authService: AuthService,
@@ -29,22 +33,36 @@ export class EventsPage implements OnInit {
   ngOnInit(): void {
     this.loadUser();
     this.fetchUpcomingEvents();
+    this.fetchPastEvents();
   }
 
   loadUser() {
     this.user = this.authService.getLoggedInUser();
-    this.cacheKey = `cache:${this.user.member_id}:events`;
+    this.upcomingCacheKey = `cache:${this.user.member_id}:events:upcoming`;
+    this.pastCacheKey = `cache:${this.user.member_id}:events:past`;
   }
 
   fetchUpcomingEvents() {
-    if( this.storage.has(this.cacheKey) ) {
-      this.events$ = of( this.storage.get(this.cacheKey) );
+    if( this.storage.has(this.upcomingCacheKey) ) {
+      this.upcomingEvents$ = of( this.storage.get(this.upcomingCacheKey) );
       return;
     }
 
-    return this.events$ = this.eventService.getUserUpcomingEvents(this.user.member_id)
+    return this.upcomingEvents$ = this.eventService.getUserUpcomingEvents(this.user.member_id)
       .pipe(
-        tap(events => this.storage.set(this.cacheKey, events, 1, 'days'))
+        tap(events => this.storage.set(this.upcomingCacheKey, events, 1, 'days'))
+      );
+  }
+
+  fetchPastEvents() {
+    if( this.storage.has(this.pastCacheKey) ) {
+      this.pastEvents$ = of( this.storage.get(this.pastCacheKey) );
+      return;
+    }
+
+    return this.pastEvents$ = this.eventService.getUserPastEvents(this.user.member_id)
+      .pipe(
+        tap(events => this.storage.set(this.pastCacheKey, events, 1, 'days'))
       );
   }
 
@@ -54,8 +72,26 @@ export class EventsPage implements OnInit {
   }
 
   handleRefresh(event) {
-    this.storage.remove(this.cacheKey);
+    this.storage.remove(this.upcomingCacheKey);
     this.fetchUpcomingEvents();
     event.target.complete();
+  }
+
+  handleRefreshOfPastEvents(event) {
+    this.storage.remove(this.pastCacheKey);
+    this.fetchPastEvents();
+    event.target.complete();
+  }
+
+  setContent(event) {
+    this.content = event.target.value;
+  }
+
+  showUpcoming() {
+    return this.content === 'upcoming';
+  }
+
+  showPast() {
+    return this.content === 'past';
   }
 }
