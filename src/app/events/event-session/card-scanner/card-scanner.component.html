@@ -1,11 +1,11 @@
-<ion-modal #ionModal [isOpen]="open" (willDismiss)="onWillDismiss($event)">
+<ion-modal #ionModal [keepContentsMounted]="true" [isOpen]="open" (willDismiss)="onWillDismiss($event)">
   <ng-template>
     <ion-header>
       <ion-toolbar>
-        <ion-buttons slot="start">
+        <ion-title>Scan QR Code To Register</ion-title>
+        <ion-buttons slot="end">
           <ion-button (click)="hideScanner()">Close</ion-button>
         </ion-buttons>
-        <ion-title>Scan QR Code To Register</ion-title>
       </ion-toolbar>
 
     </ion-header>

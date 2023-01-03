@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { IonModal, IonSearchbar } from '@ionic/angular';
-import { Observable, of, tap } from 'rxjs';
+import { IonModal, IonSearchbar, ModalController } from '@ionic/angular';
+import { fromEvent, Observable, of, Subscription, tap } from 'rxjs';
 import { OrganisationEvent } from '../../../shared/models/api/organisation-event';
 import { OrganisationEventSession } from '../../../shared/models/api/organisation-event-session';
 import { OrganisationMember } from '../../../shared/models/api/organisation-member';
 import { OrganisationMemberCategory } from '../../../shared/models/api/organisation-member-category';
 import { OrganisationMemberCategoryService } from '../../../shared/services/api/organisation-member-category.service';
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
+import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 import { StorageService } from '../../../shared/services/storage.service';
 
 @Component({
@@ -16,7 +17,7 @@ import { StorageService } from '../../../shared/services/storage.service';
   templateUrl: './add-membership.component.html',
   styleUrls: ['./add-membership.component.scss'],
 })
-export class AddMembershipComponent implements OnInit {
+export class AddMembershipComponent implements OnInit, OnDestroy {
 
   @ViewChild('ionModal') modal: IonModal;
   @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
@@ -26,6 +27,7 @@ export class AddMembershipComponent implements OnInit {
 
   @Input() eventSession: OrganisationEventSession;
 
+
   public open = true;
   public addForm: UntypedFormGroup;
   public categories$: Observable<OrganisationMemberCategory[]>;
@@ -33,12 +35,23 @@ export class AddMembershipComponent implements OnInit {
   constructor(
     public categoryService: OrganisationMemberCategoryService,
     public membershipService: OrganisationMemberService,
-    public storage: StorageService
+    public storage: StorageService,
+    public modalBackButton: ModalBackButtonService
   ) { }
 
   ngOnInit() {
     this.setupForm();
     this.fetchCategories();
+    this.modalBackButton.pushModalState();
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  dismissModal() {
+    this.onCancel();
+  }
+
+  ngOnDestroy(): void {
+    this.modalBackButton.clearModalState();
   }
 
   setupForm() {
