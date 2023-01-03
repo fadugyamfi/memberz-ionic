@@ -17,7 +17,7 @@
       <ion-badge class="me-1">{{ session?.attendees_count || 0 }} Registered</ion-badge>
     </ion-list-header>
 
-    <ion-list-header lines="full" class="p-0 mb-3">
+    <ion-list-header lines="full" class="p-0 mb-3" *ngIf="userIsAdmin()">
       <div class="ion-justify-content-between d-flex w-100">
         <ion-button (click)="scanQRCode()" color="primary">
           <ion-icon name="camera" class="me-1"></ion-icon>

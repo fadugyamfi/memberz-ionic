@@ -2,10 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MemberAccount } from '../../shared/models/api/member-account';
 import { OrganisationEvent } from '../../shared/models/api/organisation-event';
 import { OrganisationEventAttendee } from '../../shared/models/api/organisation-event-attendee';
 import { OrganisationEventSession } from '../../shared/models/api/organisation-event-session';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
+import { AuthService } from '../../shared/services/api/auth.service';
 import { OrganisationEventAttendeeService } from '../../shared/services/api/organisation-event-attendee.service';
 import { OrganisationEventSessionService } from '../../shared/services/api/organisation-event-session.service';
 import { OrganisationEventService } from '../../shared/services/api/organisation-event.service';
@@ -32,6 +34,7 @@ export class EventSessionPage implements OnInit {
 
   public event: OrganisationEvent;
   public session: OrganisationEventSession;
+  public user: MemberAccount;
 
   constructor(
     public eventService: OrganisationEventService,
@@ -39,11 +42,17 @@ export class EventSessionPage implements OnInit {
     public sessionService: OrganisationEventSessionService,
     public attendeeService: OrganisationEventAttendeeService,
     public route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
     this.loadSession();
+    this.user = this.authService.getLoggedInUser();
+  }
+
+  userIsAdmin() {
+    return this.user?.isOrganisationAdmin( this.session?.organisation_id );
   }
 
   getEventDetailsURL() {

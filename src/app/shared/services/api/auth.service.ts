@@ -251,11 +251,11 @@ export class AuthService extends APIService<MemberAccount> {
     }
   }
 
-  getLoggedInUser() {
+  getLoggedInUser(): MemberAccount {
     return this.userData;
   }
 
-  public userStorageData() {
+  public userStorageData(): MemberAccount {
     return new MemberAccount(this.storage.get('user'));
   }
 }

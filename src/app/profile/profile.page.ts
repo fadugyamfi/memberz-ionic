@@ -22,4 +22,8 @@ export class ProfilePage implements OnInit {
   doLogout() {
     this.authService.logout();
   }
+
+  doRefresh() {
+    window.location.reload();
+  }
 }

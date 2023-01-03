@@ -12,7 +12,7 @@ const routes: Routes = [
         loadChildren: () => import('../events/events.module').then(m => m.EventsPageModule)
       },
       {
-        path: 'profile',
+        path: 'settings',
         loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
       },
       {
