@@ -13,7 +13,8 @@
         </ion-label>
       </ion-title>
 
-      <ngx-avatars [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
+      <ngx-avatars [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding"
+                   routerLink="/tabs/pages/settings">
       </ngx-avatars>
     </ion-toolbar>
 
@@ -25,6 +26,13 @@
     </ion-toolbar>
 
   </ion-header>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button routerLink="/tabs/pages/events/create">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 
   <!-- UPCOMING EVENTS -->
   <ion-content [fullscreen]="true" *ngIf="showUpcoming()">

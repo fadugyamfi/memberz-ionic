@@ -3,9 +3,9 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProfilePage } from './profile.page';
+import { SettingsPage } from './settings.page';
 
-import { ProfilePageRoutingModule } from './profile-routing.module';
+import { SettingsPageRoutingModule } from './settings-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
@@ -15,11 +15,11 @@ import { MainMenuComponent } from '../shared/components/main-menu/main-menu.comp
     IonicModule,
     CommonModule,
     FormsModule,
-    ProfilePageRoutingModule,
+    SettingsPageRoutingModule,
     SharedModule,
     NgxScannerQrcodeModule,
     MainMenuComponent
   ],
-  declarations: [ProfilePage]
+  declarations: [SettingsPage]
 })
-export class ProfilePageModule {}
+export class SettingsPageModule {}

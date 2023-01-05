@@ -20,6 +20,14 @@ const routes: Routes = [
     loadChildren: () => import('./two-factor-auth/two-factor-auth.module').then( m => m.TwoFactorAuthPageModule),
     canActivate: [UserNotLoggedInGuard]
   },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
 ];
 
 @NgModule({

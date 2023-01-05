@@ -3,11 +3,11 @@ import { MemberAccount } from '../shared/models/api/member-account';
 import { AuthService } from '../shared/services/api/auth.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss']
+  selector: 'app-settings',
+  templateUrl: './settings.page.html',
+  styleUrls: ['./settings.page.scss']
 })
-export class ProfilePage implements OnInit {
+export class SettingsPage implements OnInit {
 
   public user: MemberAccount;
 

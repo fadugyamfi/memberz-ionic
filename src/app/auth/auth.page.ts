@@ -43,7 +43,7 @@ export class AuthPage implements OnInit {
       // login.username = login.username.e164Number;
     }
 
-    this.authService.login(login.username.replaceAll(' ', ''), login.password, login.remember_me);
+    this.authService.login(login.username.replaceAll(' ', ''), login.password, true);
   }
 
 }

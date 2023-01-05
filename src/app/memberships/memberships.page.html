@@ -14,13 +14,14 @@
         </ion-label>
       </ion-title>
 
-      <ngx-avatars [src]="user?.member?.thumbnail()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
+      <ngx-avatars [src]="user?.member?.thumbnail()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding"
+                   routerLink="/tabs/pages/settings">
       </ngx-avatars>
     </ion-toolbar>
 
   </ion-header>
 
-  <ion-content class="pb-50" >
+  <ion-content class="pb-50">
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -33,7 +34,8 @@
         </ion-list-header>
 
         <ion-item detail="true" button *ngFor="let membership of memberships" (click)="loadMembership(membership)">
-          <ngx-avatars slot="start" [src]="membership.organisation?.logo" [name]="membership.organisation?.name" size="40"></ngx-avatars>
+          <ngx-avatars slot="start" [src]="membership.organisation?.logo" [name]="membership.organisation?.name"
+                       size="40"></ngx-avatars>
 
           <ion-label>
             <h6 class="fw-semibold">{{ membership.organisation?.name }}</h6>
