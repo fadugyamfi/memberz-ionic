@@ -1,0 +1,43 @@
+<ion-modal #ionModal [isOpen]="open" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Find Member</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="onCancel()">Cancel</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+
+      <ion-toolbar>
+        <ion-searchbar #searchbar color="light" placeholder="By phone number, membership id or name" [debounce]="1000"
+                       (ionChange)="onSearch($event)" class="member-search-searchbar"></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+
+      <ion-list lines="full">
+
+        <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
+          <ion-list-header *ngIf="memberships.length > 0">
+            <ion-label>Select Member To Register</ion-label>
+          </ion-list-header>
+
+          <ion-item *ngFor="let membership of memberships" (click)="onSelect(membership)">
+            <ngx-avatars slot="start" [src]="membership.member.thumbnail()" [name]="membership.name()"
+                         size="40"></ngx-avatars>
+
+            <ion-label>{{ membership.member.lastThenFirstName() }}</ion-label>
+          </ion-item>
+        </ng-container>
+
+        <ng-template #loading>
+          <ion-item class="ion-text-center">
+            <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+            <ion-text>Searching</ion-text>
+          </ion-item>
+        </ng-template>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

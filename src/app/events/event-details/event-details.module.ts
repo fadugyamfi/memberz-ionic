@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { EventDetailsPageRoutingModule } from './event-details-routing.module';
 
 import { EventDetailsPage } from './event-details.page';
-import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     EventDetailsPageRoutingModule,
-    NgxScannerQrcodeModule
   ],
-  declarations: [EventDetailsPage]
+  declarations: [
+    EventDetailsPage,
+
+  ]
 })
 export class EventDetailsPageModule {}

@@ -10,6 +10,7 @@ export class OrganisationEventSession extends AppModel {
   public organisation_event_id: number;
   public session_name: string;
   public session_dt: any;
+  public attendees_count: number;
 
   constructor(data) {
     super(data);

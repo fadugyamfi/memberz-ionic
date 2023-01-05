@@ -14,7 +14,7 @@ export class MemberAccount extends AppModel {
   public timezone: string;
 
   public member_id: number;
-  public organisation_account: any[];
+  public organisation_accounts: any[];
   public email_2fa: number;
 
   constructor(data) {
@@ -42,22 +42,19 @@ export class MemberAccount extends AppModel {
   }
 
   photoURL() {
-    return this.member.member_image && this.member.member_image[0] && this.member.member_image[0].url;
+    return this.member.profile_photo && this.member.profile_photo.url;
   }
 
   thumbPhotoURL() {
-    return this.member.member_image && this.member.member_image[0] && this.member.member_image[0].thumb_url;
+    return this.member.profile_photo && this.member.profile_photo.thumb_url;
   }
 
   isOrganisationAdmin(organisation_id: number) {
-    return this.organisation_account &&
-           this.organisation_account.some(account => account.organisation_id === organisation_id);
+    return this.organisation_accounts?.some(account => account.organisation_id === organisation_id);
   }
 
   getOrganisationAccount(organisation_id: number) {
-    return this.isOrganisationAdmin(organisation_id) ?
-           this.organisation_account.find(account => account.organisation_id === organisation_id) :
-           null;
+    return this.organisation_accounts?.find(account => account.organisation_id === organisation_id);
   }
 
   isTwoFactorAuthEnabled() {

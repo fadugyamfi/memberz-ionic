@@ -13,6 +13,10 @@ import { OrganisationService } from './organisation.service';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
+const Alert = Swal.mixin({
+  heightAuto: false
+});
+
 export interface RegisterUserContract {
   first_name: string;
   last_name: string;
@@ -89,14 +93,14 @@ export class AuthService extends APIService<MemberAccount> {
         }
       },
       error: () => {
-        Swal.fire(
+        Alert.fire(
           this.translate.instant('Login Failed'),
-          this.translate.instant('Username or Password may be incorrect') + '.' + this.translate.instant('Please try again'),
+          this.translate.instant('Username or Password may be incorrect') + '. ' + this.translate.instant('Please try again'),
           'error'
         );
         this.requesting = false;
       },
-      complete: () => Swal.close()
+      complete: () => Alert.close()
     });
   }
 
@@ -113,7 +117,7 @@ export class AuthService extends APIService<MemberAccount> {
         this.performLogin(res, DURATION, rememberMe);
       },
       error: () => {
-        Swal.fire(
+        Alert.fire(
           this.translate.instant('Login Failed'),
           this.translate.instant('Username or Password may be incorrect') + '.' + this.translate.instant('Please try again'),
           'error'
@@ -131,7 +135,7 @@ export class AuthService extends APIService<MemberAccount> {
     this.me(rememberMe).subscribe({
       next: () => this.router.navigate(['/tabs']),
       error: () => {
-        Swal.fire(
+        Alert.fire(
           this.translate.instant('Account Info Not Found'),
           this.translate.instant('Please attempt login again'),
           'info'
@@ -143,33 +147,33 @@ export class AuthService extends APIService<MemberAccount> {
   }
 
   public register(data: RegisterUserContract) {
-    Swal.fire(
+    Alert.fire(
       this.translate.instant('Registering Your Account'),
       this.translate.instant('You will be logged in automatically when successful'),
       'info'
     );
-    Swal.showLoading();
+    Alert.showLoading();
 
     return this.post(`${this.url}/register`, data).subscribe({
       next: () => {
         this.login(data.email, data.password);
-        Swal.fire(
+        Alert.fire(
           this.translate.instant('Registration Successful'),
           this.translate.instant('Logging in to the application'),
           'success'
         );
-        Swal.showLoading();
+        Alert.showLoading();
       },
       error: () => {
-        Swal.fire(
+        Alert.fire(
           this.translate.instant('Registration Failed'),
           this.translate.instant('Please try again'),
           'error'
         );
-        Swal.hideLoading();
+        Alert.hideLoading();
         this.requesting = false;
       },
-      complete: () => Swal.close()
+      complete: () => Alert.close()
     });
   }
 
@@ -178,7 +182,7 @@ export class AuthService extends APIService<MemberAccount> {
       username: email,
     }).subscribe({
       next: () => {
-        Swal.fire(
+        Alert.fire(
           this.translate.instant('Request Successful'),
           this.translate.instant('A password reset link has been sent to your email') + '.' +
           this.translate.instant('Please use that link to reset your password'),
@@ -229,7 +233,7 @@ export class AuthService extends APIService<MemberAccount> {
   }
 
   public clearAndRedirect() {
-    Swal.close();
+    Alert.close();
     this.clearSession();
     this.router.navigate(['/auth/login']);
   }
@@ -247,11 +251,11 @@ export class AuthService extends APIService<MemberAccount> {
     }
   }
 
-  getLoggedInUser() {
+  getLoggedInUser(): MemberAccount {
     return this.userData;
   }
 
-  public userStorageData() {
+  public userStorageData(): MemberAccount {
     return new MemberAccount(this.storage.get('user'));
   }
 }

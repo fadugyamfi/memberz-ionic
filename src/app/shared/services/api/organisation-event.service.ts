@@ -31,11 +31,7 @@ export class OrganisationEventService extends APIService<OrganisationEvent> {
   }
 
   public getAttendees(event: OrganisationEvent, options = {}): Observable<OrganisationEventAttendee[]> {
-    const headers = {
-      'X-Tenant-Id': event.organisation?.uuid
-    };
-
-    return this.get(`${this.url}/${event.id}/attendees`, options, headers).pipe(
+    return this.get(`${this.url}/${event.id}/attendees`, options).pipe(
       map((response: ApiResponse) => response.data.map(data => new OrganisationEventAttendee(data)))
     );
   }
@@ -49,6 +45,15 @@ export class OrganisationEventService extends APIService<OrganisationEvent> {
     const params = { member_id: memberId };
 
     return this.get(`/members/${memberId}/upcoming-events`, params).pipe(
+      map((response: ApiResponse) => response.data.map(data => new OrganisationEvent(data)))
+    );
+  }
+
+  getUserPastEvents(memberId: number): Observable<OrganisationEvent[]> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const params = { member_id: memberId };
+
+    return this.get(`/members/${memberId}/past-events`, params).pipe(
       map((response: ApiResponse) => response.data.map(data => new OrganisationEvent(data)))
     );
   }

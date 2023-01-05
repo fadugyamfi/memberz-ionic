@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/tabs/pages/events"></ion-back-button>
     </ion-buttons>
 
     <ion-title>Event Details</ion-title>
@@ -32,70 +32,10 @@
 
     <ion-item detail="true" button *ngFor="let session of event?.sessions" (click)="setAttendanceSession(session)">
       <ion-label>{{ session.session_name }}</ion-label>
+      <ion-badge slot="end">
+        {{ session.attendees_count || 0 }}
+      </ion-badge>
     </ion-item>
   </ion-list>
-
-  <ion-modal [isOpen]="isAttendanceSessionSet()" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancelEnroll()">Back</ion-button>
-          </ion-buttons>
-          <ion-title>Event Details</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-content class="ion-padding" *ngIf="scanning">
-        <h4 class="ion-text-center">Scan Member Code To Register</h4>
-
-        <!-- For camera -->
-        <section>
-          <ngx-scanner-qrcode #scanner (event)="onCodeScanned($event)"></ngx-scanner-qrcode>
-        </section>
-
-        <!-- data  -->
-        <!-- <p class="data ion-text-center">{{ scanner.data | async }}</p> -->
-
-        <!-- Loading -->
-        <p class="ion-text-center" *ngIf="scanner.isLoading">
-          <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
-          Readying Scanner
-        </p>
-
-        <!-- start -->
-        <div class="ion-text-center">
-          <ion-button expand="block" (click)="hideScanner()">
-            Close
-          </ion-button>
-        </div>
-      </ion-content>
-
-      <ion-content>
-        <ion-list lines="full">
-          <ion-list-header>
-            <ion-label>Recent Attendees</ion-label>
-
-            <ion-button (click)="scanQRCode()" color="primary">Register</ion-button>
-          </ion-list-header>
-
-          <ng-container *ngIf="recentAttendees; else loading">
-            <ion-item *ngFor="let attendee of recentAttendees">
-              <ion-label>{{ attendee.member.lastThenFirstName() }}</ion-label>
-            </ion-item>
-          </ng-container>
-
-          <ng-template #loading>
-            <ion-item class="ion-text-center">
-              <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
-              Loading Attendees
-            </ion-item>
-          </ng-template>
-        </ion-list>
-      </ion-content>
-
-
-    </ng-template>
-  </ion-modal>
 
 </ion-content>

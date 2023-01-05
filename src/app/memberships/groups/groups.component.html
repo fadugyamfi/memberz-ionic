@@ -1,0 +1,27 @@
+<ion-item-group *ngIf="(memberGroups$ | async) as memberGroups; else groupLoading">
+  <ng-container *ngIf="memberGroups.length > 0; else noGroups">
+    <ion-item *ngFor="let memberGroup of memberGroups">
+      <ion-label>
+        <p>{{ memberGroup.organisation_group?.organisation_group_type?.name }}</p>
+        <h2>{{ memberGroup.organisation_group?.name }}</h2>
+      </ion-label>
+    </ion-item>
+  </ng-container>
+
+  <ng-template #noGroups>
+    <ion-item>
+      <ion-label>
+        <h2>No groups assigned to your membership</h2>
+      </ion-label>
+    </ion-item>
+  </ng-template>
+</ion-item-group>
+
+<ng-template #groupLoading>
+  <ion-item>
+    <ion-label>
+      <ion-skeleton-text [animated]="true" style="width:50%"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-label>
+  </ion-item>
+</ng-template>

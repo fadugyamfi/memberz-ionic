@@ -2,44 +2,57 @@
 
   <div class="fullheight xc vcs">
 
-    <ion-card class="w-100" >
-      <ion-card-content>
-        <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" class="mx-4 my-5">
+
+      <div class="d-flex justify-content-center">
+        <img src="assets/images/logo_500_dk_lc.png" class="mx-auto mb-4 w-75" />
+      </div>
+
+      <ion-grid class="login-block">
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col>
+            <ion-item>
+              <!-- <ion-label position="stacked" class="mb-2">Mobile Number</ion-label> -->
+
+              <ion-intl-tel-input formControlName="username" [defaultCountryiso]="'gh'" [preferredCountries]="['gh']"></ion-intl-tel-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col>
+            <ion-item>
+              <!-- <ion-label position="stacked">Password</ion-label> -->
+              <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" type="submit" (click)="doLogin()">
+              <ion-spinner  *ngIf="authService.requesting" name="crescent" class="ion-margin-end py-4" color="white"></ion-spinner>
+              <ion-text>Login</ion-text>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="w-80">
 
 
-          <ion-grid>
-            <ion-row class="ion-align-self-stretch ion-justify-content-center">
-              <ion-col class="ion-justify-content-center">
-                <ion-grid>
-                  <ion-row class="ion-align-items-center ion-justify-content-center">
-                    <ion-col>
-                      <ion-item>
-                        <ion-label position="floating">Mobile Number</ion-label>
-                        <ion-input formControlName="username" type="tel" placeholder="(xxx) xxx-xxxx"></ion-input>
-                      </ion-item>
-                    </ion-col>
-                  </ion-row>
-
-                  <ion-row class="ion-align-items-center ion-justify-content-center">
-                    <ion-col>
-                      <ion-item>
-                        <ion-label position="floating">Password</ion-label>
-                        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-                      </ion-item>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <div class="w-90">
-            <ion-button expand="block" type="submit" (click)="doLogin()">Login</ion-button>
-          </div>
-        </form>
-      </ion-card-content>
-    </ion-card>
+        <ion-list class="mt-4">
+          <ion-item button lines="none" detail="true" routerLink="/auth/forgot-password">
+            <ion-icon slot="start" name="help-circle"></ion-icon>
+            <ion-label>Forgot Password?</ion-label>
+          </ion-item>
+          <ion-item button lines="none" detail="true" routerLink="/auth/register">
+            <ion-icon slot="start" name="pencil"></ion-icon>
+            <ion-label>Sign Up</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </form>
 
 
 

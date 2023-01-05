@@ -1,0 +1,85 @@
+<!-- <app-main-menu [contentId]="'settings-content'"></app-main-menu> -->
+
+<div class="ion-page" id="settings-content">
+  <ion-header>
+    <ion-toolbar>
+      <!-- <ion-buttons slot="start">
+        <ion-menu-button menu="settings-content"></ion-menu-button>
+      </ion-buttons> -->
+
+      <ion-title>
+        <ion-label>
+          Settings
+        </ion-label>
+      </ion-title>
+
+      <ngx-avatars [src]="user?.member?.thumbnail()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding"
+                   routerLink="/tabs/pages/settings">
+      </ngx-avatars>
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+
+    <!-- <ion-card>
+      <ion-card-header>
+        <ion-card-title>Personal ID QR Code</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content class="ion-text-center">
+        <qr-code [value]="user?.username" size="180" errorCorrectionLevel="M"></qr-code>
+      </ion-card-content>
+    </ion-card> -->
+
+
+    <ion-list>
+      <ion-item-group>
+        <ion-list-header>
+          <ion-label>Your Account</ion-label>
+        </ion-list-header>
+
+        <ion-item button detail="true" lines="full">
+          <ion-icon name="pencil" slot="start"></ion-icon>
+          <ion-label>Edit Settings</ion-label>
+        </ion-item>
+
+        <ion-item button detail="true" lines="full">
+          <ion-icon name="key" slot="start"></ion-icon>
+          <ion-label>Change Password</ion-label>
+        </ion-item>
+
+        <ion-item button detail="true" lines="full">
+          <ion-icon name="phone-portrait" slot="start"></ion-icon>
+          <ion-label>Enable Two-Factor Authentication</ion-label>
+        </ion-item>
+
+        <ion-item button lines="full" detail="true">
+          <ion-icon name="trash" slot="start" color="danger"></ion-icon>
+          <ion-label color="danger">Delete Account</ion-label>
+        </ion-item>
+      </ion-item-group>
+
+
+      <ion-item-group class="mt-4">
+        <ion-list-header lines="full">
+          <ion-label>App Settings</ion-label>
+        </ion-list-header>
+
+        <ion-item button lines="full" (click)="doRefresh()">
+          <ion-icon name="refresh" slot="start"></ion-icon>
+          <ion-label>
+            <h2>Refresh Application</h2>
+            <p>Reload and fetch latest updates</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item button lines="full" (click)="doLogout()">
+          <ion-icon name="exit" slot="start"></ion-icon>
+          <ion-label>Log Out</ion-label>
+        </ion-item>
+      </ion-item-group>
+
+    </ion-list>
+  </ion-content>
+</div>

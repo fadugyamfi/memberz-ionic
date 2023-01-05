@@ -1,0 +1,90 @@
+<app-main-menu [contentId]="'main-content'"></app-main-menu>
+
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+      <ion-title>
+        <ion-label>
+          {{ 'Welcome' }} {{ user?.member?.first_name }}!
+        </ion-label>
+      </ion-title>
+
+      <ngx-avatars [src]="user?.thumbPhotoURL()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding">
+      </ngx-avatars>
+    </ion-toolbar>
+
+    <ion-toolbar>
+      <ion-title size="small">Your Organisations</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- <ion-content class="pb-50" [ngClass]="{ 'd-block': showMemberships(), 'd-none': !showMemberships() }">
+    <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
+      <ion-card *ngFor="let membership of memberships" class="shadow-sm">
+
+        <ng-container *ngIf="membership?.organisation_no">
+          <ion-card-content class="ion-no-padding">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3">
+                  <qr-code  [value]="membership?.uuid" size="80" errorCorrectionLevel="M"></qr-code>
+                </ion-col>
+
+                <ion-col class="ion-padding-top">
+                  <div class="fw-semibold text-dark">{{ membership.organisation?.name }}</div>
+                  <div class="">{{ membership.category?.name }}</div>
+                  <div class="">{{ membership.organisation_no }}</div>
+                  <div>Expires: <ion-text color="success">NEVER</ion-text></div>
+                </ion-col>
+              </ion-row>
+
+            </ion-grid>
+          </ion-card-content>
+        </ng-container>
+
+      </ion-card>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="ion-padding ion-text-center ion-align-items-center">
+        <ion-spinner name="crescent" class="ion-margin-end"></ion-spinner>
+        <ion-text>Loading Your Memberships</ion-text>
+      </div>
+    </ng-template>
+  </ion-content> -->
+
+  <ion-content class="ion-padding-top" [ngClass]="{ 'd-block': showOrganisations(), 'd-none': !showOrganisations() }">
+
+    <ng-container *ngIf="(organisations$ | async) as organisations; else orgLoading">
+      <ion-list lines="full">
+        <ion-item detail="true" button *ngFor="let organisation of organisations" (click)="loadOrganisation(organisation)">
+          <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatars>
+
+          <ion-label>
+            <h6>{{ organisation.name }}</h6>
+            <p class="mb-0">{{ organisation.organisation_type.name }}</p>
+          </ion-label>
+
+          <!-- <ion-button slot="end">Open</ion-button> -->
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+
+    <ng-template #orgLoading>
+      <div class="ion-padding ion-text-center ion-align-items-center">
+        <ion-spinner name="crescent" class="ion-margin-end"></ion-spinner>
+        <ion-text>Loading Your Organisations</ion-text>
+      </div>
+    </ng-template>
+
+    <div class="ion-padding">
+      <ion-button expand="block" (click)="discover()">{{ 'See More Organisations' }}</ion-button>
+    </div>
+  </ion-content>
+</div>

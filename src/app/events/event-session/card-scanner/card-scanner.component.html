@@ -1,0 +1,23 @@
+<ion-modal #ionModal [keepContentsMounted]="true" [isOpen]="open" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Scan QR Code To Register</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="hideScanner()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+
+    </ion-header>
+
+    <ion-content>
+      <p class="ion-text-center" *ngIf="scanner.isLoading">
+        <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+        Readying Scanner
+      </p>
+
+      <ngx-scanner-qrcode #scanner (event)="onCodeScanned($event)" ></ngx-scanner-qrcode>
+
+    </ion-content>
+  </ng-template>
+</ion-modal>

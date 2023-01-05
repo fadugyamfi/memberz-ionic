@@ -1,0 +1,80 @@
+<ion-modal #ionModal [isOpen]="open" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Add New Member</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="onCancel()">Cancel</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <form [formGroup]="addForm" (submit)="onSubmit($event)">
+        <ion-list lines="full">
+          <ion-item>
+            <ion-label position="stacked">Membership Category</ion-label>
+            <ion-select placeholder="Select Category" required formControlName="organisation_member_category_id">
+              <ng-container *ngIf="(categories$ | async) as categories">
+                <ion-select-option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.name }}
+                </ion-select-option>
+              </ng-container>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Surname Name</ion-label>
+            <ion-input placeholder="e.g Michaels" required formControlName="last_name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Other Name(s)</ion-label>
+            <ion-input placeholder="e.g Jones Quaye" required formControlName="first_name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Phone Number</ion-label>
+            <ion-intl-tel-input placeholder="e.g +2332440001100" [required]="true" formControlName="mobile_number"
+                                [defaultCountryiso]="'gh'" [preferredCountries]="['gh']"></ion-intl-tel-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Gender</ion-label>
+            <ion-select placeholder="Select Gender" required formControlName="gender">
+              <ion-select-option value="">No Gender</ion-select-option>
+              <ion-select-option value="male">Male</ion-select-option>
+              <ion-select-option value="female">Female</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Date of Birth</ion-label>
+            <ion-datetime-button datetime="dob-date"></ion-datetime-button>
+
+            <ion-popover [keepContentsMounted]="true" >
+              <ng-template>
+                <ion-datetime id="dob-date" presentation="date" required formControlName="dob"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Address / Digital Address</ion-label>
+            <ion-input placeholder="e.g GE-123-3210" formControlName="address"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <div class="ion-padding">
+          <ion-button type="submit" expand="block">
+            <ion-spinner name="crescent" *ngIf="membershipService.creating"></ion-spinner>
+            Register
+          </ion-button>
+        </div>
+      </form>
+
+
+
+    </ion-content>
+  </ng-template>
+</ion-modal>
