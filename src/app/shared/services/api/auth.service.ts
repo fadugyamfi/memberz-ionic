@@ -239,9 +239,7 @@ export class AuthService extends APIService<MemberAccount> {
   }
 
   public clearSession() {
-    this.organisationService.clearActiveOrganisation();
-    this.storage.remove('user');
-    this.storage.remove('auth');
+    this.storage.engine.clear();
   }
 
   loadUserData() {

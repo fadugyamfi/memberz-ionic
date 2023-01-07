@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { MemberAccount } from '../../shared/models/api/member-account';
 import { OrganisationEvent } from '../../shared/models/api/organisation-event';
 import { OrganisationEventAttendee } from '../../shared/models/api/organisation-event-attendee';
 import { OrganisationEventSession } from '../../shared/models/api/organisation-event-session';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
+import { ApiResponse } from '../../shared/services/api/api.service';
 import { AuthService } from '../../shared/services/api/auth.service';
 import { OrganisationEventAttendeeService } from '../../shared/services/api/organisation-event-attendee.service';
 import { OrganisationEventSessionService } from '../../shared/services/api/organisation-event-session.service';
 import { OrganisationEventService } from '../../shared/services/api/organisation-event.service';
 import { OrganisationService } from '../../shared/services/api/organisation.service';
 
-const Alert = Swal.mixin({
+const SwAlert = Swal.mixin({
   heightAuto: false
 });
 
@@ -120,34 +122,41 @@ export class EventSessionPage implements OnInit {
     }
 
     if( this.captures.indexOf(code) > -1 ) {
-      Alert.fire('Already Registered', 'Please register a different guest', 'error');
+      SwAlert.fire('Already Registered', 'Please register a different guest', 'error');
       return;
     }
 
-    Alert.fire('Registering', 'Please wait...', 'info');
-    Alert.showLoading();
+    await this.registerMembers([code]);
+    this.captures.push(code);
+  }
 
-    this.eventService.registerMemberByQRCode({
-      membership_uuid: code,
+  async registerMembers(codes: string[]) {
+    SwAlert.fire('Registering', 'Please wait...', 'info');
+    SwAlert.showLoading();
+
+    return this.eventService.registerMemberByQRCode({
+      membership_uuids: codes,
       organisation_id: this.session.organisation_id,
       organisation_event_session_id: this.session.id,
       organisation_event_id: this.session.organisation_event_id
     }).subscribe({
-      next: (attendee: OrganisationEventAttendee) => {
-        this.captures.push(code);
-        this.recentAttendees.unshift(attendee);
+      next: (attendees: OrganisationEventAttendee[]) => {
+        if( attendees.length > 0 ) {
+          this.recentAttendees.unshift(...attendees);
+          const names = attendees.map(attendee => attendee.member.name()).join('<br />');
 
-        Alert.fire('Registered', `${attendee.member.name()} registed successfully`, 'info');
-        Alert.hideLoading();
+          SwAlert.fire(`Registered ${attendees.length}/${codes.length} Successfully`, names, 'info');
+          SwAlert.hideLoading();
+        } else {
+          SwAlert.fire('Registration Failed', 'No members registered', 'error');
+        }
       },
       error: (error) => {
-        Alert.fire('Registration Failed', `${error.error.message}`, 'error');
-        Alert.hideLoading();
+        const message = error.error?.message || error.message;
+        SwAlert.fire('Registration Failed', `${message}`, 'error');
+        SwAlert.hideLoading();
       }
     });
-
-    // setTimeout(() => this.capturing = false, 3000);
-    return;
   }
 
   isValidMemberCode(code: string) {
@@ -174,14 +183,14 @@ export class EventSessionPage implements OnInit {
     this.recentAttendees.unshift(attendee);
   }
 
-  onMemberSelected(membership: OrganisationMember) {
+  onMembersSelected(memberships: OrganisationMember[]) {
     this.searching = false;
-    this.onCodeScanned( membership.uuid );
+    this.registerMembers( memberships.map(membership => membership.uuid) );
   }
 
   onMemberAdded(membership: OrganisationMember) {
     this.adding = false;
-    this.onCodeScanned( membership.uuid );
+    this.registerMembers([membership.uuid]);
   }
 
   isAttendanceSessionSet() {
@@ -194,7 +203,7 @@ export class EventSessionPage implements OnInit {
   }
 
   removeAttendee(attendee: OrganisationEventAttendee) {
-    Alert.fire({
+    SwAlert.fire({
       title: 'Remove Attendee',
       text: 'Are you sure you want to remove this attendee from this event session?',
       icon: 'warning',

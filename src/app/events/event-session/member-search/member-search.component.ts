@@ -24,6 +24,7 @@ export class MemberSearchComponent implements OnInit {
 
   public memberships$: Observable<OrganisationMember[]> = of([]);
   public open = true;
+  public selected: OrganisationMember[] = [];
 
   constructor(
     public membershipService: OrganisationMemberService,
@@ -32,7 +33,7 @@ export class MemberSearchComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => { // this will make the execution after the above boolean has changed
-      this.searchbar.setFocus();
+      this.searchbar?.setFocus();
     }, 100);
     this.modalBackButton.pushModalState();
   }
@@ -60,7 +61,17 @@ export class MemberSearchComponent implements OnInit {
   }
 
   onSelect(membership: OrganisationMember) {
+    const index = this.selected.indexOf(membership);
+    if( index > -1 ) {
+      this.selected.splice(index, 1);
+      return;
+    }
+
+    this.selected.push(membership);
+  }
+
+  onRegister() {
     this.modal.dismiss(null, 'searched');
-    setTimeout(() => this.register.emit(membership), 200);
+    setTimeout(() => this.register.emit(this.selected), 200);
   }
 }

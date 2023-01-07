@@ -34,6 +34,11 @@
                 "input": "src",
                 "output": "./"
               },
+              {
+                "glob": "**/*",
+                "input": "src/.well-known",
+                "output": ".well-known"
+              },
               "src/manifest.webmanifest"
             ],
             "styles": [

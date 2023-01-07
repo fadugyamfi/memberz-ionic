@@ -16,11 +16,15 @@
 
     <ion-content>
 
-      <ion-list lines="full">
+      <ion-list lines="full" class="mt-3">
 
         <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
           <ion-list-header *ngIf="memberships.length > 0">
-            <ion-label>Select Member To Register</ion-label>
+            <ion-label>Select Members To Register</ion-label>
+
+            <ion-button fill="solid" class="me-3" [disabled]="selected?.length === 0" (click)="onRegister()">
+              Register ({{ selected.length }})
+            </ion-button>
           </ion-list-header>
 
           <ion-item *ngFor="let membership of memberships" (click)="onSelect(membership)">
@@ -28,6 +32,8 @@
                          size="40"></ngx-avatars>
 
             <ion-label>{{ membership.member.lastThenFirstName() }}</ion-label>
+
+            <ion-checkbox slot="end" [value]="membership.id"></ion-checkbox>
           </ion-item>
         </ng-container>
 

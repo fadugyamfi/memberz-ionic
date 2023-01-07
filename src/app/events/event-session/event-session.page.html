@@ -59,7 +59,7 @@
 </ion-content>
 
 <app-member-search *ngIf="searching" (close)="searching = false"
-                   (register)="onMemberSelected($event)"></app-member-search>
+                   (register)="onMembersSelected($event)"></app-member-search>
 
 <app-card-scanner *ngIf="scanning" (scan)="onCodeScanned($event)" (close)="onHideScanner()"></app-card-scanner>
 

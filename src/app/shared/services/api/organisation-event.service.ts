@@ -5,16 +5,16 @@ import { EventsService } from '../events.service';
 import { HttpClient } from '@angular/common/http';
 import { OrganisationEvent } from '../../models/api/organisation-event';
 import { StorageService } from '../storage.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of, tap, throwError } from 'rxjs';
 import { OrganisationEventAttendee } from '../../models/api/organisation-event-attendee';
 
 interface EventAttendeeRequest {
-  membership_uuid: string;
   organisation_id: number;
   organisation_event_id: number;
   organisation_event_session_id: number;
-  member_id?: number;
-  organisation_member_id?: number;
+  membership_uuids?: string[];
+  organisation_member_ids?: number[];
+  member_ids?: number[];
 }
 
 @Injectable({
@@ -58,9 +58,17 @@ export class OrganisationEventService extends APIService<OrganisationEvent> {
     );
   }
 
-  registerMemberByQRCode(request: EventAttendeeRequest, options = {}): Observable<OrganisationEventAttendee> {
+  registerMemberByQRCode(request: EventAttendeeRequest, options = {}): Observable<OrganisationEventAttendee[]> {
     return this.post(`/events/${request.organisation_event_id}/register`, request).pipe(
-      map((response: ApiResponse) => new OrganisationEventAttendee(response.data))
+      map(
+        (response: ApiResponse) => {
+          if( response.data.skipped.length > 0 && response.data.attendees.length === 0 ) {
+            throw new Error('Guest(s) already registered');
+          }
+
+          return response.data.attendees.map(attendee => new OrganisationEventAttendee(attendee));
+        }
+      )
     );
   }
 }
