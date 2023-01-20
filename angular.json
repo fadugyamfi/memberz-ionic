@@ -47,7 +47,6 @@
               "node_modules/flag-icons/sass/flag-icons.scss"
             ],
             "scripts": [],
-            "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,

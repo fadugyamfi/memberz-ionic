@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +35,18 @@ export class StorageService {
    * @param unit Unit of storage duration, e.g. days, months, weeks, hours, minutes, seconds
    */
   public set(key: string, value: any, duration: any = 1, unit = 'days') {
+    const future = new Date();
+
+    if( unit.includes('day') ) { future.setDate( future.getDate() + duration ); }
+    if( unit.includes('hour') ) { future.setHours( future.getHours() + duration ); }
+    if( unit.includes('minute') ) { future.setMinutes( future.getMinutes() + duration ); }
+    if( unit.includes('month') ) { future.setMonth( future.getMonth() + duration ); }
+    if( unit.includes('year') ) { future.setFullYear( future.getFullYear() + duration ); }
+
     const data = {
-      created: moment().valueOf(),
+      created: Date.now(),
       data: value,
-      expires: moment().add(duration, unit).valueOf()
+      expires: future.getTime()
     };
 
     this.engine.setItem(key, JSON.stringify(data));
@@ -125,7 +132,11 @@ export class StorageService {
    * @param result
    */
   private isResultExpired(result) {
-    return result && moment(result.expires).isBefore(moment(), 'minute');
+    if( !result ) {
+      return false;
+    }
+
+    return result.expires < Date.now();
   }
 
   /**

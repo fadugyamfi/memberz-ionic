@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
+import * as relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 export class AppModel {
 
@@ -20,11 +22,11 @@ export class AppModel {
   }
 
   whenCreated() {
-    return moment(this.created || this.created_at).fromNow();
+    return dayjs(this.created || this.created_at).fromNow();
   }
 
   lastModified() {
-    return moment(this.modified || this.updated_at).fromNow();
+    return dayjs(this.modified || this.updated_at).fromNow();
   }
 
   toJSON() {

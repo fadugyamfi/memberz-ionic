@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 
 import { AppModel } from './app.model';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 import { SubscriptionType } from './subscription-type';
 import { OrganisationInvoice } from './organisation-invoice';
+
+import * as relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 export class OrganisationSubscription extends AppModel {
 
@@ -43,7 +46,7 @@ export class OrganisationSubscription extends AppModel {
       return 'Never Expires';
     }
 
-    const daysRemaining = moment(this.end_dt).fromNow();
+    const daysRemaining = dayjs(this.end_dt).fromNow();
 
     return this.isExpired() ? `Expired ${daysRemaining}` : `Expires ${daysRemaining}`;
   }
@@ -53,11 +56,11 @@ export class OrganisationSubscription extends AppModel {
   }
 
   isExpired(): boolean {
-    return !this.validForever() && moment(this.end_dt).isBefore(moment());
+    return !this.validForever() && dayjs(this.end_dt).isBefore(dayjs());
   }
 
   isExpiring() {
-    return !this.isExpired() && !this.validForever() && moment(this.end_dt).subtract(60, 'days').isBefore(moment());
+    return !this.isExpired() && !this.validForever() && dayjs(this.end_dt).subtract(60, 'days').isBefore(dayjs());
   }
 
   invoicePaid(): boolean {
@@ -92,6 +95,6 @@ export class OrganisationSubscription extends AppModel {
   }
 
   nextRenewalDate(sub_length: number) {
-    return this.isExpired() ? moment().add(sub_length, 'month') : moment(this.end_dt).add(sub_length, 'month');
+    return this.isExpired() ? dayjs().add(sub_length, 'month') : dayjs(this.end_dt).add(sub_length, 'month');
   }
 }

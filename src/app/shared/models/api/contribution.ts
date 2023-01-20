@@ -6,7 +6,7 @@ import { AppModel } from './app.model';
 import { OrganisationMember } from './organisation-member';
 import { ContributionReceipt } from './contribution-receipt';
 import { ContributionType } from './contribution-type';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 export class Contribution extends AppModel {
 
@@ -54,7 +54,7 @@ export class Contribution extends AppModel {
   }
 
   period() {
-    const month = moment().month(this.month - 1).format('MMM');
+    const month = dayjs().month(this.month - 1).format('MMM');
     return `Wk ${this.week}, ${month} ${this.year}`;
   }
 }

@@ -368,10 +368,10 @@ export class APIService<T extends AppModel> {
    *
    * @param model Model data to pass
    */
-  create(model: T, qparams: object = null) {
+  create(model: T, qparams: object = null, headers: object = null) {
     this.creating = this.saving = true;
 
-    return this.post(`${this.url}`, model, qparams).pipe(
+    return this.post(`${this.url}`, model, qparams, headers).pipe(
       map((response: ApiResponse) => new this.model(response.data)),
 
       tap(responseModel => {

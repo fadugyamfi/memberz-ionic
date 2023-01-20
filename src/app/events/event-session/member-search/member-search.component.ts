@@ -62,11 +62,14 @@ export class MemberSearchComponent implements OnInit {
 
   onSelect(membership: OrganisationMember) {
     const index = this.selected.indexOf(membership);
+
     if( index > -1 ) {
+      membership.selected = false;
       this.selected.splice(index, 1);
       return;
     }
 
+    membership.selected = true;
     this.selected.push(membership);
   }
 
