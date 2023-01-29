@@ -8,7 +8,6 @@ import { OrganisationEvent } from '../../shared/models/api/organisation-event';
 import { OrganisationEventAttendee } from '../../shared/models/api/organisation-event-attendee';
 import { OrganisationEventSession } from '../../shared/models/api/organisation-event-session';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
-import { ApiResponse } from '../../shared/services/api/api.service';
 import { AuthService } from '../../shared/services/api/auth.service';
 import { OrganisationEventAttendeeService } from '../../shared/services/api/organisation-event-attendee.service';
 import { OrganisationEventSessionService } from '../../shared/services/api/organisation-event-session.service';
