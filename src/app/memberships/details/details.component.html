@@ -28,14 +28,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="showDirectory()">
+<ion-content [hidden]="!showDirectory()">
   <app-membership-directory [membership]="membership"></app-membership-directory>
 </ion-content>
 
 
-<ion-content *ngIf="showMembership()">
+<ion-content [hidden]="!showMembership()">
   <ion-card class="shadow-sm">
-    <ion-card-content class="ion-no-padding d-flex ion-justify-content-center">
+    <ion-card-content class="d-flex ion-justify-content-center">
       <qr-code [value]="membership?.uuid" size="200" errorCorrectionLevel="M"></qr-code>
     </ion-card-content>
     <ion-card-header>
@@ -70,6 +70,6 @@
 
 </ion-content>
 
-<ion-content *ngIf="showPayments()">
+<ion-content [hidden]="!showPayments()">
   <app-membership-payments [membership]="membership"></app-membership-payments>
 </ion-content>

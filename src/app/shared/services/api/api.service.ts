@@ -266,7 +266,9 @@ export class APIService<T extends AppModel> {
   }
 
   public clearSelectedModel() {
-    this.setSelectedModel = null;
+    this.selectedModel = null;
+    this.storage.remove(`${this.model_name.toLowerCase()}_selected`);
+    this.events.trigger(`${this.model_name}:cleared`);
   }
 
   public clearItems() {

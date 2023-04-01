@@ -33,4 +33,8 @@ export class OrganisationPage implements OnInit {
       next: (organisation: Organisation) => this.organisation = organisation
     });
   }
+
+  join() {
+
+  }
 }

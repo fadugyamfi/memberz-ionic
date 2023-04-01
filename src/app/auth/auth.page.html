@@ -1,7 +1,12 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
-  </ion-toolbar>
+
+  <section class="position-relative header d-flex">
+    <div class="header-bg"></div>
+
+    <ion-back-button defaultHref="/home" slot="start" routerLink="/home"></ion-back-button>
+
+    <ion-title>Account Login</ion-title>
+  </section>
 </ion-header>
 
 <ion-content>
@@ -10,17 +15,14 @@
 
     <form [formGroup]="loginForm" class="mx-4 my-5">
 
-      <div class="d-flex justify-content-center">
-        <img src="assets/images/logo_500_dk_lc.png" class="mx-auto mb-4 w-75" />
-      </div>
-
       <ion-grid class="login-block">
         <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col>
             <ion-item>
               <!-- <ion-label position="stacked" class="mb-2">Mobile Number</ion-label> -->
 
-              <ion-intl-tel-input formControlName="username" [defaultCountryiso]="'gh'" [preferredCountries]="['gh']"></ion-intl-tel-input>
+              <ion-intl-tel-input formControlName="username" [defaultCountryiso]="'gh'"
+                                  [preferredCountries]="['gh']"></ion-intl-tel-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -37,7 +39,8 @@
         <ion-row>
           <ion-col>
             <ion-button expand="block" type="submit" (click)="doLogin()">
-              <ion-spinner  *ngIf="authService.requesting" name="crescent" class="ion-margin-end py-4" color="white"></ion-spinner>
+              <ion-spinner *ngIf="authService.requesting" name="crescent" class="ion-margin-end py-4"
+                           color="white"></ion-spinner>
               <ion-text>Login</ion-text>
             </ion-button>
           </ion-col>

@@ -38,7 +38,10 @@
             <ngx-avatars slot="start" [src]="membership.member?.thumbnail()" [name]="membership.name()"
                          size="40"></ngx-avatars>
 
-            <ion-label>{{ membership.member?.lastThenFirstName() }}</ion-label>
+            <ion-label class="fw-semibold">
+              {{ membership.member?.lastThenFirstName() }}
+              <p class="my-0 text-muted f-12 fw-normal">{{ membership.category?.name }}</p>
+            </ion-label>
 
             <ion-icon slot="end" name="checkbox" color="light" *ngIf="!membership.selected"></ion-icon>
             <ion-icon slot="end" name="checkbox" color="success" *ngIf="membership.selected"></ion-icon>

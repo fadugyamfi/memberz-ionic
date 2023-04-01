@@ -1,16 +1,15 @@
 <app-main-menu [contentId]="'discovery-content'"></app-main-menu>
 
 <ion-header [translucent]="true" class="ion-no-border">
-  <section class="text-center position-relative header">
+  <section class="position-relative header">
     <div class="header-bg"></div>
 
     <header class="d-flex justify-content-between w-100">
       <ion-back-button defaultHref="/home"></ion-back-button>
 
-      <ion-button fill="clear" routerLink="/auth/login" class="text-white">Log In</ion-button>
+      <ion-title>Join An Organisation</ion-title>
+      <ion-button fill="clear" routerLink="/auth/login" class="text-white" *ngIf="!authService.isLoggedIn">Log In</ion-button>
     </header>
-
-    <h2 class="mb-0 mt-2">Join An Organisation</h2>
   </section>
 </ion-header>
 
@@ -26,14 +25,14 @@
 
     <ng-container *ngIf="(organisations$ | async) as organisations; else loading">
       <ion-item detail="true" button *ngFor="let organisation of organisations" (click)="loadOrganisation(organisation)">
-        <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatars>
+        <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40" initialsSize="2"></ngx-avatars>
 
         <ion-label>
           <h6>{{ organisation.name }}</h6>
           <p class="mb-0">{{ organisation.organisation_type.name }}</p>
         </ion-label>
 
-        <ion-button slot="end">Join</ion-button>
+        <!-- <ion-button slot="end">Join</ion-button> -->
       </ion-item>
     </ng-container>
 

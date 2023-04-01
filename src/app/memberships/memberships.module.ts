@@ -14,6 +14,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { AnniversariesComponent } from './anniversaries/anniversaries.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { DirectoryComponent } from './directory/directory.component';
+import { ProfileDetailsComponent } from './directory/profile-details/profile-details.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { DirectoryComponent } from './directory/directory.component';
   declarations: [
     MembershipsPage,
     DetailsComponent,
+    ProfileDetailsComponent,
     GroupsComponent,
     AnniversariesComponent,
     PaymentsComponent,

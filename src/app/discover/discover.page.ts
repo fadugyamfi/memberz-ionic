@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Organisation } from '../shared/models/api/organisation';
+import { AuthService } from '../shared/services/api/auth.service';
 import { OrganisationService } from '../shared/services/api/organisation.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class DiscoverPage implements OnInit {
 
   constructor(
     public organisationService: OrganisationService,
-    public router: Router
+    public router: Router,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
