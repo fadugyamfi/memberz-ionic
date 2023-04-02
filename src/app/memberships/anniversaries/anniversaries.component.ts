@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberAnniversary } from '../../shared/models/api/organisation-member-anniversary';
@@ -16,6 +16,8 @@ export class AnniversariesComponent implements OnInit {
   public membership: OrganisationMember;
   public anniversaries$: Observable<OrganisationMemberAnniversary[]>;
 
+  @Output() load = new EventEmitter<any>();
+
   public cacheKey: string;
 
   constructor(
@@ -30,7 +32,9 @@ export class AnniversariesComponent implements OnInit {
 
   loadAnniversaries() {
     if( this.storage.has(this.cacheKey) ) {
-      this.anniversaries$ = of( this.storage.get(this.cacheKey) );
+      const anniversaries = this.storage.get(this.cacheKey);
+      this.anniversaries$ = of( anniversaries );
+      this.load.emit(anniversaries);
       return;
     }
 
@@ -41,6 +45,7 @@ export class AnniversariesComponent implements OnInit {
       .pipe(
         tap(anniversaries => {
           this.storage.set(this.cacheKey, anniversaries, 1, 'days');
+          this.load.emit(anniversaries);
         })
       );
   }

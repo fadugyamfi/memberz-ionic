@@ -4,6 +4,7 @@
 
 import { AppModel } from './app.model';
 import { Member } from './member';
+import { Organisation } from './organisation';
 import { OrganisationEventAttendee } from './organisation-event-attendee';
 import { OrganisationMemberCategory } from './organisation-member-category';
 import { OrganisationRegistrationForm } from './organisation-registration-form';
@@ -22,7 +23,9 @@ export class OrganisationMember extends AppModel {
   public _organisation_member_category: OrganisationMemberCategory;
   public _organisation_registration_form: OrganisationRegistrationForm;
   public event_attendee: OrganisationEventAttendee;
-  public organisation;
+  public _organisation: Organisation;
+  public membership_start_dt: string;
+  public membership_end_dt: string;
 
   constructor(data) {
     super(data);
@@ -60,6 +63,13 @@ export class OrganisationMember extends AppModel {
     this._organisation_registration_form = value ? new OrganisationRegistrationForm(value) : null;
   }
 
+  get organisation(): Organisation {
+    return this._organisation;
+  }
+
+  set organisation(value) {
+    this._organisation = value ? new Organisation(value) : null;
+  }
 
   name() {
     return this.member && this.member.firstThenLastName();

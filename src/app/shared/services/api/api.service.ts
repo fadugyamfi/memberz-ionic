@@ -249,7 +249,7 @@ export class APIService<T extends AppModel> {
     let model = this.selectedModel;
 
     if( !model ) {
-      model = this.storage.get(`${this.model_name.toLowerCase()}_selected`);
+      model = new this.model(this.storage.get(`${this.model_name.toLowerCase()}_selected`));
     }
 
     return model;

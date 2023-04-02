@@ -45,4 +45,10 @@ export class Organisation extends AppModel {
   set organisation_type(value) {
     this._organisationType = value ? new OrganisationType(value) : null;
   }
+
+  getTenantHeaders() {
+    return {
+      'X-Tenant-Id': this.uuid
+    };
+  }
 }
