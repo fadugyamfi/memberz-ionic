@@ -20,9 +20,10 @@
           <ion-col>
             <ion-item>
               <!-- <ion-label position="stacked" class="mb-2">Mobile Number</ion-label> -->
+              <ion-input label="Mobile Number" type="tel" labelPlacement="floating" placeholder="+23324010100" formControlName="username"></ion-input>
 
-              <ion-intl-tel-input formControlName="username" [defaultCountryiso]="'gh'"
-                                  [preferredCountries]="['gh']"></ion-intl-tel-input>
+              <!-- <ion-intl-tel-input formControlName="username" [defaultCountryiso]="'gh'"
+                                  [preferredCountries]="['gh']"></ion-intl-tel-input> -->
             </ion-item>
           </ion-col>
         </ion-row>
@@ -31,7 +32,7 @@
           <ion-col>
             <ion-item>
               <!-- <ion-label position="stacked">Password</ion-label> -->
-              <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+              <ion-input label="Password" labelPlacement="stacked" type="password" placeholder="Password" formControlName="password"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>

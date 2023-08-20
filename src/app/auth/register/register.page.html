@@ -8,6 +8,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding-top" [formGroup]="newAccountForm">
+  <h5 class="text-center">Setup Your Account</h5>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input label="First Name" labelPlacement="floating" formControlName="first_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Last Name" labelPlacement="floating" formControlName="last_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Email" type="email" labelPlacement="floating" formControlName="email" placeholder="joe@example.com"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Phone Number" type="tel" labelPlacement="floating" formControlName="mobile_number" placeholder="+233244000000"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Password" labelPlacement="floating" type="password" formControlName="password" placeholder="p@$$w0RD!"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button expand="block" type="submit" (click)="validate()">Create Account</ion-button>
+  </div>
 
 </ion-content>

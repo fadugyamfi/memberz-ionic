@@ -9,3 +9,6 @@ Write-Host -fore Cyan "`r`nDeploying files on remote /home/runcloud/webapps/memb
 
 # Write-Host -fore Cyan "`r`nExtracting uploaded files on remote /home/runcloud/webapps/memberz-ionic"
 # . ssh -i C:\Users\icewa\.ssh\TG-Personal.pem "runcloud@m.memberz.org" "cd ~/webapps/memberz-ionic; unzip -o www.zip; exit;"
+
+
+## Todo update ng-qrcode to Angular16 https://github.com/mnahkies/ng-qrcode/releases
