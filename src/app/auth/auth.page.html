@@ -19,11 +19,7 @@
         <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col>
             <ion-item>
-              <!-- <ion-label position="stacked" class="mb-2">Mobile Number</ion-label> -->
               <ion-input label="Mobile Number" type="tel" labelPlacement="floating" placeholder="+23324010100" formControlName="username"></ion-input>
-
-              <!-- <ion-intl-tel-input formControlName="username" [defaultCountryiso]="'gh'"
-                                  [preferredCountries]="['gh']"></ion-intl-tel-input> -->
             </ion-item>
           </ion-col>
         </ion-row>
@@ -40,7 +36,7 @@
         <ion-row>
           <ion-col>
             <ion-button expand="block" type="submit" (click)="doLogin()">
-              <ion-spinner *ngIf="authService.requesting" name="crescent" class="ion-margin-end py-4"
+              <ion-spinner *ngIf="authService.requesting" name="crescent" class="ion-margin-end"
                            color="white"></ion-spinner>
               <ion-text>Login</ion-text>
             </ion-button>

@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AuthPageRoutingModule } from './auth-routing.module';
-// import { IonIntlTelInputModule } from 'ion-intl-tel-input/dist';
 
 import { AuthPage } from './auth.page';
 
@@ -16,7 +15,6 @@ import { AuthPage } from './auth.page';
     ReactiveFormsModule,
     IonicModule,
     AuthPageRoutingModule,
-    // IonIntlTelInputModule
   ],
   declarations: [
     AuthPage,

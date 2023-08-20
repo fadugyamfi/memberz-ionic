@@ -24,19 +24,15 @@
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked">Surname Name</ion-label>
-            <ion-input placeholder="e.g Michaels" required formControlName="last_name"></ion-input>
+            <ion-input labelPlacement="stacked" label="Surname" placeholder="e.g Michaels" required formControlName="last_name"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked">Other Name(s)</ion-label>
-            <ion-input placeholder="e.g Jones Quaye" required formControlName="first_name"></ion-input>
+            <ion-input labelPlacement="stacked" label="Other Name(s)" placeholder="e.g Jones Quaye" required formControlName="first_name"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked">Phone Number</ion-label>
-            <ion-intl-tel-input placeholder="e.g +2332440001100" [required]="true" formControlName="mobile_number"
-                                [defaultCountryiso]="'gh'" [preferredCountries]="['gh']"></ion-intl-tel-input>
+            <ion-input labelPlacement="stacked" label="Phone Number" placeholder="e.g. +233244010101" formControlName="mobile_number"  />
           </ion-item>
 
           <ion-item>
@@ -60,8 +56,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked">Address / Digital Address</ion-label>
-            <ion-input placeholder="e.g GE-123-3210" formControlName="address"></ion-input>
+            <ion-input label="Address / Digital Address" labelPlacement="stacked" placeholder="e.g GE-123-3210" formControlName="address"></ion-input>
           </ion-item>
         </ion-list>
 
