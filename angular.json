@@ -43,8 +43,7 @@
             ],
             "styles": [
               "src/theme/variables.scss",
-              "src/global.scss",
-              "node_modules/flag-icons/sass/flag-icons.scss"
+              "src/global.scss"
             ],
             "scripts": [],
             "vendorChunk": true,
