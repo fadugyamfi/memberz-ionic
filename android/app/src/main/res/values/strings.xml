@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">memberz-ionic</string>
-    <string name="title_activity_main">memberz-ionic</string>
+    <string name="app_name">Memberz.Org</string>
+    <string name="title_activity_main">Memberz.Org</string>
     <string name="package_name">org.memberz.app</string>
     <string name="custom_url_scheme">org.memberz.app</string>
 </resources>
