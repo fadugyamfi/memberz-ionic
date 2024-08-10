@@ -1,5 +1,4 @@
 <ion-header class="ion-no-border">
-
   <section class="position-relative header d-flex">
     <div class="header-bg"></div>
 
@@ -28,7 +27,7 @@
           <ion-col>
             <ion-item>
               <!-- <ion-label position="stacked">Password</ion-label> -->
-              <ion-input label="Password" labelPlacement="stacked" type="password" placeholder="Password" formControlName="password"></ion-input>
+              <ion-input label="Password" labelPlacement="floating" type="password" placeholder="Password" formControlName="password"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -48,7 +47,7 @@
 
 
         <ion-list class="mt-4">
-          <ion-item button lines="none" detail="true" routerLink="/auth/forgot-password">
+          <ion-item button lines="true" detail="true" routerLink="/auth/forgot-password">
             <ion-icon slot="start" name="help-circle"></ion-icon>
             <ion-label>Forgot Password?</ion-label>
           </ion-item>

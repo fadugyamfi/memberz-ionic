@@ -1,17 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/auth/login"></ion-back-button>
-    </ion-buttons>
-
+  <section class="position-relative header d-flex">
+    <div class="header-bg"></div>
+    <ion-back-button slot="start" defaultHref="/auth/login"></ion-back-button>
     <ion-title>Sign Up</ion-title>
-  </ion-toolbar>
+  </section>
 </ion-header>
 
 <ion-content class="ion-padding-top" [formGroup]="newAccountForm">
   <h5 class="text-center">Setup Your Account</h5>
 
-  <ion-list lines="full">
+  <!-- <ion-list lines="full">
     <ion-item>
       <ion-input label="First Name" labelPlacement="floating" formControlName="first_name"></ion-input>
     </ion-item>
@@ -28,10 +26,54 @@
       <ion-input label="Phone Number" type="tel" labelPlacement="floating" formControlName="mobile_number" placeholder="+233244000000"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item title="Password must be min(8), mixed case(letters, numbers & symbols)">
       <ion-input label="Password" labelPlacement="floating" type="password" formControlName="password" placeholder="p@$$w0RD!"></ion-input>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+
+  <ion-grid class="login-block">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+    <ion-item>
+      <ion-input label="First Name" labelPlacement="floating" formControlName="first_name"></ion-input>
+    </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+      <ion-item>
+      <ion-input label="Last Name" labelPlacement="floating" formControlName="last_name"></ion-input>
+    </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+    <ion-item>
+      <ion-input label="Email" type="email" labelPlacement="floating" formControlName="email" placeholder="joe@example.com"></ion-input>
+    </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+    <ion-item>
+      <ion-input label="Phone Number" type="tel" labelPlacement="floating" formControlName="mobile_number" placeholder="+233244000000"></ion-input>
+    </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+    <ion-item >
+      <ion-input label="Password" helperText="min 8 chars, mix of letters, numbers & symbols" labelPlacement="floating" type="password" formControlName="password" placeholder="p@$$w0RD!"></ion-input>
+    </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-grid>
 
   <div class="ion-padding">
     <ion-button expand="block" type="submit" (click)="validate()">Create Account</ion-button>

@@ -7,6 +7,7 @@ body.swal2-height-auto {
 // }
 
 .login-block {
+
   ion-item::part(native) {
     border-color: #f3f3f3;
     border-style: solid;
@@ -28,7 +29,7 @@ body.swal2-height-auto {
     border-radius: 50%;
     width: 180%;
     height: 200px;
-    top: -90px;
+    top: -100px;
     left: -40%;
   }
 }

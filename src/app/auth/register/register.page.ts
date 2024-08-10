@@ -29,7 +29,8 @@ export class RegisterPage implements OnInit {
       last_name: new UntypedFormControl('', [Validators.required]),
       email: new UntypedFormControl('', [Validators.required, Validators.email]),
       mobile_number: new UntypedFormControl('', [Validators.required]),
-      password: new UntypedFormControl('', [Validators.required]),
+      // eslint-disable-next-line max-len
+      password: new UntypedFormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
     });
   }
 

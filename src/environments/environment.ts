@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    url: 'https://api-beta.memberz.org/api'
+    url: 'http://api.memberz.test/api'
   },
 };
 

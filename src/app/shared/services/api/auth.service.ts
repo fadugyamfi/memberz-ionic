@@ -18,7 +18,7 @@ const Alert = Swal.mixin({
 });
 
 export interface RegisterUserContract {
-  first_name: string;
+  full_name: string;
   last_name: string;
   email: string;
   mobile_number: string;
@@ -133,7 +133,7 @@ export class AuthService extends APIService<MemberAccount> {
     this.storage.set('auth', res, DURATION, 'day');
 
     this.me(rememberMe).subscribe({
-      next: () => this.router.navigate(['/tabs/pages/memberships'], { queryParams: { refresh: true }}),
+      next: () => this.router.navigate(['/tabs/pages/memberships'], { queryParams: { refresh: true } }),
       error: () => {
         Alert.fire(
           this.translate.instant('Account Info Not Found'),
@@ -190,7 +190,10 @@ export class AuthService extends APIService<MemberAccount> {
         );
         this.router.navigate(['/auth/login']);
       },
-      error: () => (this.requesting = false)
+      error: () => {
+        console.log('Error');
+        this.requesting = false;
+      }
     });
   }
 

@@ -1,17 +1,40 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>two-factor-auth</ion-title>
-  </ion-toolbar>
+  <section class="position-relative header d-flex">
+    <div class="header-bg"></div>
+    <ion-title>Two-Factor Authentication</ion-title>
+  </section>
 </ion-header>
 
 <ion-content>
-  <div class="fullheight xc vcs">
+  
+  <div class="fullheight xc vcs w-100 max-w-md p-4 ">
+    <h5 class="text-center">Two-Factor Authentication</h5>
+    <p class="text-center text-muted">Please enter the one-time password sent to your email.</p>
+    <form [formGroup]="twoFactorAuthForm">
+      <ion-grid class="login-block">
+        <ion-row class="ion-align-items-center ion-justify-content-center mb-2">
+          <ion-col>
+            <ion-item>
+              <!-- <ion-label position="stacked">Two Factor Auth Code</ion-label> -->
+              <ion-input formControlName="code" label="Verification Code" labelPlacement="floating"> </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
-    <ion-card class="w-100" [formGroup]="twoFactorAuthForm">
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" type="submit" (click)="validate()">
+              <ion-text>Submit</ion-text>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <!-- <ion-card class="w-100">
       <ion-card-content>
 
         <ion-grid>
-          <ion-row class="ion-align-self-stretch ion-justify-content-center">
+          <ion-row class="ion-align-items-center ion-justify-content-center">
             <ion-col class="ion-justify-content-center">
               <ion-grid>
                 <ion-row class="ion-align-items-center ion-justify-content-center">
@@ -29,11 +52,8 @@
         </ion-grid>
 
       </ion-card-content>
-    </ion-card>
+    </ion-card> -->
 
-    <div class="w-90">
-      <ion-button expand="block" type="submit" (click)="validate()">Submit</ion-button>
-    </div>
 
   </div>
 </ion-content>
