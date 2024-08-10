@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/api/auth.service';
-import { MemberAccount } from '../../shared/models/api/member-account';
 import { MemberAccountService } from '../../shared/services/api/member-account.service';
 
 @Component({
