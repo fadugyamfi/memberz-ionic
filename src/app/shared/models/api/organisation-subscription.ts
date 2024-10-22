@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 
 import { AppModel } from './app.model';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { SubscriptionType } from './subscription-type';
 import { OrganisationInvoice } from './organisation-invoice';
 
-import * as relativeTime from 'dayjs/plugin/relativeTime';
+import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 export class OrganisationSubscription extends AppModel {

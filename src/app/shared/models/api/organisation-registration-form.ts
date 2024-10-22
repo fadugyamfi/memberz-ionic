@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { AppModel } from './app.model';
 
 export class OrganisationRegistrationForm extends AppModel {

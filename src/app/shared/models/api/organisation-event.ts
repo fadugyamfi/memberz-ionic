@@ -7,7 +7,7 @@ import { AppModel } from './app.model';
 import { Organisation } from './organisation';
 import { OrganisationCalendar } from './organisation-calendar';
 
-import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
 dayjs.extend(advancedFormat);
 
 export class OrganisationEvent extends AppModel {

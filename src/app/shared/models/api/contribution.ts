@@ -6,7 +6,7 @@ import { AppModel } from './app.model';
 import { OrganisationMember } from './organisation-member';
 import { ContributionReceipt } from './contribution-receipt';
 import { ContributionType } from './contribution-type';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 export class Contribution extends AppModel {
 
