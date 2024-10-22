@@ -2,10 +2,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 import { AppModel } from './app.model';
 import { Organisation } from './organisation';
 import { OrganisationCalendar } from './organisation-calendar';
+
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+dayjs.extend(advancedFormat);
 
 export class OrganisationEvent extends AppModel {
 
@@ -48,8 +51,8 @@ export class OrganisationEvent extends AppModel {
 
 
   get dates() {
-    const start_dt = moment(this.start_dt);
-    const end_dt = moment(this.end_dt);
+    const start_dt = dayjs(this.start_dt);
+    const end_dt = dayjs(this.end_dt);
 
     if( start_dt.isSame(end_dt, 'month') && !start_dt.isSame(end_dt, 'day') ) {
       return start_dt.format('Do') + ' - ' + end_dt.format('Do MMM, YYYY');
@@ -71,8 +74,8 @@ export class OrganisationEvent extends AppModel {
   }
 
   get times() {
-    const start_dt = moment(this.start_dt);
-    const end_dt = moment(this.end_dt);
+    const start_dt = dayjs(this.start_dt);
+    const end_dt = dayjs(this.end_dt);
 
     if( start_dt.isSame(end_dt, 'month') && !start_dt.isSame(end_dt, 'day') ) {
       return start_dt.format('HH:mm') + ' - ' + end_dt.format('HH:mm');

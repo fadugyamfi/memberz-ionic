@@ -249,7 +249,7 @@ export class APIService<T extends AppModel> {
     let model = this.selectedModel;
 
     if( !model ) {
-      model = this.storage.get(`${this.model_name.toLowerCase()}_selected`);
+      model = new this.model(this.storage.get(`${this.model_name.toLowerCase()}_selected`));
     }
 
     return model;
@@ -266,7 +266,9 @@ export class APIService<T extends AppModel> {
   }
 
   public clearSelectedModel() {
-    this.setSelectedModel = null;
+    this.selectedModel = null;
+    this.storage.remove(`${this.model_name.toLowerCase()}_selected`);
+    this.events.trigger(`${this.model_name}:cleared`);
   }
 
   public clearItems() {
@@ -368,10 +370,10 @@ export class APIService<T extends AppModel> {
    *
    * @param model Model data to pass
    */
-  create(model: T, qparams: object = null) {
+  create(model: T, qparams: object = null, headers: object = null) {
     this.creating = this.saving = true;
 
-    return this.post(`${this.url}`, model, qparams).pipe(
+    return this.post(`${this.url}`, model, qparams, headers).pipe(
       map((response: ApiResponse) => new this.model(response.data)),
 
       tap(responseModel => {

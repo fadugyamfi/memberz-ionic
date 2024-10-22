@@ -90,4 +90,10 @@ export class OrganisationService extends APIService<Organisation> {
       map((response: any[]) => response.map(data => new Organisation(data)))
     );
   }
+
+  getPublicOrganisations(params: any = {}, headers: any = {}): Observable<Organisation[]> {
+    return this.get(`${this.url}/public`, params, headers).pipe(
+      map((response: ApiResponse) => response.data.map(data => new Organisation(data)))
+    );
+  }
 }

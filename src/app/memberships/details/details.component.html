@@ -28,30 +28,36 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="showDirectory()">
+<ion-content [ngClass]="{ 'ion-hide': !showDirectory() }">
   <app-membership-directory [membership]="membership"></app-membership-directory>
 </ion-content>
 
 
-<ion-content *ngIf="showMembership()">
+<ion-content [ngClass]="{ 'ion-hide': !showMembership() }">
   <ion-card class="shadow-sm">
-    <ion-card-content class="ion-no-padding d-flex ion-justify-content-center">
-      <qr-code [value]="membership?.uuid" size="200" errorCorrectionLevel="M"></qr-code>
+    <ion-card-content class="d-flex ion-justify-content-center">
+      <qr-code [value]="membership?.uuid" size="120" errorCorrectionLevel="M"></qr-code>
     </ion-card-content>
-    <ion-card-header>
+    <ion-card-header class="text-center pt-0">
       <ion-card-title>Membership No: {{ membership?.organisation_no }}</ion-card-title>
       <ion-card-subtitle>Category: {{ membership?.category?.name }}</ion-card-subtitle>
     </ion-card-header>
+    <ion-card-content class="text-center">
+      <ion-label *ngIf="!membership.approved" color="danger">Pending Approval</ion-label>
+      <ion-label *ngIf="membership.approved">
+        Member Since: {{ (membership.membership_start_dt || membership.created) | date: 'mediumDate' }}
+      </ion-label>
+    </ion-card-content>
   </ion-card>
 
-  <ion-accordion-group value="groups">
+  <ion-accordion-group>
     <ion-accordion value="groups">
       <ion-item slot="header" color="light">
         <ion-icon name="people-outline" class="me-2"></ion-icon>
-        <ion-label>Your Groups</ion-label>
+        <ion-label>Your Groups ({{ groups?.length }})</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        <app-membership-groups [membership]="membership"></app-membership-groups>
+        <app-membership-groups [membership]="membership" (load)="groups = $event"></app-membership-groups>
       </div>
     </ion-accordion>
 
@@ -59,17 +65,37 @@
     <ion-accordion value="anniversaries">
       <ion-item slot="header" color="light">
         <ion-icon name="calendar-outline" class="me-2"></ion-icon>
-        <ion-label>Your Anniversaries</ion-label>
+        <ion-label>Your Anniversaries ({{ anniversaries?.length }})</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        <app-membership-anniversaries [membership]="membership"></app-membership-anniversaries>
+        <app-membership-anniversaries [membership]="membership" (load)="anniversaries = $event"></app-membership-anniversaries>
       </div>
     </ion-accordion>
 
   </ion-accordion-group>
 
+  <ion-list lines="full">
+    <ion-list-header>
+      <b>Membership Settings</b>
+    </ion-list-header>
+    <ion-item button (click)="confirnCancelMembership()" [disabled]="true">
+      <ion-label>
+        Renew Membership
+        <p>Pay to renew membership</p>
+      </ion-label>
+      <ion-icon icon="card" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button (click)="confirnCancelMembership()">
+      <ion-label color="danger">
+        Cancel Membership
+        <p>End your membership with this organisation</p>
+      </ion-label>
+      <ion-icon color="danger" icon="trash" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
 
-<ion-content *ngIf="showPayments()">
+<ion-content [ngClass]="{ 'ion-hide': !showPayments() }">
   <app-membership-payments [membership]="membership"></app-membership-payments>
 </ion-content>

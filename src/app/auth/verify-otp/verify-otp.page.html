@@ -1,0 +1,28 @@
+<ion-header>
+  <section class="position-relative header d-flex">
+    <div class="header-bg"></div>
+    <ion-title>Verify OTP</ion-title>
+  </section>
+</ion-header>
+
+<ion-content>
+  <div class="w-100 max-w-md p-4 bg-white rounded">
+    <h2 class="text-center text-dark">Enter OTP</h2>
+    <p class="text-center text-muted">Please enter the one-time password sent to your email.</p>
+    <form>
+      <div class="d-flex justify-content-center mb-3">
+        <input type="number" class="form-control me-2 otp-input" maxlength="1" required>
+        <input type="number" class="form-control me-2 otp-input" maxlength="1" required>
+        <input type="number" class="form-control me-2 otp-input" maxlength="1" required>
+        <input type="number" class="form-control otp-input" maxlength="1" required>
+      </div>
+      <ion-button expand="block" type="submit">
+        <ion-text>Verify OTP</ion-text>
+      </ion-button>
+    </form>
+    <ion-text>
+      <p class="text-center text-muted mt-3">Didn't receive the code? <a href="#" class="text-primary">Resend</a></p>
+    </ion-text>
+  </div>
+
+</ion-content>

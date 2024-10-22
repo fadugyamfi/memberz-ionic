@@ -18,6 +18,7 @@ export class PaymentsComponent implements OnInit {
   public contributions$: Observable<Contribution[]>;
 
   public cacheKey: string;
+  public refreshing = false;
 
   constructor(
     public contributionService: ContributionService,
@@ -44,11 +45,13 @@ export class PaymentsComponent implements OnInit {
       .pipe(
         tap(contributions => {
           this.storage.set(this.cacheKey, contributions, 1, 'days');
+          this.refreshing = false;
         })
       );
   }
 
   handleRefresh(event) {
+    this.refreshing = true;
     this.storage.remove(this.cacheKey);
     this.loadRecentPayments();
   }

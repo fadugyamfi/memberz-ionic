@@ -1,0 +1,54 @@
+<!-- <app-main-menu [contentId]="'home-content'"></app-main-menu> -->
+
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Discover Organisations
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header> -->
+<section class="text-center position-relative header">
+  <div class="header-bg"></div>
+
+  <!-- <header class="d-flex justify-content-end w-100">
+    <ion-menu-button></ion-menu-button>
+
+    <ion-buttons>
+      <ion-button fill="clear" routerLink="/auth/login">Log In</ion-button>
+    </ion-buttons>
+  </header> -->
+
+  <h2 class="mb-0 mt-2">Memberz.Org</h2>
+  <p class="mt-0">Bridging People & Organizations</p>
+</section>
+
+<ion-content id="home-content">
+
+  <ion-list lines="full">
+    <ion-item routerLink="/discover">
+      <ion-icon slot="start" name="search"></ion-icon>
+      <ion-label>Join An Organisation</ion-label>
+    </ion-item>
+
+
+    <ion-item routerLink="/auth/register">
+      <ion-icon slot="start" name="pencil"></ion-icon>
+      <ion-label>Create An Account</ion-label>
+    </ion-item>
+
+    <ion-item routerLink="/">
+      <ion-icon slot="start" name="share-social-outline"></ion-icon>
+      <ion-label>Invite A Friend</ion-label>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-button expand="block" size="large" routerLink="/auth/login">Login</ion-button>
+</ion-footer>

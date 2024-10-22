@@ -5,7 +5,10 @@
   "background_color": "#fcfcfc",
   "display": "standalone",
   "scope": "./",
-  "start_url": "./",
+  "start_url": "./?utm_source=android",
+  "shortcuts": [
+
+  ],
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

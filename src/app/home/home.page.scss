@@ -1,0 +1,28 @@
+:host {
+  --primary-color: rgb(72, 72, 224);
+}
+
+.header {
+  color: white;
+  padding: 15px 10px;
+
+  .header-bg {
+    position: absolute;
+    background-color: var(--primary-color);
+    z-index: -1;
+    border-radius: 50%;
+    width: 180%;
+    height: 200px;
+    top: -100px;
+    left: -40%;
+  }
+}
+
+ion-list-header {
+  text-align: center;
+  padding-inline-start: 0px;
+}
+
+ion-button {
+  --background: var(--primary-color);
+}

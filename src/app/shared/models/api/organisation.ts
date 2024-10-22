@@ -20,6 +20,9 @@ export class Organisation extends AppModel {
   public address: string;
   public city: string;
   public state: string;
+  public short_description: string;
+  public organisation_member_count: number;
+  public organisation_account_count: number;
   private _activeSubscription: OrganisationSubscription;
   private _organisationType: OrganisationType;
 
@@ -41,5 +44,11 @@ export class Organisation extends AppModel {
 
   set organisation_type(value) {
     this._organisationType = value ? new OrganisationType(value) : null;
+  }
+
+  getTenantHeaders() {
+    return {
+      'X-Tenant-Id': this.uuid
+    };
   }
 }

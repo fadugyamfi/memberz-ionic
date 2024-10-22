@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "xyz.appmaker.yapbei",
+      "sha256_cert_fingerprints": ["AD:FB:D5:0E:43:2A:6D:D7:02:39:7B:D6:7C:7D:20:8D:23:5C:8D:34:8B:40:83:B8:B3:4C:05:8B:70:61:6D:81"]
+    }
+  }
+]

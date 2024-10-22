@@ -8,11 +8,14 @@
 <ion-list lines="full">
   <ng-container *ngIf="memberships$ | async as memberships; else loading">
     <ion-item-group *ngIf="memberships.length > 0; else empty">
-      <ion-item detail="true" *ngFor="let membership of memberships">
+      <ion-item detail="true" *ngFor="let membership of memberships" (click)="viewProfileDetails(membership)">
         <ngx-avatars slot="start" [src]="membership.member?.thumbnail()" [name]="membership.name()"
                      size="40"></ngx-avatars>
 
-        <ion-label>{{ membership.name() }}</ion-label>
+        <ion-label>
+          <p class="fw-semibold my-0">{{ membership.name() }}</p>
+          <p class="text-muted my-0">{{ membership.category?.name }}</p>
+        </ion-label>
       </ion-item>
     </ion-item-group>
   </ng-container>
@@ -35,3 +38,5 @@
     </ion-item>
   </ng-template>
 </ion-list>
+
+<app-profile-details *ngIf="viewingProfile" (close)="viewingProfile = false" [membership]="selectedProfile"></app-profile-details>

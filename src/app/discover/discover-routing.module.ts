@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: DiscoverPage,
+  },
+  {
+    path: 'organisation/:slug',
+    loadChildren: () => import('./organisation/organisation.module').then( m => m.OrganisationPageModule)
   }
 ];
 

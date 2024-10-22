@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import * as moment from 'moment';
+import dayjs from 'dayjs';
 import { AppModel } from './app.model';
 
 export class OrganisationRegistrationForm extends AppModel {
@@ -29,7 +29,7 @@ export class OrganisationRegistrationForm extends AppModel {
   }
 
   get isClosed() {
-    return moment().isAfter( moment(this.expiration_dt) );
+    return dayjs().isAfter( dayjs(this.expiration_dt) );
   }
 
   get expiration_dt() {

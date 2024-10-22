@@ -1,30 +1,50 @@
 <app-main-menu [contentId]="'discovery-content'"></app-main-menu>
 
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      Discover Organisations
-    </ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true" class="ion-no-border">
+  <section class="position-relative header">
+    <div class="header-bg"></div>
+
+    <header class="d-flex justify-content-between w-100">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+
+      <ion-title>Join An Organisation</ion-title>
+      <ion-button fill="clear" routerLink="/auth/login" class="text-white" *ngIf="!authService.isLoggedIn">Log In</ion-button>
+    </header>
+  </section>
 </ion-header>
+
+
 
 <ion-content id="discovery-content">
 
   <ion-list lines="full">
-    <!-- <ion-list-header>Recommended Organisations</ion-list-header> -->
+    <ion-list-header class="pb-3">
+      <ion-searchbar placeholder="Find Your Organisation" autocomplete="organization" inputmode="text" [debounce]="500"
+                     (ionChange)="onSearch($event)"></ion-searchbar>
+    </ion-list-header>
 
-    <ion-item detail="false" button *ngFor="let organisation of (organisations$ | async)">
-      <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40"></ngx-avatars>
+    <ng-container *ngIf="(organisations$ | async) as organisations; else loading">
+      <ion-item detail="true" button *ngFor="let organisation of organisations" (click)="loadOrganisation(organisation)">
+        <ngx-avatars slot="start" [src]="organisation.logo" [name]="organisation.name" size="40" initialsSize="2"></ngx-avatars>
 
-      <ion-label>
-        <h6>{{ organisation.name }}</h6>
-        <p class="mb-0">{{ organisation.organisation_type.name }}</p>
-      </ion-label>
+        <ion-label>
+          <h6>{{ organisation.name }}</h6>
+          <p class="mb-0">{{ organisation.organisation_type.name }}</p>
+        </ion-label>
 
-      <ion-button slot="end">Join</ion-button>
-    </ion-item>
+        <!-- <ion-button slot="end">Join</ion-button> -->
+      </ion-item>
+    </ng-container>
+
+    <ng-template #loading>
+      <ion-item class="d-flex justify-content-center">
+        <ion-label class="d-flex ion-align-items-center justify-content-center">
+          <ion-spinner name="crescent" class="me-2"></ion-spinner>
+          <ion-text>Loading ...</ion-text>
+        </ion-label>
+      </ion-item>
+    </ng-template>
+
+
   </ion-list>
 </ion-content>

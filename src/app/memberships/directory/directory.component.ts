@@ -15,6 +15,8 @@ export class DirectoryComponent implements OnInit {
   @Input() public membership: OrganisationMember;
 
   public memberships$: Observable<OrganisationMember[]> = of([]);
+  public viewingProfile = false;
+  public selectedProfile: OrganisationMember = null;
 
   constructor(
     public membershipService: OrganisationMemberService
@@ -32,5 +34,10 @@ export class DirectoryComponent implements OnInit {
     };
 
     this.memberships$ = this.membershipService.getAll(options);
+  }
+
+  viewProfileDetails(membership: OrganisationMember) {
+    this.selectedProfile = membership;
+    this.viewingProfile = true;
   }
 }

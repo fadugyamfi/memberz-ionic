@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, of, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Observable, Subscription, of, tap } from 'rxjs';
 import { MemberAccount } from '../shared/models/api/member-account';
 import { Organisation } from '../shared/models/api/organisation';
 import { OrganisationMember } from '../shared/models/api/organisation-member';
@@ -14,7 +14,7 @@ import { StorageService } from '../shared/services/storage.service';
   templateUrl: './memberships.page.html',
   styleUrls: ['./memberships.page.scss'],
 })
-export class MembershipsPage implements OnInit {
+export class MembershipsPage implements OnInit, OnDestroy {
 
   public memberships$: Observable<OrganisationMember[]>;
   public user: MemberAccount;
@@ -22,11 +22,13 @@ export class MembershipsPage implements OnInit {
   public organisations$: Observable<Organisation[]>;
 
   public cacheKey: string;
+  public subscription: Subscription = new Subscription();
 
   constructor(
     public membershipService: OrganisationMemberService,
     public organisationService: OrganisationService,
     public authService: AuthService,
+    public route: ActivatedRoute,
     public router: Router,
     public storage: StorageService
   ) { }
@@ -35,6 +37,27 @@ export class MembershipsPage implements OnInit {
     this.loadUser();
     this.fetchUserMemberships();
     this.fetchUserOrganisations();
+    this.subscribeToRouterEvents();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  subscribeToRouterEvents() {
+    const sub = this.router.events.subscribe({
+      next: (event) => {
+        if( event instanceof NavigationEnd ) {
+          if( this.route.snapshot.queryParamMap.has('refresh') ) {
+            this.storage.remove(this.cacheKey);
+            this.fetchUserMemberships();
+            this.router.navigate([], { queryParams: {}});
+          }
+        }
+      }
+    });
+
+    this.subscription.add(sub);
   }
 
   loadUser() {
@@ -45,15 +68,7 @@ export class MembershipsPage implements OnInit {
   fetchUserMemberships() {
     const user = this.authService.getLoggedInUser();
 
-    if( this.storage.has(this.cacheKey) ) {
-      this.memberships$ = of( this.storage.get(this.cacheKey) );
-      return;
-    }
-
-    this.memberships$ = this.membershipService.getUserMemberships( user.member_id )
-      .pipe(
-        tap(memberships => this.storage.set(this.cacheKey, memberships, 7, 'days'))
-      );
+    this.memberships$ = this.membershipService.getUserMemberships( user.member_id );
   }
 
   fetchUserOrganisations() {

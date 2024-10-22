@@ -41,7 +41,10 @@
         <ngx-avatars slot="start" [src]="attendee.member.thumbnail()" [name]="attendee.member.lastThenFirstName()"
                      size="40"></ngx-avatars>
 
-        <ion-label>{{ attendee.member.lastThenFirstName() }}</ion-label>
+        <ion-label>
+          {{ attendee.member.lastThenFirstName() }}
+          <p class="my-0 f-12 text-muted">{{ attendee.category?.name }}</p>
+        </ion-label>
 
         <ion-button slot="end" fill="clear" color="danger" (click)="removeAttendee(attendee)">
           <ion-icon name="trash"></ion-icon>
@@ -59,7 +62,7 @@
 </ion-content>
 
 <app-member-search *ngIf="searching" (close)="searching = false"
-                   (register)="onMemberSelected($event)"></app-member-search>
+                   (register)="onMembersSelected($event)"></app-member-search>
 
 <app-card-scanner *ngIf="scanning" (scan)="onCodeScanned($event)" (close)="onHideScanner()"></app-card-scanner>
 

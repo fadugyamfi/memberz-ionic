@@ -46,8 +46,8 @@ export class CardScannerComponent implements OnInit {
     this.close.emit();
   }
 
-  async onCodeScanned(code: ScannerQRCodeResult) {
-    this.scan.emit(code.data);
+  async onCodeScanned(codes: ScannerQRCodeResult[]) {
+    codes.forEach(code => this.scan.emit(code.decode()));
   }
 
   onWillDismiss(event) {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberGroup } from '../../shared/models/api/organisation-member-group';
@@ -17,6 +17,7 @@ export class GroupsComponent implements OnInit {
   public membership: OrganisationMember;
   public memberGroups$: Observable<OrganisationMemberGroup[]>;
 
+  @Output() public load = new EventEmitter();
   public cacheKey = '';
 
   constructor(
@@ -31,7 +32,9 @@ export class GroupsComponent implements OnInit {
 
   loadMemberGroups() {
     if( this.storage.has(this.cacheKey) ) {
-      this.memberGroups$ = of( this.storage.get(this.cacheKey) );
+      const groups = this.storage.get(this.cacheKey);
+      this.memberGroups$ = of( groups );
+      this.load.emit(groups);
       return;
     }
 
@@ -43,6 +46,7 @@ export class GroupsComponent implements OnInit {
       .pipe(
         tap((groups) => {
           this.storage.set(this.cacheKey, groups, 1, 'days');
+          this.load.emit(groups);
         })
       );
   }

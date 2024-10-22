@@ -2,9 +2,10 @@
   <ion-list-header lines="full">
     <ion-label>{{ 'Payments' | uppercase }}</ion-label>
 
-    <ion-button fill="clear" (click)="handleRefresh($event)">
+    <ion-button *ngIf="!refreshing" fill="clear" (click)="handleRefresh($event)">
       <ion-icon name="refresh"></ion-icon>
     </ion-button>
+    <ion-spinner name="crescent" *ngIf="refreshing" color="primary" class="me-2"></ion-spinner>
   </ion-list-header>
 
   <ion-item-group *ngIf="(contributions$ | async) as contributions; else loading">

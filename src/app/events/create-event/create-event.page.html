@@ -5,9 +5,70 @@
     </ion-buttons>
 
     <ion-title>Create Event</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="onSubmit($event)" color="primary" [disabled]="!canCreate()">Create</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="addForm" (submit)="onSubmit($event)">
+    <ion-item>
+      <ion-label position="stacked">Organisation</ion-label>
+      <ion-select placeholder="Select Organisation" required formControlName="organisation_id">
+        <ng-container *ngIf="(organisations$ | async) as organisations">
+          <ion-select-option *ngFor="let organisation of organisations" [value]="organisation.id">
+            {{ organisation.name }}
+          </ion-select-option>
+        </ng-container>
+      </ion-select>
+    </ion-item>
 
+    <ion-list lines="full">
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input formControlName="event_name" placeholder="e.g. A general meeting" required></ion-input>
+        <ion-note slot="error" *ngIf="addForm.controls.event_name?.errors?.required">Event Name Required</ion-note>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime-button datetime="start-date"></ion-datetime-button>
+
+      <ion-popover [keepContentsMounted]="true" >
+        <ng-template>
+          <ion-datetime id="start-date" presentation="date-time" required formControlName="start_dt"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>End Date</ion-label>
+      <ion-datetime-button datetime="end-date"></ion-datetime-button>
+
+      <ion-popover [keepContentsMounted]="true" >
+        <ng-template>
+          <ion-datetime id="end-date" presentation="date-time" required formControlName="end_dt"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-list lines="full">
+      <ion-item>
+        <ion-label position="stacked">Venue</ion-label>
+        <ion-input formControlName="venue" placeholder="e.g. Main auditorium" required></ion-input>
+        <!-- <ion-note slot="error" *ngIf="addForm.controls.venue?.errors?.required">Event Name Required</ion-note> -->
+      </ion-item>
+    </ion-list>
+
+    <ion-list lines="full">
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea formControlName="long_description" placeholder="Info about event"></ion-textarea>
+        <!-- <ion-note slot="error" *ngIf="addForm.controls.venue?.errors?.required">Event Name Required</ion-note> -->
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

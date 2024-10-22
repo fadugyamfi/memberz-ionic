@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { ApiResponse, APIService } from './api.service';
 import { EventsService } from '../events.service';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { OrganisationMember } from '../../models/api/organisation-member';
 import { StorageService } from '../storage.service';
 import { OrganisationService } from './organisation.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Organisation } from '../../models/api/organisation';
 
 @Injectable({
@@ -27,12 +27,27 @@ export class OrganisationMemberService extends APIService<OrganisationMember> {
     this.model_name = 'OrganisationMember';
   }
 
+  clearUserMembershipCache(memberId) {
+    const cacheKey = `cache:${memberId}:memberships`;
+    this.storage.remove(cacheKey);
+  }
+
   getUserMemberships(memberId: number): Observable<OrganisationMember[]> {
+    const cacheKey = `cache:${memberId}:memberships`;
+
+    if( this.storage.has(cacheKey) ) {
+      const memberships = this.storage.get(cacheKey).map(data => new OrganisationMember(data));
+      return of( memberships );
+    }
+
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const params = { member_id: memberId, contain: 'organisation' };
 
     return this.get(`/members/${memberId}/memberships`, params).pipe(
-      map((response: ApiResponse) => response.data.map(data => new OrganisationMember(data)))
+      map((response: ApiResponse) => response.data.map(data => new OrganisationMember(data))),
+      tap(memberships => {
+        this.storage.set(cacheKey, memberships, 7, 'days');
+      })
     );
   }
 

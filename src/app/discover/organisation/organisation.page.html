@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="/discover"></ion-back-button>
+    <ion-title>
+      Organisation Details
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list lines="full">
+    <ion-item class="ion-align-items-start">
+      <ngx-avatars [src]="organisation?.logo" [name]="organisation?.name" slot="start" size="40" class="me-2" initialsSize="2"></ngx-avatars>
+      <ion-label class="ion-text-wrap mt-0">
+        {{ organisation?.name }}
+        <p class="mb-0">{{ organisation?.organisation_type.name }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <section>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-center border-end border-light">
+          <h6 class="fw-bold d-flex align-items-center justify-content-center">
+            <ion-icon name="thumbs-up-outline" class="me-1"></ion-icon>
+            {{ organisation?.organisation_member_count || 0 | number }} Members
+          </h6>
+        </ion-col>
+
+        <ion-col class="ion-text-center border-end border-light">
+          <h6 class="fw-bold d-flex align-items-center justify-content-center">
+            <ion-icon name="people-outline" class="me-1"></ion-icon>
+            {{ organisation?.organisation_account_count || 0 | number }} Admins
+          </h6>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+  <ion-button expand="block" (click)="join()">Join</ion-button>
+
+  <p class="ion-padding-vertical" *ngIf="organisation?.short_description" [innerHTML]="organisation?.short_description"></p>
+
+</ion-content>

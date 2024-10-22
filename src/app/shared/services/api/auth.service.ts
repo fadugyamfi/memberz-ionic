@@ -22,8 +22,8 @@ export interface RegisterUserContract {
   last_name: string;
   email: string;
   mobile_number: string;
-  dob: string;
-  gender: string;
+  dob?: string;
+  gender?: string;
   password: string;
 }
 
@@ -133,7 +133,7 @@ export class AuthService extends APIService<MemberAccount> {
     this.storage.set('auth', res, DURATION, 'day');
 
     this.me(rememberMe).subscribe({
-      next: () => this.router.navigate(['/tabs']),
+      next: () => this.router.navigate(['/tabs/pages/memberships'], { queryParams: { refresh: true } }),
       error: () => {
         Alert.fire(
           this.translate.instant('Account Info Not Found'),
@@ -190,7 +190,10 @@ export class AuthService extends APIService<MemberAccount> {
         );
         this.router.navigate(['/auth/login']);
       },
-      error: () => (this.requesting = false)
+      error: () => {
+        console.log('Error');
+        this.requesting = false;
+      }
     });
   }
 
@@ -239,9 +242,7 @@ export class AuthService extends APIService<MemberAccount> {
   }
 
   public clearSession() {
-    this.organisationService.clearActiveOrganisation();
-    this.storage.remove('user');
-    this.storage.remove('auth');
+    this.storage.engine.clear();
   }
 
   loadUserData() {

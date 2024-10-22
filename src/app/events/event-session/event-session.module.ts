@@ -12,7 +12,6 @@ import { MemberSearchComponent } from './member-search/member-search.component';
 import { SharedModule } from '../../shared/shared.module';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { AddMembershipComponent } from './add-membership/add-membership.component';
-import { IonIntlTelInputModule } from 'ion-intl-tel-input/dist';
 
 @NgModule({
   imports: [
@@ -23,8 +22,7 @@ import { IonIntlTelInputModule } from 'ion-intl-tel-input/dist';
     EventSessionPageRoutingModule,
     SharedModule,
     NgxScannerQrcodeModule,
-    ReactiveFormsModule,
-    IonIntlTelInputModule
+    ReactiveFormsModule
   ],
   declarations: [
     EventSessionPage,

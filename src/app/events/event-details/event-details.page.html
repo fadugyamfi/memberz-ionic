@@ -17,7 +17,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <p [innerHtml]="event?.long_description" class="fs-5"></p>
+      <p [innerHtml]="event?.long_description"></p>
     </ion-card-content>
   </ion-card>
 
@@ -28,6 +28,11 @@
         <h5 class="fs-5">Sessions</h5>
         <p class="mb-2">Select session to record attendance</p>
       </ion-label>
+
+      <ion-button color="primary">
+        <ion-icon name="add-circle" class="me-2"></ion-icon>
+        <ion-text>Add</ion-text>
+      </ion-button>
     </ion-list-header>
 
     <ion-item detail="true" button *ngFor="let session of event?.sessions" (click)="setAttendanceSession(session)">
