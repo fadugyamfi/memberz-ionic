@@ -8,9 +8,10 @@ import { OrganisationEventService } from '../shared/services/api/organisation-ev
 import { StorageService } from '../shared/services/storage.service';
 
 @Component({
-  selector: 'app-events',
-  templateUrl: 'events.page.html',
-  styleUrls: ['events.page.scss']
+    selector: 'app-events',
+    templateUrl: 'events.page.html',
+    styleUrls: ['events.page.scss'],
+    standalone: false
 })
 export class EventsPage implements OnInit {
 

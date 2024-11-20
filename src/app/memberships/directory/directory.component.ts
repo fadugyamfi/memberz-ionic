@@ -5,9 +5,10 @@ import { OrganisationMember } from '../../shared/models/api/organisation-member'
 import { OrganisationMemberService } from '../../shared/services/api/organisation-member.service';
 
 @Component({
-  selector: 'app-membership-directory',
-  templateUrl: './directory.component.html',
-  styleUrls: ['./directory.component.scss'],
+    selector: 'app-membership-directory',
+    templateUrl: './directory.component.html',
+    styleUrls: ['./directory.component.scss'],
+    standalone: false
 })
 export class DirectoryComponent implements OnInit {
 

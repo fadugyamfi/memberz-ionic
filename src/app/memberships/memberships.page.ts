@@ -10,9 +10,10 @@ import { OrganisationService } from '../shared/services/api/organisation.service
 import { StorageService } from '../shared/services/storage.service';
 
 @Component({
-  selector: 'app-memberships',
-  templateUrl: './memberships.page.html',
-  styleUrls: ['./memberships.page.scss'],
+    selector: 'app-memberships',
+    templateUrl: './memberships.page.html',
+    styleUrls: ['./memberships.page.scss'],
+    standalone: false
 })
 export class MembershipsPage implements OnInit, OnDestroy {
 

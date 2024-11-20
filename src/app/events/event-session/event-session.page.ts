@@ -19,9 +19,10 @@ const SwAlert = Swal.mixin({
 });
 
 @Component({
-  selector: 'app-event-session',
-  templateUrl: './event-session.page.html',
-  styleUrls: ['./event-session.page.scss'],
+    selector: 'app-event-session',
+    templateUrl: './event-session.page.html',
+    styleUrls: ['./event-session.page.scss'],
+    standalone: false
 })
 export class EventSessionPage implements OnInit {
 

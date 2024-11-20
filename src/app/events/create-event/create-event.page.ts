@@ -17,9 +17,10 @@ const SwAlert = Swal.mixin({
 });
 
 @Component({
-  selector: 'app-create-event',
-  templateUrl: './create-event.page.html',
-  styleUrls: ['./create-event.page.scss'],
+    selector: 'app-create-event',
+    templateUrl: './create-event.page.html',
+    styleUrls: ['./create-event.page.scss'],
+    standalone: false
 })
 export class CreateEventPage implements OnInit {
 

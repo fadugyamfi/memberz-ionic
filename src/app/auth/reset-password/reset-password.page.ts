@@ -5,9 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EventsService } from 'src/app/shared/services/events.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.page.html',
-  styleUrls: ['./reset-password.page.scss'],
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.page.html',
+    styleUrls: ['./reset-password.page.scss'],
+    standalone: false
 })
 export class ResetPasswordPage implements OnInit {
    public resetPasswordForm: FormGroup;

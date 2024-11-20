@@ -5,9 +5,10 @@ import { NgxScannerQrcodeComponent, ScannerQRCodeResult } from 'ngx-scanner-qrco
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 
 @Component({
-  selector: 'app-card-scanner',
-  templateUrl: './card-scanner.component.html',
-  styleUrls: ['./card-scanner.component.scss'],
+    selector: 'app-card-scanner',
+    templateUrl: './card-scanner.component.html',
+    styleUrls: ['./card-scanner.component.scss'],
+    standalone: false
 })
 export class CardScannerComponent implements OnInit {
 

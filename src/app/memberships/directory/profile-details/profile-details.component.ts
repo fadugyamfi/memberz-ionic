@@ -7,9 +7,10 @@ import { OrganisationMemberService } from '../../../shared/services/api/organisa
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 
 @Component({
-  selector: 'app-profile-details',
-  templateUrl: './profile-details.component.html',
-  styleUrls: ['./profile-details.component.scss'],
+    selector: 'app-profile-details',
+    templateUrl: './profile-details.component.html',
+    styleUrls: ['./profile-details.component.scss'],
+    standalone: false
 })
 export class ProfileDetailsComponent implements OnInit {
 

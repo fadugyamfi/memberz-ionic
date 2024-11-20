@@ -5,9 +5,10 @@ import { AuthService } from '../../shared/services/api/auth.service';
 import { MemberAccountService } from '../../shared/services/api/member-account.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+    selector: 'app-register',
+    templateUrl: './register.page.html',
+    styleUrls: ['./register.page.scss'],
+    standalone: false
 })
 export class RegisterPage implements OnInit {
 

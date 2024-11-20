@@ -6,9 +6,10 @@ import { OrganisationMemberAnniversaryService } from '../../shared/services/api/
 import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
-  selector: 'app-membership-anniversaries',
-  templateUrl: './anniversaries.component.html',
-  styleUrls: ['./anniversaries.component.scss'],
+    selector: 'app-membership-anniversaries',
+    templateUrl: './anniversaries.component.html',
+    styleUrls: ['./anniversaries.component.scss'],
+    standalone: false
 })
 export class AnniversariesComponent implements OnInit {
 

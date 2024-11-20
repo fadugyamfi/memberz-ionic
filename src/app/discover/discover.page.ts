@@ -7,9 +7,10 @@ import { AuthService } from '../shared/services/api/auth.service';
 import { OrganisationService } from '../shared/services/api/organisation.service';
 
 @Component({
-  selector: 'app-discover',
-  templateUrl: 'discover.page.html',
-  styleUrls: ['discover.page.scss']
+    selector: 'app-discover',
+    templateUrl: 'discover.page.html',
+    styleUrls: ['discover.page.scss'],
+    standalone: false
 })
 export class DiscoverPage implements OnInit {
 

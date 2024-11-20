@@ -7,9 +7,10 @@ import { ContributionService } from '../../shared/services/api/contribution.serv
 import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
-  selector: 'app-membership-payments',
-  templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.scss'],
+    selector: 'app-membership-payments',
+    templateUrl: './payments.component.html',
+    styleUrls: ['./payments.component.scss'],
+    standalone: false
 })
 export class PaymentsComponent implements OnInit {
 

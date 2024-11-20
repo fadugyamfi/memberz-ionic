@@ -9,9 +9,10 @@ import { OrganisationMemberService } from '../shared/services/api/organisation-m
 import { OrganisationService } from '../shared/services/api/organisation.service';
 
 @Component({
-  selector: 'app-organisations',
-  templateUrl: './organisations.page.html',
-  styleUrls: ['./organisations.page.scss'],
+    selector: 'app-organisations',
+    templateUrl: './organisations.page.html',
+    styleUrls: ['./organisations.page.scss'],
+    standalone: false
 })
 export class OrganisationsPage implements OnInit {
 

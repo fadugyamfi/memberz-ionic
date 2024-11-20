@@ -13,9 +13,10 @@ import { ModalBackButtonService } from '../../../shared/services/modal-back-butt
 import { StorageService } from '../../../shared/services/storage.service';
 
 @Component({
-  selector: 'app-add-membership',
-  templateUrl: './add-membership.component.html',
-  styleUrls: ['./add-membership.component.scss'],
+    selector: 'app-add-membership',
+    templateUrl: './add-membership.component.html',
+    styleUrls: ['./add-membership.component.scss'],
+    standalone: false
 })
 export class AddMembershipComponent implements OnInit, OnDestroy {
 

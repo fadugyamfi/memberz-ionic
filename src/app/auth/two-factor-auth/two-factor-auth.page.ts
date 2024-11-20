@@ -7,9 +7,10 @@ import { AuthService } from '../../shared/services/api/auth.service';
 import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
-  selector: 'app-two-factor-auth',
-  templateUrl: './two-factor-auth.page.html',
-  styleUrls: ['./two-factor-auth.page.scss'],
+    selector: 'app-two-factor-auth',
+    templateUrl: './two-factor-auth.page.html',
+    styleUrls: ['./two-factor-auth.page.scss'],
+    standalone: false
 })
 export class TwoFactorAuthPage implements OnInit {
 

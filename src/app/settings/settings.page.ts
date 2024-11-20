@@ -3,9 +3,10 @@ import { MemberAccount } from '../shared/models/api/member-account';
 import { AuthService } from '../shared/services/api/auth.service';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.page.html',
-  styleUrls: ['./settings.page.scss']
+    selector: 'app-settings',
+    templateUrl: './settings.page.html',
+    styleUrls: ['./settings.page.scss'],
+    standalone: false
 })
 export class SettingsPage implements OnInit {
 

@@ -8,9 +8,10 @@ import { OrganisationMemberService } from '../../../shared/services/api/organisa
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 
 @Component({
-  selector: 'app-member-search',
-  templateUrl: './member-search.component.html',
-  styleUrls: ['./member-search.component.scss'],
+    selector: 'app-member-search',
+    templateUrl: './member-search.component.html',
+    styleUrls: ['./member-search.component.scss'],
+    standalone: false
 })
 export class MemberSearchComponent implements OnInit {
 

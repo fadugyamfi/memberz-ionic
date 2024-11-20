@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/api/auth.service';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.page.html',
-  styleUrls: ['./auth.page.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-auth',
+    templateUrl: './auth.page.html',
+    styleUrls: ['./auth.page.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class AuthPage implements OnInit {
 

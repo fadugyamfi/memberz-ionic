@@ -7,9 +7,10 @@ import { OrganisationMemberGroupService } from '../../shared/services/api/organi
 import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
-  selector: 'app-membership-groups',
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.scss'],
+    selector: 'app-membership-groups',
+    templateUrl: './groups.component.html',
+    styleUrls: ['./groups.component.scss'],
+    standalone: false
 })
 export class GroupsComponent implements OnInit {
 

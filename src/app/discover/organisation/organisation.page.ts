@@ -16,9 +16,10 @@ const SwAlert = Swal.mixin({
   heightAuto: false
 });
 @Component({
-  selector: 'app-organisation',
-  templateUrl: './organisation.page.html',
-  styleUrls: ['./organisation.page.scss'],
+    selector: 'app-organisation',
+    templateUrl: './organisation.page.html',
+    styleUrls: ['./organisation.page.scss'],
+    standalone: false
 })
 export class OrganisationPage implements OnInit {
 
