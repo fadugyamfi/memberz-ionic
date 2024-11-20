@@ -1,24 +1,22 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
 import { CreateEventPage } from './create-event.page';
 
 describe('CreateEventPage', () => {
-  let component: CreateEventPage;
-  let fixture: ComponentFixture<CreateEventPage>;
+    let component: CreateEventPage;
+    let fixture: ComponentFixture<CreateEventPage>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CreateEventPage ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [CreateEventPage],
+            
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateEventPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(CreateEventPage);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

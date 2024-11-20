@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicRouteStrategy, provideIonicAngular, IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -17,14 +17,14 @@ import { environment } from '../environments/environment';
 // AoT requires an exported function for factories
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        IonicModule.forRoot({
-            mode: 'md'
-        }),
+@NgModule({
+    declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {
@@ -38,10 +38,17 @@ export function createTranslateLoader(http: HttpClient) {
             // Register the ServiceWorker as soon as the application is stable
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000'
-        })], providers: [
+        }),
+        IonApp,
+        IonRouterOutlet
+    ],
+
+    providers: [
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         // appending organisation_id to requests
         { provide: HTTP_INTERCEPTORS, useClass: OrganisationInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
-export class AppModule {}
+        provideIonicAngular()
+    ]
+})
+export class AppModule { }

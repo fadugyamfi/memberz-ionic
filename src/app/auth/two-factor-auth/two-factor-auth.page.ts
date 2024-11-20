@@ -14,26 +14,26 @@ import { StorageService } from '../../shared/services/storage.service';
 })
 export class TwoFactorAuthPage implements OnInit {
 
-  public twoFactorAuthForm: UntypedFormGroup;
+    public twoFactorAuthForm: UntypedFormGroup;
 
-  constructor(
-    public router: Router,
-    public fb: UntypedFormBuilder,
-    public storage: StorageService,
-    public translate: TranslateService,
-    public authService: AuthService
-  ) {
-    this.twoFactorAuthForm = this.fb.group({
-      code: ['', [Validators.required]]
-    });
-  }
+    constructor(
+        public router: Router,
+        public fb: UntypedFormBuilder,
+        public storage: StorageService,
+        public translate: TranslateService,
+        public authService: AuthService
+    ) {
+        this.twoFactorAuthForm = this.fb.group({
+            code: ['', [Validators.required]]
+        });
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  validate() {
-    const twoFactorAuthForm = this.twoFactorAuthForm.value;
+    validate() {
+        const twoFactorAuthForm = this.twoFactorAuthForm.value;
 
-    this.authService.validateTwoFactorAuthLogin(twoFactorAuthForm.code);
-  }
+        this.authService.validateTwoFactorAuthLogin(twoFactorAuthForm.code);
+    }
 }

@@ -12,29 +12,29 @@ import { MemberAccountService } from '../../shared/services/api/member-account.s
 })
 export class RegisterPage implements OnInit {
 
-  public newAccountForm: UntypedFormGroup;
+    public newAccountForm: UntypedFormGroup;
 
-  constructor(
-    public authService: AuthService,
-    public accountService: MemberAccountService
-  ) { }
+    constructor(
+        public authService: AuthService,
+        public accountService: MemberAccountService
+    ) { }
 
-  ngOnInit() {
-    this.setupForm();
-  }
+    ngOnInit() {
+        this.setupForm();
+    }
 
-  setupForm() {
-    this.newAccountForm = new FormGroup({
-      first_name: new UntypedFormControl('', [Validators.required]),
-      last_name: new UntypedFormControl('', [Validators.required]),
-      email: new UntypedFormControl('', [Validators.required, Validators.email]),
-      mobile_number: new UntypedFormControl('', [Validators.required]),
-      // eslint-disable-next-line max-len
-      password: new UntypedFormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
-    });
-  }
+    setupForm() {
+        this.newAccountForm = new FormGroup({
+            first_name: new UntypedFormControl('', [Validators.required]),
+            last_name: new UntypedFormControl('', [Validators.required]),
+            email: new UntypedFormControl('', [Validators.required, Validators.email]),
+            mobile_number: new UntypedFormControl('', [Validators.required]),
+            // eslint-disable-next-line max-len
+            password: new UntypedFormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
+        });
+    }
 
-  validate() {
-    this.authService.register(this.newAccountForm.value);
-  }
+    validate() {
+        this.authService.register(this.newAccountForm.value);
+    }
 }

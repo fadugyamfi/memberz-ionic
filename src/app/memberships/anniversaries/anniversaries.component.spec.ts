@@ -1,24 +1,22 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-
 import { AnniversariesComponent } from './anniversaries.component';
 
 describe('AnniversariesComponent', () => {
-  let component: AnniversariesComponent;
-  let fixture: ComponentFixture<AnniversariesComponent>;
+    let component: AnniversariesComponent;
+    let fixture: ComponentFixture<AnniversariesComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AnniversariesComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [AnniversariesComponent],
+            
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(AnniversariesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(AnniversariesComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

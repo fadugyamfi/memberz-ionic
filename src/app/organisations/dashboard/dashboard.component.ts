@@ -12,28 +12,28 @@ import { OrganisationService } from '../../shared/services/api/organisation.serv
 })
 export class DashboardComponent implements OnInit {
 
-  public organisation: Organisation;
-  public membership: OrganisationMember;
+    public organisation: Organisation;
+    public membership: OrganisationMember;
 
-  constructor(
-    public organisationService: OrganisationService,
-    public membershipService: OrganisationMemberService
-  ) { }
+    constructor(
+        public organisationService: OrganisationService,
+        public membershipService: OrganisationMemberService
+    ) { }
 
-  ngOnInit() {
-    this.loadOrganisation();
-    this.loadMembership();
-  }
+    ngOnInit() {
+        this.loadOrganisation();
+        this.loadMembership();
+    }
 
-  loadOrganisation() {
-    this.organisation = this.organisationService.getSelectedModel();
+    loadOrganisation() {
+        this.organisation = this.organisationService.getSelectedModel();
 
-    if( !this.organisation ) {
+        if (!this.organisation) {
+
+        }
+    }
+
+    loadMembership() {
 
     }
-  }
-
-  loadMembership() {
-
-  }
 }

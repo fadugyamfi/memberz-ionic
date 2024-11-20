@@ -7,6 +7,8 @@ import { OrganisationEventSession } from '../../shared/models/api/organisation-e
 import { OrganisationEventSessionService } from '../../shared/services/api/organisation-event-session.service';
 import { OrganisationEventService } from '../../shared/services/api/organisation-event.service';
 import { OrganisationService } from '../../shared/services/api/organisation.service';
+import { addIcons } from 'ionicons';
+import { addCircle } from 'ionicons/icons';
 
 @Component({
     selector: 'app-event-details',
@@ -16,78 +18,80 @@ import { OrganisationService } from '../../shared/services/api/organisation.serv
 })
 export class EventDetailsPage implements OnInit {
 
-  public attendanceSession: OrganisationEventSession;
-  public recentAttendees: OrganisationEventAttendee[] = null;
+    public attendanceSession: OrganisationEventSession;
+    public recentAttendees: OrganisationEventAttendee[] = null;
 
-  public scanning = false;
-  public searching = false;
-  public captures = [];
+    public scanning = false;
+    public searching = false;
+    public captures = [];
 
-  private iEvent: OrganisationEvent;
+    private iEvent: OrganisationEvent;
 
-  constructor(
-    public eventService: OrganisationEventService,
-    public organisationService: OrganisationService,
-    public sessionService: OrganisationEventSessionService,
-    public route: ActivatedRoute,
-    public router: Router
-  ) { }
-
-
-  get event(): OrganisationEvent {
-    return this.iEvent;
-  }
-
-  set event(value: OrganisationEvent) {
-    this.iEvent = value;
-    if( value ) {
-      this.organisationService.setActiveOrganisation(value.organisation);
+    constructor(
+        public eventService: OrganisationEventService,
+        public organisationService: OrganisationService,
+        public sessionService: OrganisationEventSessionService,
+        public route: ActivatedRoute,
+        public router: Router
+    ) {
+        addIcons({ addCircle });
     }
-  }
 
 
-  ngOnInit() {
-    this.loadEvent();
-  }
+    get event(): OrganisationEvent {
+        return this.iEvent;
+    }
 
-  loadEvent() {
-    this.event = this.eventService.getSelectedModel();
-
-    if( !this.event ) {
-      const eventId = this.route.snapshot.paramMap.get('id');
-
-      if( !eventId ) {
-        this.router.navigate(['/tabs/pages/events']);
-        return;
-      }
-
-      this.eventService.getById(eventId, { contain: ['sessions', 'organisation'].join(',')}).subscribe({
-        next: (event) => {
-          this.event = event;
-        },
-        error: (error) => {
-          console.log(error);
-          this.router.navigate(['/tabs/pages/events']);
+    set event(value: OrganisationEvent) {
+        this.iEvent = value;
+        if (value) {
+            this.organisationService.setActiveOrganisation(value.organisation);
         }
-      });
     }
-  }
 
-  setAttendanceSession(session: OrganisationEventSession) {
-    this.sessionService.setSelectedModel(session);
-    this.router.navigate(['/tabs/pages/events', this.event.id, 'sessions', session.id]);
-  }
 
-  onWillDismiss(dismiss) {
+    ngOnInit() {
+        this.loadEvent();
+    }
 
-  }
+    loadEvent() {
+        this.event = this.eventService.getSelectedModel();
 
-  confirmEnroll() {
+        if (!this.event) {
+            const eventId = this.route.snapshot.paramMap.get('id');
 
-  }
+            if (!eventId) {
+                this.router.navigate(['/tabs/pages/events']);
+                return;
+            }
 
-  cancelEnroll() {
-    this.attendanceSession = null;
-  }
+            this.eventService.getById(eventId, { contain: ['sessions', 'organisation'].join(',') }).subscribe({
+                next: (event) => {
+                    this.event = event;
+                },
+                error: (error) => {
+                    console.log(error);
+                    this.router.navigate(['/tabs/pages/events']);
+                }
+            });
+        }
+    }
+
+    setAttendanceSession(session: OrganisationEventSession) {
+        this.sessionService.setSelectedModel(session);
+        this.router.navigate(['/tabs/pages/events', this.event.id, 'sessions', session.id]);
+    }
+
+    onWillDismiss(dismiss) {
+
+    }
+
+    confirmEnroll() {
+
+    }
+
+    cancelEnroll() {
+        this.attendanceSession = null;
+    }
 
 }

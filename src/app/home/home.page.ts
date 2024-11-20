@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { addIcons } from 'ionicons';
+import { search, pencil, shareSocialOutline } from 'ionicons/icons';
+import { IonRouterLink } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-home',
@@ -8,9 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+    constructor() {
+        addIcons({ search, pencil, shareSocialOutline });
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerifyOtpPage implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

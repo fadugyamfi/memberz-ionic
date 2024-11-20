@@ -7,9 +7,11 @@ import { OrganisationMemberService } from '../../shared/services/api/organisatio
 import { OrganisationService } from '../../shared/services/api/organisation.service';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ApiResponse } from '../../shared/services/api/api.service';
+import { addIcons } from 'ionicons';
+import { peopleOutline, calendarOutline, card, trash } from 'ionicons/icons';
 
 const SwAlert = Swal.mixin({
-  heightAuto: false
+    heightAuto: false
 });
 @Component({
     selector: 'app-details',
@@ -19,81 +21,83 @@ const SwAlert = Swal.mixin({
 })
 export class DetailsComponent implements OnInit {
 
-  public organisation: Organisation;
-  public membership: OrganisationMember;
-  public content = 'membership';
-  public groups = [];
-  public anniversaries = [];
+    public organisation: Organisation;
+    public membership: OrganisationMember;
+    public content = 'membership';
+    public groups = [];
+    public anniversaries = [];
 
-  constructor(
-    public organisationService: OrganisationService,
-    public membershipService: OrganisationMemberService,
-    public router: Router,
+    constructor(
+        public organisationService: OrganisationService,
+        public membershipService: OrganisationMemberService,
+        public router: Router,
 
-  ) { }
-
-  ngOnInit() {
-    this.loadOrganisation();
-    this.loadMembership();
-  }
-
-  loadOrganisation() {
-    this.organisation = this.organisationService.getSelectedModel();
-
-    if( !this.organisation ) {
-
-    }
-  }
-
-  loadMembership() {
-    this.membership = this.membershipService.getSelectedModel();
-
-    if( !this.membership ) {
-      this.router.navigate(['/tabs/pages/memberships']);
+    ) {
+        addIcons({ peopleOutline, calendarOutline, card, trash });
     }
 
+    ngOnInit() {
+        this.loadOrganisation();
+        this.loadMembership();
+    }
 
-  }
+    loadOrganisation() {
+        this.organisation = this.organisationService.getSelectedModel();
 
-  setContent(event) {
-    this.content = event.target.value;
-  }
+        if (!this.organisation) {
 
-  showMembership() {
-    return this.content === 'membership';
-  }
+        }
+    }
 
-  showPayments() {
-    return this.content === 'payments';
-  }
+    loadMembership() {
+        this.membership = this.membershipService.getSelectedModel();
 
-  showDirectory() {
-    return this.content === 'directory';
-  }
+        if (!this.membership) {
+            this.router.navigate(['/tabs/pages/memberships']);
+        }
 
-  confirnCancelMembership() {
-    SwAlert.fire({
-      title: 'Cancel Membership',
-      text: 'Are you sure you want to cancel this membership?',
-      showCancelButton: true
-    }).then((action: SweetAlertResult) => {
-      if( action.isDismissed ) {
-        return;
-      }
 
-      this.cancelMembership();
-    });
-  }
+    }
 
-  cancelMembership() {
-    const url = `/organisations/${this.organisation.slug}/memberships/${this.membership.id}`;
-    const headers = this.organisation.getTenantHeaders();
-    this.membershipService.delete(url, {}, headers).subscribe({
-      next: (response: ApiResponse) => {
-        const membership = new OrganisationMember(response.data);
-        this.router.navigate(['/tabs/pages/memberships'], { queryParams: { refresh: true }});
-      },
-      error: (error) => SwAlert.fire('Error', error.error.message, 'error')
-    });
-  }
+    setContent(event) {
+        this.content = event.target.value;
+    }
+
+    showMembership() {
+        return this.content === 'membership';
+    }
+
+    showPayments() {
+        return this.content === 'payments';
+    }
+
+    showDirectory() {
+        return this.content === 'directory';
+    }
+
+    confirnCancelMembership() {
+        SwAlert.fire({
+            title: 'Cancel Membership',
+            text: 'Are you sure you want to cancel this membership?',
+            showCancelButton: true
+        }).then((action: SweetAlertResult) => {
+            if (action.isDismissed) {
+                return;
+            }
+
+            this.cancelMembership();
+        });
+    }
+
+    cancelMembership() {
+        const url = `/organisations/${this.organisation.slug}/memberships/${this.membership.id}`;
+        const headers = this.organisation.getTenantHeaders();
+        this.membershipService.delete(url, {}, headers).subscribe({
+            next: (response: ApiResponse) => {
+                const membership = new OrganisationMember(response.data);
+                this.router.navigate(['/tabs/pages/memberships'], { queryParams: { refresh: true } });
+            },
+            error: (error) => SwAlert.fire('Error', error.error.message, 'error')
+        });
+    }
 }

@@ -14,41 +14,41 @@ import { StorageService } from '../../shared/services/storage.service';
 })
 export class GroupsComponent implements OnInit {
 
-  @Input()
-  public membership: OrganisationMember;
-  public memberGroups$: Observable<OrganisationMemberGroup[]>;
+    @Input()
+    public membership: OrganisationMember;
+    public memberGroups$: Observable<OrganisationMemberGroup[]>;
 
-  @Output() public load = new EventEmitter();
-  public cacheKey = '';
+    @Output() public load = new EventEmitter();
+    public cacheKey = '';
 
-  constructor(
-    public memberGroupService: OrganisationMemberGroupService,
-    public storage: StorageService
-  ) { }
+    constructor(
+        public memberGroupService: OrganisationMemberGroupService,
+        public storage: StorageService
+    ) { }
 
-  ngOnInit() {
-    this.cacheKey = `cache:membership:${this.membership.id}:groups`;
-    this.loadMemberGroups();
-  }
-
-  loadMemberGroups() {
-    if( this.storage.has(this.cacheKey) ) {
-      const groups = this.storage.get(this.cacheKey);
-      this.memberGroups$ = of( groups );
-      this.load.emit(groups);
-      return;
+    ngOnInit() {
+        this.cacheKey = `cache:membership:${this.membership.id}:groups`;
+        this.loadMemberGroups();
     }
 
-    const options = {
-      organisation_member_id: this.membership.id,
-    };
+    loadMemberGroups() {
+        if (this.storage.has(this.cacheKey)) {
+            const groups = this.storage.get(this.cacheKey);
+            this.memberGroups$ = of(groups);
+            this.load.emit(groups);
+            return;
+        }
 
-    this.memberGroups$ = this.memberGroupService.getAll(options)
-      .pipe(
-        tap((groups) => {
-          this.storage.set(this.cacheKey, groups, 1, 'days');
-          this.load.emit(groups);
-        })
-      );
-  }
+        const options = {
+            organisation_member_id: this.membership.id,
+        };
+
+        this.memberGroups$ = this.memberGroupService.getAll(options)
+            .pipe(
+                tap((groups) => {
+                    this.storage.set(this.cacheKey, groups, 1, 'days');
+                    this.load.emit(groups);
+                })
+            );
+    }
 }

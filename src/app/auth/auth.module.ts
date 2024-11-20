@@ -1,23 +1,38 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
 import { AuthPageRoutingModule } from './auth-routing.module';
 
 import { AuthPage } from './auth.page';
+import {
+    IonHeader, IonBackButton, IonTitle, IonContent, IonGrid, IonRow,
+    IonCol, IonItem, IonInput, IonButton, IonSpinner, IonText, IonList, IonIcon, IonLabel
+} from '@ionic/angular/standalone';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    IonicModule,
-    AuthPageRoutingModule,
-  ],
-  declarations: [
-    AuthPage,
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AuthPageRoutingModule,
+        IonHeader,
+        IonBackButton,
+        IonTitle,
+        IonContent,
+        IonGrid,
+        IonRow,
+        IonCol,
+        IonItem,
+        IonInput,
+        IonButton,
+        IonSpinner,
+        IonText,
+        IonList,
+        IonIcon,
+        IonLabel
+    ],
+    declarations: [
+        AuthPage,
+    ]
 })
-export class AuthPageModule {}
+export class AuthPageModule { }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Organisation } from '../shared/models/api/organisation';
 import { AuthService } from '../shared/services/api/auth.service';
 import { OrganisationService } from '../shared/services/api/organisation.service';
+import { IonRouterLink } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-discover',
@@ -14,36 +15,36 @@ import { OrganisationService } from '../shared/services/api/organisation.service
 })
 export class DiscoverPage implements OnInit {
 
-  public organisations$: Observable<Organisation[]>;
+    public organisations$: Observable<Organisation[]>;
 
-  constructor(
-    public organisationService: OrganisationService,
-    public router: Router,
-    public authService: AuthService
-  ) {}
+    constructor(
+        public organisationService: OrganisationService,
+        public router: Router,
+        public authService: AuthService
+    ) { }
 
-  ngOnInit(): void {
-    this.loadOrganisations();
-  }
+    ngOnInit(): void {
+        this.loadOrganisations();
+    }
 
-  loadOrganisations() {
-    this.organisations$ = this.organisationService.getRecommended();
-  }
+    loadOrganisations() {
+        this.organisations$ = this.organisationService.getRecommended();
+    }
 
-  onSearch(event) {
-    const params = {
-      name_has: event.target.value,
-      page: 1,
-      limit: 30
-    };
+    onSearch(event) {
+        const params = {
+            name_has: event.target.value,
+            page: 1,
+            limit: 30
+        };
 
-    const headers = {};
+        const headers = {};
 
-    this.organisations$ = this.organisationService.getPublicOrganisations(params);
-  }
+        this.organisations$ = this.organisationService.getPublicOrganisations(params);
+    }
 
-  loadOrganisation(organisation: Organisation) {
-    this.organisationService.setSelectedModel(organisation);
-    this.router.navigate(['/discover/organisation', organisation.slug]);
-  }
+    loadOrganisation(organisation: Organisation) {
+        this.organisationService.setSelectedModel(organisation);
+        this.router.navigate(['/discover/organisation', organisation.slug]);
+    }
 }

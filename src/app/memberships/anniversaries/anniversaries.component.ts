@@ -13,41 +13,41 @@ import { StorageService } from '../../shared/services/storage.service';
 })
 export class AnniversariesComponent implements OnInit {
 
-  @Input()
-  public membership: OrganisationMember;
-  public anniversaries$: Observable<OrganisationMemberAnniversary[]>;
+    @Input()
+    public membership: OrganisationMember;
+    public anniversaries$: Observable<OrganisationMemberAnniversary[]>;
 
-  @Output() load = new EventEmitter<any>();
+    @Output() load = new EventEmitter<any>();
 
-  public cacheKey: string;
+    public cacheKey: string;
 
-  constructor(
-    public memberAnniversaries: OrganisationMemberAnniversaryService,
-    public storage: StorageService
-  ) { }
+    constructor(
+        public memberAnniversaries: OrganisationMemberAnniversaryService,
+        public storage: StorageService
+    ) { }
 
-  ngOnInit() {
-    this.cacheKey = `cache:membership:${this.membership.id}:anniversaries`;
-    this.loadAnniversaries();
-  }
-
-  loadAnniversaries() {
-    if( this.storage.has(this.cacheKey) ) {
-      const anniversaries = this.storage.get(this.cacheKey);
-      this.anniversaries$ = of( anniversaries );
-      this.load.emit(anniversaries);
-      return;
+    ngOnInit() {
+        this.cacheKey = `cache:membership:${this.membership.id}:anniversaries`;
+        this.loadAnniversaries();
     }
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const options = { organisation_member_id: this.membership.id };
+    loadAnniversaries() {
+        if (this.storage.has(this.cacheKey)) {
+            const anniversaries = this.storage.get(this.cacheKey);
+            this.anniversaries$ = of(anniversaries);
+            this.load.emit(anniversaries);
+            return;
+        }
 
-    this.anniversaries$ = this.memberAnniversaries.getAll(options)
-      .pipe(
-        tap(anniversaries => {
-          this.storage.set(this.cacheKey, anniversaries, 1, 'days');
-          this.load.emit(anniversaries);
-        })
-      );
-  }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const options = { organisation_member_id: this.membership.id };
+
+        this.anniversaries$ = this.memberAnniversaries.getAll(options)
+            .pipe(
+                tap(anniversaries => {
+                    this.storage.set(this.cacheKey, anniversaries, 1, 'days');
+                    this.load.emit(anniversaries);
+                })
+            );
+    }
 }

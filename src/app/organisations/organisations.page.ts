@@ -16,50 +16,50 @@ import { OrganisationService } from '../shared/services/api/organisation.service
 })
 export class OrganisationsPage implements OnInit {
 
-  public memberships$: Observable<OrganisationMember[]>;
-  public user: MemberAccount;
-  public content = 'organisations';
-  public organisations$: Observable<Organisation[]>;
+    public memberships$: Observable<OrganisationMember[]>;
+    public user: MemberAccount;
+    public content = 'organisations';
+    public organisations$: Observable<Organisation[]>;
 
-  constructor(
-    public membershipService: OrganisationMemberService,
-    public organisationService: OrganisationService,
-    public authService: AuthService,
-    public router: Router
-  ) { }
+    constructor(
+        public membershipService: OrganisationMemberService,
+        public organisationService: OrganisationService,
+        public authService: AuthService,
+        public router: Router
+    ) { }
 
-  ngOnInit() {
-    this.loadUser();
-    this.fetchUserOrganisations();
-  }
+    ngOnInit() {
+        this.loadUser();
+        this.fetchUserOrganisations();
+    }
 
-  loadUser() {
-    this.user = this.authService.getLoggedInUser();
-  }
+    loadUser() {
+        this.user = this.authService.getLoggedInUser();
+    }
 
-  fetchUserOrganisations() {
-    const user = this.authService.getLoggedInUser();
-    this.organisations$ = this.membershipService.getUserOrganisations( user.member_id );
-  }
+    fetchUserOrganisations() {
+        const user = this.authService.getLoggedInUser();
+        this.organisations$ = this.membershipService.getUserOrganisations(user.member_id);
+    }
 
-  discover() {
-    this.router.navigate(['/discover']);
-  }
+    discover() {
+        this.router.navigate(['/discover']);
+    }
 
-  showMemberships() {
-    return this.content === 'memberships';
-  }
+    showMemberships() {
+        return this.content === 'memberships';
+    }
 
-  showOrganisations() {
-    return this.content === 'organisations';
-  }
+    showOrganisations() {
+        return this.content === 'organisations';
+    }
 
-  setContent(event) {
-    this.content = event.target.value;
-  }
+    setContent(event) {
+        this.content = event.target.value;
+    }
 
-  loadOrganisation(organisation: Organisation) {
-    this.organisationService.setSelectedModel(organisation);
-    this.router.navigate(['/tabs/pages/organisations', organisation.id]);
-  }
+    loadOrganisation(organisation: Organisation) {
+        this.organisationService.setSelectedModel(organisation);
+        this.router.navigate(['/tabs/pages/organisations', organisation.id]);
+    }
 }
