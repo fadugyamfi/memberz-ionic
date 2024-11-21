@@ -4,7 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateEventPageRoutingModule } from './create-event-routing.module';
 
 import { CreateEventPage } from './create-event.page';
-import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption, IonList, IonInput, IonNote, IonDatetimeButton, IonPopover, IonDatetime, IonTextarea } from '@ionic/angular/standalone';
+import {
+    IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton,
+    IonContent, IonItem, IonLabel, IonSelect, IonSelectOption, IonList, IonInput,
+    IonNote, IonDatetimeButton, IonPopover, IonDatetime, IonTextarea
+} from '@ionic/angular/standalone';
 
 @NgModule({
     imports: [

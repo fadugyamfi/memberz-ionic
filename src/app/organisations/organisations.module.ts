@@ -7,7 +7,11 @@ import { OrganisationsPage } from './organisations.page';
 import { SharedModule } from '../shared/shared.module';
 import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonLabel, IonContent, IonList, IonItem, IonSpinner, IonText, IonButton, IonBackButton, IonCard, IonCardContent, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
+import {
+    IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonLabel,
+    IonContent, IonList, IonItem, IonSpinner, IonText, IonButton, IonBackButton,
+    IonCard, IonCardContent, IonGrid, IonRow, IonCol
+} from '@ionic/angular/standalone';
 
 @NgModule({
     imports: [

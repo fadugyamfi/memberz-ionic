@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicRouteStrategy, provideIonicAngular, IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,13 +26,6 @@ export function createTranslateLoader(http: HttpClient) {
     imports: [
         BrowserModule,
         AppRoutingModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            },
-        }),
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             // Register the ServiceWorker as soon as the application is stable
@@ -48,7 +41,14 @@ export function createTranslateLoader(http: HttpClient) {
         // appending organisation_id to requests
         { provide: HTTP_INTERCEPTORS, useClass: OrganisationInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),
-        provideIonicAngular()
+        provideIonicAngular(),
+        provideTranslateService({
+            loader: {
+              provide: TranslateLoader,
+              useFactory: (createTranslateLoader),
+              deps: [HttpClient],
+            },
+        }),
     ]
 })
 export class AppModule { }

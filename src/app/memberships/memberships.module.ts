@@ -12,7 +12,13 @@ import { AnniversariesComponent } from './anniversaries/anniversaries.component'
 import { PaymentsComponent } from './payments/payments.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { ProfileDetailsComponent } from './directory/profile-details/profile-details.component';
-import { IonHeader, IonToolbar, IonTitle, IonLabel, IonContent, IonRefresher, IonRefresherContent, IonList, IonListHeader, IonItem, IonSpinner, IonText, IonButton, IonItemGroup, IonSkeletonText, IonButtons, IonBackButton, IonSegment, IonSegmentButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonIcon, IonSearchbar, IonModal } from '@ionic/angular/standalone';
+import {
+    IonHeader, IonToolbar, IonTitle, IonLabel, IonContent, IonRefresher,
+    IonRefresherContent, IonList, IonListHeader, IonItem, IonSpinner, IonText,
+    IonButton, IonItemGroup, IonSkeletonText, IonButtons, IonBackButton, IonSegment,
+    IonSegmentButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle,
+    IonAccordionGroup, IonAccordion, IonIcon, IonSearchbar, IonModal
+} from '@ionic/angular/standalone';
 
 @NgModule({
     imports: [

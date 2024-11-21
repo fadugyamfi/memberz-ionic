@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule, UntypedFormBuilder } from '@angular/f
 import { ForgotPasswordPageRoutingModule } from './forgot-password-routing.module';
 
 import { ForgotPasswordPage } from './forgot-password.page';
-import { IonHeader, IonBackButton, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton, IonText, IonList, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import {
+    IonHeader, IonBackButton, IonTitle, IonContent, IonGrid, IonRow,
+    IonCol, IonItem, IonInput, IonButton, IonText, IonList, IonIcon, IonLabel
+} from '@ionic/angular/standalone';
 
 @NgModule({
     imports: [

@@ -6,7 +6,11 @@ import { EventsPage } from './events.page';
 import { EventsPageRoutingModule } from './events-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
-import { IonHeader, IonToolbar, IonTitle, IonLabel, IonSegment, IonSegmentButton, IonFab, IonFabButton, IonIcon, IonContent, IonRefresher, IonRefresherContent, IonList, IonItem, IonSpinner, IonText } from '@ionic/angular/standalone';
+import {
+    IonHeader, IonToolbar, IonTitle, IonLabel, IonSegment, IonSegmentButton,
+    IonFab, IonFabButton, IonIcon, IonContent, IonRefresher, IonRefresherContent,
+    IonList, IonItem, IonSpinner, IonText
+} from '@ionic/angular/standalone';
 
 @NgModule({
     imports: [

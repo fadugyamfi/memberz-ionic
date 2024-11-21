@@ -8,7 +8,10 @@ import { SettingsPageRoutingModule } from './settings-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
-import { IonHeader, IonToolbar, IonTitle, IonLabel, IonContent, IonList, IonItemGroup, IonListHeader, IonItem, IonIcon } from '@ionic/angular/standalone';
+import {
+    IonHeader, IonToolbar, IonTitle, IonLabel, IonContent, IonList,
+    IonItemGroup, IonListHeader, IonItem, IonIcon
+} from '@ionic/angular/standalone';
 
 @NgModule({
     imports: [
