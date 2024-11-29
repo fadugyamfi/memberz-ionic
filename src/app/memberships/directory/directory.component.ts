@@ -1,19 +1,25 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { IonSearchbar } from '@ionic/angular/standalone';
+import { Component, OnInit, ViewChild, input } from '@angular/core';
+import { IonSearchbar, IonHeader, IonToolbar, IonList, IonItemGroup, IonItem, IonLabel, IonSkeletonText } from '@ionic/angular/standalone';
 import { Observable, of } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberService } from '../../shared/services/api/organisation-member.service';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AvatarModule } from 'ngx-avatars';
+import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 
 @Component({
     selector: 'app-membership-directory',
     templateUrl: './directory.component.html',
     styleUrls: ['./directory.component.scss'],
-    standalone: false
+    imports: [
+        IonHeader, IonToolbar, IonSearchbar, IonList, NgIf, IonItemGroup, NgFor,
+        IonItem, AvatarModule, IonLabel, IonSkeletonText, ProfileDetailsComponent, AsyncPipe
+    ]
 })
 export class DirectoryComponent implements OnInit {
 
     @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
-    @Input() public membership: OrganisationMember;
+    public readonly membership = input<OrganisationMember>(undefined);
 
     public memberships$: Observable<OrganisationMember[]> = of([]);
     public viewingProfile = false;

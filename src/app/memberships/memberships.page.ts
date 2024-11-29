@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable, Subscription, of, tap } from 'rxjs';
 import { MemberAccount } from '../shared/models/api/member-account';
 import { Organisation } from '../shared/models/api/organisation';
@@ -8,13 +8,22 @@ import { AuthService } from '../shared/services/api/auth.service';
 import { OrganisationMemberService } from '../shared/services/api/organisation-member.service';
 import { OrganisationService } from '../shared/services/api/organisation.service';
 import { StorageService } from '../shared/services/storage.service';
-import { IonRouterLink } from '@ionic/angular/standalone';
+import {
+    IonRouterLink, IonHeader, IonToolbar, IonTitle, IonLabel, IonContent, IonRefresher,
+    IonRefresherContent, IonList, IonListHeader, IonItem, IonSpinner, IonText, IonButton
+} from '@ionic/angular/standalone';
+import { AvatarModule } from 'ngx-avatars';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-memberships',
     templateUrl: './memberships.page.html',
     styleUrls: ['./memberships.page.scss'],
-    standalone: false
+    imports: [
+        IonHeader, IonToolbar, IonTitle, IonLabel, AvatarModule, RouterLink, IonContent,
+        IonRefresher, IonRefresherContent, NgIf, IonList, IonListHeader, NgFor, IonItem,
+        IonSpinner, IonText, IonButton, AsyncPipe
+    ]
 })
 export class MembershipsPage implements OnInit, OnDestroy {
 

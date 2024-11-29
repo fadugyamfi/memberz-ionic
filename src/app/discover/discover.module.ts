@@ -29,8 +29,8 @@ import {
         IonItem,
         IonLabel,
         IonSpinner,
-        IonText
-    ],
-    declarations: [DiscoverPage]
+        IonText,
+        DiscoverPage
+    ]
 })
 export class DiscoverPageModule { }

@@ -7,12 +7,23 @@ import { OrganisationMember } from '../shared/models/api/organisation-member';
 import { AuthService } from '../shared/services/api/auth.service';
 import { OrganisationMemberService } from '../shared/services/api/organisation-member.service';
 import { OrganisationService } from '../shared/services/api/organisation.service';
+import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
+import {
+    IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonLabel, IonContent,
+    IonList, IonItem, IonSpinner, IonText, IonButton
+} from '@ionic/angular/standalone';
+import { AvatarModule } from 'ngx-avatars';
+import { NgClass, NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-organisations',
     templateUrl: './organisations.page.html',
     styleUrls: ['./organisations.page.scss'],
-    standalone: false
+    imports: [
+        MainMenuComponent, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle,
+        IonLabel, AvatarModule, IonContent, NgClass, NgIf, IonList, NgFor, IonItem, IonSpinner,
+        IonText, IonButton, AsyncPipe
+    ]
 })
 export class OrganisationsPage implements OnInit {
 

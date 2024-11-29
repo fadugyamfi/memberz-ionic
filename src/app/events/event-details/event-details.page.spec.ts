@@ -7,9 +7,8 @@ describe('EventDetailsPage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EventDetailsPage],
-            
-        }).compileComponents();
+    imports: [EventDetailsPage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(EventDetailsPage);
         component = fixture.componentInstance;

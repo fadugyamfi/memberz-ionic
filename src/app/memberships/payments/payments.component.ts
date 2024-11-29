@@ -7,12 +7,14 @@ import { ContributionService } from '../../shared/services/api/contribution.serv
 import { StorageService } from '../../shared/services/storage.service';
 import { addIcons } from 'ionicons';
 import { refresh } from 'ionicons/icons';
+import { IonList, IonListHeader, IonLabel, IonButton, IonIcon, IonSpinner, IonItemGroup, IonItem, IonSkeletonText } from '@ionic/angular/standalone';
+import { NgIf, NgFor, AsyncPipe, UpperCasePipe, DecimalPipe, TitleCasePipe, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-membership-payments',
     templateUrl: './payments.component.html',
     styleUrls: ['./payments.component.scss'],
-    standalone: false
+    imports: [IonList, IonListHeader, IonLabel, NgIf, IonButton, IonIcon, IonSpinner, IonItemGroup, NgFor, IonItem, IonSkeletonText, AsyncPipe, UpperCasePipe, DecimalPipe, TitleCasePipe, DatePipe]
 })
 export class PaymentsComponent implements OnInit {
 

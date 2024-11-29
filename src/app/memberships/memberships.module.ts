@@ -96,9 +96,7 @@ import {
         IonCardContent,
         IonCardHeader,
         IonCardTitle,
-        IonCardSubtitle
-    ],
-    declarations: [
+        IonCardSubtitle,
         MembershipsPage,
         DetailsComponent,
         ProfileDetailsComponent,

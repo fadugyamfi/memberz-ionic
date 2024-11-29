@@ -7,8 +7,8 @@ describe('HomePage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [HomePage],
-        }).compileComponents();
+    imports: [HomePage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(HomePage);
         component = fixture.componentInstance;

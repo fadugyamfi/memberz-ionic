@@ -7,9 +7,8 @@ describe('ProfileDetailsComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ProfileDetailsComponent],
-            
-        }).compileComponents();
+    imports: [ProfileDetailsComponent],
+}).compileComponents();
 
         fixture = TestBed.createComponent(ProfileDetailsComponent);
         component = fixture.componentInstance;

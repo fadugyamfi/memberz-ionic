@@ -25,8 +25,8 @@ import { IonHeader, IonToolbar, IonBackButton, IonTitle, IonContent, IonList, Io
         IonRow,
         IonCol,
         IonIcon,
-        IonButton
-    ],
-    declarations: [OrganisationPage]
+        IonButton,
+        OrganisationPage
+    ]
 })
 export class OrganisationPageModule { }

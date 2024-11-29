@@ -7,9 +7,8 @@ describe('DirectoryComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DirectoryComponent],
-            
-        }).compileComponents();
+    imports: [DirectoryComponent],
+}).compileComponents();
 
         fixture = TestBed.createComponent(DirectoryComponent);
         component = fixture.componentInstance;

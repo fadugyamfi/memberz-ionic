@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { IonModal, IonSearchbar, ModalController } from '@ionic/angular/standalone';
+import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonModal, IonSearchbar, ModalController, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner } from '@ionic/angular/standalone';
 import { fromEvent, Observable, of, Subscription, tap } from 'rxjs';
 import { OrganisationEvent } from '../../../shared/models/api/organisation-event';
 import { OrganisationEventSession } from '../../../shared/models/api/organisation-event-session';
@@ -11,12 +11,13 @@ import { OrganisationMemberCategoryService } from '../../../shared/services/api/
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 import { StorageService } from '../../../shared/services/storage.service';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-add-membership',
     templateUrl: './add-membership.component.html',
     styleUrls: ['./add-membership.component.scss'],
-    standalone: false
+    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, FormsModule, ReactiveFormsModule, IonList, IonItem, IonLabel, IonSelect, NgIf, NgFor, IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner, AsyncPipe]
 })
 export class AddMembershipComponent implements OnInit, OnDestroy {
 

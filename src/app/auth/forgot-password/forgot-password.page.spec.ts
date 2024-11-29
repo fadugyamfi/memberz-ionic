@@ -7,9 +7,8 @@ describe('ForgotPasswordPage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ForgotPasswordPage],
-            
-        }).compileComponents();
+    imports: [ForgotPasswordPage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(ForgotPasswordPage);
         component = fixture.componentInstance;

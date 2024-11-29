@@ -19,8 +19,8 @@ import { IonContent, IonList, IonItem, IonIcon, IonLabel, IonFooter, IonButton }
         IonIcon,
         IonLabel,
         IonFooter,
-        IonButton
-    ],
-    declarations: [HomePage]
+        IonButton,
+        HomePage
+    ]
 })
 export class HomePageModule { }

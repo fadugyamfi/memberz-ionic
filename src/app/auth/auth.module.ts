@@ -29,10 +29,8 @@ import {
         IonText,
         IonList,
         IonIcon,
-        IonLabel
-    ],
-    declarations: [
-        AuthPage,
+        IonLabel,
+        AuthPage
     ]
 })
 export class AuthPageModule { }

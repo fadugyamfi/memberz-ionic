@@ -34,8 +34,8 @@ import {
         IonList,
         IonItem,
         IonSpinner,
-        IonText
-    ],
-    declarations: [EventsPage]
+        IonText,
+        EventsPage
+    ]
 })
 export class EventsPageModule { }

@@ -7,9 +7,8 @@ describe('OrganisationsPage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [OrganisationsPage],
-            
-        }).compileComponents();
+    imports: [OrganisationsPage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(OrganisationsPage);
         component = fixture.componentInstance;

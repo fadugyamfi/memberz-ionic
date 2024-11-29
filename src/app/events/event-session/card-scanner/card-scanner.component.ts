@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
-import { IonModal } from '@ionic/angular/standalone';
-import { NgxScannerQrcodeComponent, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
+import { IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonSpinner } from '@ionic/angular/standalone';
+import { NgxScannerQrcodeComponent, ScannerQRCodeResult, NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-card-scanner',
     templateUrl: './card-scanner.component.html',
     styleUrls: ['./card-scanner.component.scss'],
-    standalone: false
+    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, NgIf, IonSpinner, NgxScannerQrcodeModule]
 })
 export class CardScannerComponent implements OnInit {
 

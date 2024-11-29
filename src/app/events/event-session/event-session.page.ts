@@ -15,6 +15,12 @@ import { OrganisationEventService } from '../../shared/services/api/organisation
 import { OrganisationService } from '../../shared/services/api/organisation.service';
 import { addIcons } from 'ionicons';
 import { camera, search, add, trash } from 'ionicons/icons';
+import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonListHeader, IonLabel, IonText, IonBadge, IonButton, IonIcon, IonItem, IonSpinner } from '@ionic/angular/standalone';
+import { NgIf, NgFor } from '@angular/common';
+import { AvatarModule } from 'ngx-avatars';
+import { MemberSearchComponent } from './member-search/member-search.component';
+import { CardScannerComponent } from './card-scanner/card-scanner.component';
+import { AddMembershipComponent } from './add-membership/add-membership.component';
 
 const SwAlert = Swal.mixin({
     heightAuto: false
@@ -24,7 +30,7 @@ const SwAlert = Swal.mixin({
     selector: 'app-event-session',
     templateUrl: './event-session.page.html',
     styleUrls: ['./event-session.page.scss'],
-    standalone: false
+    imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonListHeader, IonLabel, IonText, IonBadge, NgIf, IonButton, IonIcon, NgFor, IonItem, AvatarModule, IonSpinner, MemberSearchComponent, CardScannerComponent, AddMembershipComponent]
 })
 export class EventSessionPage implements OnInit {
 

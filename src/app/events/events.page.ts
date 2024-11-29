@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { from, Observable, of, tap } from 'rxjs';
 import { MemberAccount } from '../shared/models/api/member-account';
 import { OrganisationEvent } from '../shared/models/api/organisation-event';
@@ -8,13 +8,15 @@ import { OrganisationEventService } from '../shared/services/api/organisation-ev
 import { StorageService } from '../shared/services/storage.service';
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
-import { IonRouterLink } from '@ionic/angular/standalone';
+import { IonRouterLink, IonHeader, IonToolbar, IonTitle, IonLabel, IonSegment, IonSegmentButton, IonFab, IonFabButton, IonIcon, IonContent, IonRefresher, IonRefresherContent, IonList, IonItem, IonSpinner, IonText } from '@ionic/angular/standalone';
+import { AvatarModule } from 'ngx-avatars';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-events',
     templateUrl: 'events.page.html',
     styleUrls: ['events.page.scss'],
-    standalone: false
+    imports: [IonHeader, IonToolbar, IonTitle, IonLabel, AvatarModule, RouterLink, IonSegment, IonSegmentButton, IonFab, IonFabButton, IonIcon, NgIf, IonContent, IonRefresher, IonRefresherContent, IonList, IonItem, NgFor, IonSpinner, IonText, AsyncPipe]
 })
 export class EventsPage implements OnInit {
 

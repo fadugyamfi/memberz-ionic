@@ -7,9 +7,8 @@ describe('TwoFactorAuthPage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TwoFactorAuthPage],
-            
-        }).compileComponents();
+    imports: [TwoFactorAuthPage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(TwoFactorAuthPage);
         component = fixture.componentInstance;

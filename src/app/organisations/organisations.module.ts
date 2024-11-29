@@ -43,9 +43,7 @@ import {
         IonGrid,
         IonRow,
         IonCol,
-        IonText
-    ],
-    declarations: [
+        IonText,
         OrganisationsPage,
         DashboardComponent
     ]

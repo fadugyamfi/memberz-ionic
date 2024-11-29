@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { IonInput, IonModal, IonSearchbar } from '@ionic/angular/standalone';
+import { IonInput, IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonText, IonContent, IonList, IonItem, IonLabel, IonIcon, IonSpinner } from '@ionic/angular/standalone';
 import { Observable, of } from 'rxjs';
 import { OrganisationMember } from '../../../shared/models/api/organisation-member';
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 import { addIcons } from 'ionicons';
 import { checkbox } from 'ionicons/icons';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AvatarModule } from 'ngx-avatars';
 
 @Component({
     selector: 'app-member-search',
     templateUrl: './member-search.component.html',
     styleUrls: ['./member-search.component.scss'],
-    standalone: false
+    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonSearchbar, IonText, IonContent, IonList, NgIf, NgFor, IonItem, AvatarModule, IonLabel, IonIcon, IonSpinner, AsyncPipe]
 })
 export class MemberSearchComponent implements OnInit {
 

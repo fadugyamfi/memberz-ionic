@@ -12,17 +12,17 @@
     <ion-content [fullscreen]="true">
       <ion-card class="shadow-sm">
         <ion-card-content class="d-flex ion-justify-content-center">
-          <ngx-avatars slot="start" [src]="membership.member?.thumbnail()" [name]="membership.name()"
+          <ngx-avatars slot="start" [src]="membership().member?.thumbnail()" [name]="membership().name()"
                      size="150"></ngx-avatars>
 
           <!-- <qr-code [value]="membership?.uuid" size="40" errorCorrectionLevel="M"></qr-code> -->
         </ion-card-content>
         <ion-card-header class="text-center">
-          <ion-card-title>{{ membership?.name() }}</ion-card-title>
-          <ion-card-subtitle>{{ membership?.member?.occupation }}</ion-card-subtitle>
+          <ion-card-title>{{ membership()?.name() }}</ion-card-title>
+          <ion-card-subtitle>{{ membership()?.member?.occupation }}</ion-card-subtitle>
           <ion-card-subtitle>
-            {{ membership?.category?.name }}
-            <span *ngIf="membership?.organisation_no">| {{ membership?.organisation_no }}</span>
+            {{ membership()?.category?.name }}
+            <span *ngIf="membership()?.organisation_no">| {{ membership()?.organisation_no }}</span>
           </ion-card-subtitle>
         </ion-card-header>
       </ion-card>

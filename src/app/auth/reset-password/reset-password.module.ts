@@ -23,8 +23,8 @@ import { IonHeader, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonI
         IonItem,
         IonInput,
         IonButton,
-        IonText
-    ],
-    declarations: [ResetPasswordPage]
+        IonText,
+        ResetPasswordPage
+    ]
 })
 export class ResetPasswordPageModule { }

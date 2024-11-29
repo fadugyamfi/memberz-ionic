@@ -29,11 +29,8 @@ import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent,
         IonIcon,
         IonText,
         IonItem,
-        IonBadge
-    ],
-    declarations: [
-        EventDetailsPage,
-
+        IonBadge,
+        EventDetailsPage
     ]
 })
 export class EventDetailsPageModule { }

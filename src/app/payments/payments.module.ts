@@ -19,8 +19,8 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel
         IonContent,
         IonList,
         IonItem,
-        IonLabel
-    ],
-    declarations: [PaymentsPage]
+        IonLabel,
+        PaymentsPage
+    ]
 })
 export class PaymentsPageModule { }

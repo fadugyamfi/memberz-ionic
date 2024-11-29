@@ -7,9 +7,8 @@ describe('AnniversariesComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AnniversariesComponent],
-            
-        }).compileComponents();
+    imports: [AnniversariesComponent],
+}).compileComponents();
 
         fixture = TestBed.createComponent(AnniversariesComponent);
         component = fixture.componentInstance;

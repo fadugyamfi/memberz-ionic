@@ -7,9 +7,8 @@ describe('AuthPage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AuthPage],
-            
-        }).compileComponents();
+    imports: [AuthPage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(AuthPage);
         component = fixture.componentInstance;

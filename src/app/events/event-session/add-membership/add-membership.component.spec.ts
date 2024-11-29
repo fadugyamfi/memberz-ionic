@@ -7,9 +7,8 @@ describe('AddMembershipComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AddMembershipComponent],
-            
-        }).compileComponents();
+    imports: [AddMembershipComponent],
+}).compileComponents();
 
         fixture = TestBed.createComponent(AddMembershipComponent);
         component = fixture.componentInstance;

@@ -1,25 +1,33 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, input, viewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { IonModal, IonSearchbar } from '@ionic/angular/standalone';
+import {
+    IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton,
+    IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle
+} from '@ionic/angular/standalone';
 import { Observable, of } from 'rxjs';
 import { OrganisationMember } from '../../../shared/models/api/organisation-member';
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
+import { AvatarModule } from 'ngx-avatars';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-profile-details',
     templateUrl: './profile-details.component.html',
     styleUrls: ['./profile-details.component.scss'],
-    standalone: false
+    imports: [
+        IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonCard,
+        IonCardContent, AvatarModule, IonCardHeader, IonCardTitle, IonCardSubtitle, NgIf
+    ]
 })
 export class ProfileDetailsComponent implements OnInit {
 
     public searchForm: UntypedFormGroup;
 
-    @ViewChild('ionModal') modal: IonModal;
+    readonly modal = viewChild<IonModal>('ionModal');
 
     @Output() close: EventEmitter<any> = new EventEmitter();
-    @Input() membership: OrganisationMember;
+    readonly membership = input<OrganisationMember>(undefined);
 
     public memberships$: Observable<OrganisationMember[]> = of([]);
     public open = true;
@@ -44,7 +52,7 @@ export class ProfileDetailsComponent implements OnInit {
     }
 
     onCancel() {
-        this.modal.dismiss(null, 'cancel');
+        this.modal().dismiss(null, 'cancel');
         this.close.emit();
     }
 

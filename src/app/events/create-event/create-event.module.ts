@@ -33,8 +33,8 @@ import {
         IonDatetimeButton,
         IonPopover,
         IonDatetime,
-        IonTextarea
-    ],
-    declarations: [CreateEventPage]
+        IonTextarea,
+        CreateEventPage
+    ]
 })
 export class CreateEventPageModule { }

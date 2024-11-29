@@ -28,8 +28,8 @@ import {
         IonText,
         IonList,
         IonIcon,
-        IonLabel
-    ],
-    declarations: [ForgotPasswordPage]
+        IonLabel,
+        ForgotPasswordPage
+    ]
 })
 export class ForgotPasswordPageModule { }

@@ -30,8 +30,8 @@ import {
         IonItemGroup,
         IonListHeader,
         IonItem,
-        IonIcon
-    ],
-    declarations: [SettingsPage]
+        IonIcon,
+        SettingsPage
+    ]
 })
 export class SettingsPageModule { }

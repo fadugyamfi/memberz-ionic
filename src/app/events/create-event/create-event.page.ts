@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -11,6 +11,8 @@ import { OrganisationEventService } from '../../shared/services/api/organisation
 import { OrganisationMemberService } from '../../shared/services/api/organisation-member.service';
 import { OrganisationService } from '../../shared/services/api/organisation.service';
 import { StorageService } from '../../shared/services/storage.service';
+import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption, IonList, IonInput, IonNote, IonDatetimeButton, IonPopover, IonDatetime, IonTextarea } from '@ionic/angular/standalone';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 const SwAlert = Swal.mixin({
     heightAuto: false
@@ -20,7 +22,7 @@ const SwAlert = Swal.mixin({
     selector: 'app-create-event',
     templateUrl: './create-event.page.html',
     styleUrls: ['./create-event.page.scss'],
-    standalone: false
+    imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonContent, FormsModule, ReactiveFormsModule, IonItem, IonLabel, IonSelect, NgIf, NgFor, IonSelectOption, IonList, IonInput, IonNote, IonDatetimeButton, IonPopover, IonDatetime, IonTextarea, AsyncPipe]
 })
 export class CreateEventPage implements OnInit {
 

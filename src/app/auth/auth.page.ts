@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../shared/services/api/auth.service';
 import { addIcons } from 'ionicons';
 import { helpCircle, pencil } from 'ionicons/icons';
-import { IonRouterLink } from '@ionic/angular/standalone';
+import { IonRouterLink, IonHeader, IonBackButton, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton, IonSpinner, IonText, IonList, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.page.html',
     styleUrls: ['./auth.page.scss'],
-    // encapsulation: ViewEncapsulation.None,
-    standalone: false
+    imports: [IonHeader, IonBackButton, RouterLink, IonTitle, IonContent, FormsModule, ReactiveFormsModule, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton, NgIf, IonSpinner, IonText, IonList, IonIcon, IonLabel]
 })
 export class AuthPage implements OnInit {
 

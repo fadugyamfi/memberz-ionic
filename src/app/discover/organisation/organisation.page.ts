@@ -13,6 +13,9 @@ import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 import { addIcons } from 'ionicons';
 import { thumbsUpOutline, peopleOutline } from 'ionicons/icons';
+import { IonHeader, IonToolbar, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonGrid, IonRow, IonCol, IonIcon, IonButton } from '@ionic/angular/standalone';
+import { AvatarModule } from 'ngx-avatars';
+import { NgIf, DecimalPipe } from '@angular/common';
 
 const SwAlert = Swal.mixin({
     heightAuto: false
@@ -21,7 +24,7 @@ const SwAlert = Swal.mixin({
     selector: 'app-organisation',
     templateUrl: './organisation.page.html',
     styleUrls: ['./organisation.page.scss'],
-    standalone: false
+    imports: [IonHeader, IonToolbar, IonBackButton, IonTitle, IonContent, IonList, IonItem, AvatarModule, IonLabel, IonGrid, IonRow, IonCol, IonIcon, IonButton, NgIf, DecimalPipe]
 })
 export class OrganisationPage implements OnInit {
 

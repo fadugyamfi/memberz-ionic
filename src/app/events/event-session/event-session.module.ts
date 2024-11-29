@@ -73,9 +73,7 @@ import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent,
         IonItem,
         IonLabel,
         IonIcon,
-        IonSpinner
-    ],
-    declarations: [
+        IonSpinner,
         EventSessionPage,
         CardScannerComponent,
         MemberSearchComponent,

@@ -24,8 +24,8 @@ import {
         IonCol,
         IonItem,
         IonInput,
-        IonButton
-    ],
-    declarations: [RegisterPage]
+        IonButton,
+        RegisterPage
+    ]
 })
 export class RegisterPageModule { }

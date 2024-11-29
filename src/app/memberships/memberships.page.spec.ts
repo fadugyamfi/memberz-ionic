@@ -7,9 +7,8 @@ describe('MembershipsPage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MembershipsPage],
-            
-        }).compileComponents();
+    imports: [MembershipsPage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(MembershipsPage);
         component = fixture.componentInstance;

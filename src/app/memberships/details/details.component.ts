@@ -9,6 +9,18 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ApiResponse } from '../../shared/services/api/api.service';
 import { addIcons } from 'ionicons';
 import { peopleOutline, calendarOutline, card, trash } from 'ionicons/icons';
+import {
+    IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonSegment, IonSegmentButton,
+    IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonLabel,
+    IonAccordionGroup, IonAccordion, IonItem, IonIcon, IonList, IonListHeader
+} from '@ionic/angular/standalone';
+import { AvatarModule } from 'ngx-avatars';
+import { NgClass, NgIf, DatePipe } from '@angular/common';
+import { DirectoryComponent } from '../directory/directory.component';
+import { QrCodeModule } from 'ng-qrcode';
+import { GroupsComponent } from '../groups/groups.component';
+import { AnniversariesComponent } from '../anniversaries/anniversaries.component';
+import { PaymentsComponent } from '../payments/payments.component';
 
 const SwAlert = Swal.mixin({
     heightAuto: false
@@ -17,7 +29,13 @@ const SwAlert = Swal.mixin({
     selector: 'app-details',
     templateUrl: './details.component.html',
     styleUrls: ['./details.component.scss'],
-    standalone: false
+    imports: [
+        IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, AvatarModule, IonSegment,
+        IonSegmentButton, IonContent, NgClass, DirectoryComponent, IonCard, IonCardContent,
+        QrCodeModule, IonCardHeader, IonCardTitle, IonCardSubtitle, NgIf, IonLabel, IonAccordionGroup,
+        IonAccordion, IonItem, IonIcon, GroupsComponent, AnniversariesComponent, IonList, IonListHeader,
+        PaymentsComponent, DatePipe
+    ]
 })
 export class DetailsComponent implements OnInit {
 

@@ -7,9 +7,8 @@ describe('CardScannerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [CardScannerComponent],
-            
-        }).compileComponents();
+    imports: [CardScannerComponent],
+}).compileComponents();
 
         fixture = TestBed.createComponent(CardScannerComponent);
         component = fixture.componentInstance;

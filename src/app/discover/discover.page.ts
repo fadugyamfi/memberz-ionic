@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Organisation } from '../shared/models/api/organisation';
 import { AuthService } from '../shared/services/api/auth.service';
 import { OrganisationService } from '../shared/services/api/organisation.service';
-import { IonRouterLink } from '@ionic/angular/standalone';
+import { IonRouterLink, IonHeader, IonBackButton, IonTitle, IonButton, IonContent, IonList, IonListHeader, IonSearchbar, IonItem, IonLabel, IonSpinner, IonText } from '@ionic/angular/standalone';
+import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AvatarModule } from 'ngx-avatars';
 
 @Component({
     selector: 'app-discover',
     templateUrl: 'discover.page.html',
     styleUrls: ['discover.page.scss'],
-    standalone: false
+    imports: [MainMenuComponent, IonHeader, IonBackButton, IonTitle, NgIf, IonButton, RouterLink, IonContent, IonList, IonListHeader, IonSearchbar, NgFor, IonItem, AvatarModule, IonLabel, IonSpinner, IonText, AsyncPipe]
 })
 export class DiscoverPage implements OnInit {
 

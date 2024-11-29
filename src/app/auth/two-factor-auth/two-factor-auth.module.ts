@@ -21,8 +21,8 @@ import { IonHeader, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonI
         IonItem,
         IonInput,
         IonButton,
-        IonText
-    ],
-    declarations: [TwoFactorAuthPage]
+        IonText,
+        TwoFactorAuthPage
+    ]
 })
 export class TwoFactorAuthPageModule { }

@@ -15,8 +15,8 @@ import { IonHeader, IonTitle, IonContent, IonButton, IonText } from '@ionic/angu
         IonTitle,
         IonContent,
         IonButton,
-        IonText
-    ],
-    declarations: [VerifyOtpPage]
+        IonText,
+        VerifyOtpPage
+    ]
 })
 export class VerifyOtpPageModule { }

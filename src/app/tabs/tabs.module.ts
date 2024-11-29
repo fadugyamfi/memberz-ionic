@@ -16,8 +16,8 @@ import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angu
         IonTabBar,
         IonTabButton,
         IonIcon,
-        IonLabel
-    ],
-    declarations: [TabsPage]
+        IonLabel,
+        TabsPage
+    ]
 })
 export class TabsPageModule { }

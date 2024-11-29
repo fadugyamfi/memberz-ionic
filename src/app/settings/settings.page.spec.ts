@@ -7,9 +7,8 @@ describe('SettingsPage', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SettingsPage],
-            
-        }).compileComponents();
+    imports: [SettingsPage],
+}).compileComponents();
 
         fixture = TestBed.createComponent(SettingsPage);
         component = fixture.componentInstance;

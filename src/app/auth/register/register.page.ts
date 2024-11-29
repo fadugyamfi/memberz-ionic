@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormGroup, UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../shared/services/api/auth.service';
 import { MemberAccountService } from '../../shared/services/api/member-account.service';
+import { IonHeader, IonBackButton, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.page.html',
     styleUrls: ['./register.page.scss'],
-    standalone: false
+    imports: [IonHeader, IonBackButton, IonTitle, IonContent, FormsModule, ReactiveFormsModule, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton]
 })
 export class RegisterPage implements OnInit {
 
