@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberGroup } from '../../shared/models/api/organisation-member-group';
@@ -16,8 +16,7 @@ import { IonItemGroup, IonItem, IonLabel, IonSkeletonText } from '@ionic/angular
 })
 export class GroupsComponent implements OnInit {
 
-    @Input()
-    public membership: OrganisationMember;
+    public readonly membership = input<OrganisationMember>(undefined);
     public memberGroups$: Observable<OrganisationMemberGroup[]>;
 
     @Output() public load = new EventEmitter();
@@ -29,7 +28,7 @@ export class GroupsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.cacheKey = `cache:membership:${this.membership.id}:groups`;
+        this.cacheKey = `cache:membership:${this.membership().id}:groups`;
         this.loadMemberGroups();
     }
 
@@ -42,7 +41,7 @@ export class GroupsComponent implements OnInit {
         }
 
         const options = {
-            organisation_member_id: this.membership.id,
+            organisation_member_id: this.membership().id,
         };
 
         this.memberGroups$ = this.memberGroupService.getAll(options)

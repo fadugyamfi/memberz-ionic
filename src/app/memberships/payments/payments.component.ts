@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { Contribution } from '../../shared/models/api/contribution';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
@@ -18,8 +18,7 @@ import { AsyncPipe, UpperCasePipe, DecimalPipe, TitleCasePipe, DatePipe } from '
 })
 export class PaymentsComponent implements OnInit {
 
-    @Input()
-    public membership: OrganisationMember;
+    public readonly membership = input<OrganisationMember>(undefined);
     public contributions$: Observable<Contribution[]>;
 
     public cacheKey: string;
@@ -33,7 +32,7 @@ export class PaymentsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.cacheKey = `cache:${this.membership.id}:contributions`;
+        this.cacheKey = `cache:${this.membership().id}:contributions`;
         this.loadRecentPayments();
     }
 
@@ -44,7 +43,7 @@ export class PaymentsComponent implements OnInit {
         }
 
         const options = {
-            organisation_member_id: this.membership.id,
+            organisation_member_id: this.membership().id,
             sort: 'latest'
         };
 

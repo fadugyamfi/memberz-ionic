@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { AuthService } from '../../services/api/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
@@ -21,7 +21,7 @@ import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem,
 })
 export class MainMenuComponent implements OnInit {
 
-    @Input() contentId = '';
+    readonly contentId = input('');
 
     constructor(
         public authService: AuthService,

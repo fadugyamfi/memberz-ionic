@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild, input } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonModal, IonSearchbar, ModalController, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner } from '@ionic/angular/standalone';
 import { fromEvent, Observable, of, Subscription, tap } from 'rxjs';
@@ -27,7 +27,7 @@ export class AddMembershipComponent implements OnInit, OnDestroy {
     @Output() close: EventEmitter<any> = new EventEmitter();
     @Output() register: EventEmitter<any> = new EventEmitter();
 
-    @Input() eventSession: OrganisationEventSession;
+    readonly eventSession = input<OrganisationEventSession>(undefined);
 
 
     public open = true;
@@ -58,7 +58,7 @@ export class AddMembershipComponent implements OnInit, OnDestroy {
 
     setupForm() {
         this.addForm = new FormGroup({
-            organisation_id: new FormControl<number>(this.eventSession.organisation_id),
+            organisation_id: new FormControl<number>(this.eventSession().organisation_id),
             organisation_member_category_id: new FormControl<number>(null),
             last_name: new FormControl<string>(''),
             first_name: new FormControl<string>(''),
@@ -79,7 +79,7 @@ export class AddMembershipComponent implements OnInit, OnDestroy {
     }
 
     fetchCategories() {
-        const cacheKey = `cache:${this.eventSession.organisation_id}:categories`;
+        const cacheKey = `cache:${this.eventSession().organisation_id}:categories`;
 
         if (this.storage.has(cacheKey)) {
             this.categories$ = of(this.storage.get(cacheKey));
@@ -88,7 +88,7 @@ export class AddMembershipComponent implements OnInit, OnDestroy {
 
         const params = {
             sort: 'name:asc',
-            organisation_id: this.eventSession.organisation_id
+            organisation_id: this.eventSession().organisation_id
         };
 
         this.categories$ = this.categoryService.getAll(params)

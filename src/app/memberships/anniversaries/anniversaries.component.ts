@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberAnniversary } from '../../shared/models/api/organisation-member-anniversary';
@@ -15,8 +15,7 @@ import { IonItemGroup, IonItem, IonLabel, IonSkeletonText } from '@ionic/angular
 })
 export class AnniversariesComponent implements OnInit {
 
-    @Input()
-    public membership: OrganisationMember;
+    public readonly membership = input<OrganisationMember>(undefined);
     public anniversaries$: Observable<OrganisationMemberAnniversary[]>;
 
     @Output() load = new EventEmitter<any>();
@@ -29,7 +28,7 @@ export class AnniversariesComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.cacheKey = `cache:membership:${this.membership.id}:anniversaries`;
+        this.cacheKey = `cache:membership:${this.membership().id}:anniversaries`;
         this.loadAnniversaries();
     }
 
@@ -42,7 +41,7 @@ export class AnniversariesComponent implements OnInit {
         }
 
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const options = { organisation_member_id: this.membership.id };
+        const options = { organisation_member_id: this.membership().id };
 
         this.anniversaries$ = this.memberAnniversaries.getAll(options)
             .pipe(
