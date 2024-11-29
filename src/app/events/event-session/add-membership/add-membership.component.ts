@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, HostListener, OnDestroy, OnInit, ViewChild, input, output } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, input, output, viewChild } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons,
@@ -28,8 +28,8 @@ import { AsyncPipe } from '@angular/common';
 })
 export class AddMembershipComponent implements OnInit, OnDestroy {
 
-    @ViewChild('ionModal') modal: IonModal;
-    @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
+    readonly modal = viewChild<IonModal>('ionModal');
+    readonly searchbar = viewChild<IonSearchbar>('searchbar');
 
     readonly close = output();
     readonly register = output<OrganisationMember>();
@@ -77,7 +77,7 @@ export class AddMembershipComponent implements OnInit, OnDestroy {
     }
 
     onCancel() {
-        this.modal.dismiss(null, 'cancel');
+        this.modal().dismiss(null, 'cancel');
         this.close.emit();
     }
 
@@ -119,7 +119,7 @@ export class AddMembershipComponent implements OnInit, OnDestroy {
 
         this.membershipService.create(membership).subscribe({
             next: (model: OrganisationMember) => {
-                this.modal.dismiss(null, 'added');
+                this.modal().dismiss(null, 'added');
                 this.register.emit(model);
             },
             error: (error) => console.log('add error', error)

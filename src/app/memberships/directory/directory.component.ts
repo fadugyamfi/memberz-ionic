@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, input } from '@angular/core';
+import { Component, OnInit, input, viewChild } from '@angular/core';
 import { IonSearchbar, IonHeader, IonToolbar, IonList, IonItemGroup, IonItem, IonLabel, IonSkeletonText } from '@ionic/angular/standalone';
 import { Observable, of } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
@@ -27,7 +27,7 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
 })
 export class DirectoryComponent implements OnInit {
 
-    @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
+    readonly searchbar = viewChild<IonSearchbar>('searchbar');
     public readonly membership = input<OrganisationMember>(undefined);
 
     public memberships$: Observable<OrganisationMember[]> = of([]);
@@ -40,7 +40,7 @@ export class DirectoryComponent implements OnInit {
 
     ngOnInit() {
         setTimeout(() => { // this will make the execution after the above boolean has changed
-            this.searchbar.setFocus();
+            this.searchbar().setFocus();
         }, 100);
     }
 

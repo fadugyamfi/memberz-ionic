@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, HostListener, OnInit, ViewChild, output } from '@angular/core';
+import { Component, HostListener, OnInit, output, viewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import {
     IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons,
@@ -27,8 +27,8 @@ export class MemberSearchComponent implements OnInit {
 
     public searchForm: UntypedFormGroup;
 
-    @ViewChild('ionModal') modal: IonModal;
-    @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
+    readonly modal = viewChild<IonModal>('ionModal');
+    readonly searchbar = viewChild<IonSearchbar>('searchbar');
 
     readonly close = output();
     readonly register = output<any>();
@@ -46,7 +46,7 @@ export class MemberSearchComponent implements OnInit {
 
     ngOnInit() {
         setTimeout(() => { // this will make the execution after the above boolean has changed
-            this.searchbar?.setFocus();
+            this.searchbar()?.setFocus();
         }, 100);
         this.modalBackButton.pushModalState();
     }
@@ -61,7 +61,7 @@ export class MemberSearchComponent implements OnInit {
     }
 
     onCancel() {
-        this.modal.dismiss(null, 'cancel');
+        this.modal().dismiss(null, 'cancel');
         this.close.emit();
     }
 
@@ -87,7 +87,7 @@ export class MemberSearchComponent implements OnInit {
     }
 
     onRegister() {
-        this.modal.dismiss(null, 'searched');
+        this.modal().dismiss(null, 'searched');
         setTimeout(() => this.register.emit(this.selected), 200);
     }
 }

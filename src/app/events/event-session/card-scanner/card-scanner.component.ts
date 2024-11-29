@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, HostListener, OnInit, ViewChild, output } from '@angular/core';
+import { Component, HostListener, OnInit, output, viewChild } from '@angular/core';
 import { IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonSpinner } from '@ionic/angular/standalone';
 import { NgxScannerQrcodeComponent, ScannerQRCodeResult, NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
@@ -13,8 +13,8 @@ import { ModalBackButtonService } from '../../../shared/services/modal-back-butt
 })
 export class CardScannerComponent implements OnInit {
 
-    @ViewChild('ionModal', { static: true }) modal: IonModal;
-    @ViewChild('scanner', { static: false }) scanner: NgxScannerQrcodeComponent;
+    readonly modal = viewChild<IonModal>('ionModal');
+    readonly scanner = viewChild<NgxScannerQrcodeComponent>('scanner');
 
     public captures = [];
     public capturing = false;
@@ -29,7 +29,7 @@ export class CardScannerComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        setTimeout(() => this.scanner.start(), 100);
+        setTimeout(() => this.scanner().start(), 100);
         this.modalBackButton.pushModalState();
     }
 
@@ -43,8 +43,8 @@ export class CardScannerComponent implements OnInit {
     }
 
     async hideScanner() {
-        this.modal.dismiss(null, 'cancel');
-        this.scanner.stop();
+        this.modal().dismiss(null, 'cancel');
+        this.scanner().stop();
         this.close.emit();
     }
 
