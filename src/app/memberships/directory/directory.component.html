@@ -1,42 +1,45 @@
 <ion-header>
   <ion-toolbar class="py-2">
     <ion-searchbar #searchbar placeholder="Enter Name or Phone Number" color="light"
-                   (ionChange)="searchDirectory($event)" [debounce]="1000"></ion-searchbar>
+    (ionChange)="searchDirectory($event)" [debounce]="1000"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-list lines="full">
-  <ng-container *ngIf="memberships$ | async as memberships; else loading">
-    <ion-item-group *ngIf="memberships.length > 0; else empty">
-      <ion-item detail="true" *ngFor="let membership of memberships" (click)="viewProfileDetails(membership)">
-        <ngx-avatars slot="start" [src]="membership.member?.thumbnail()" [name]="membership.name()"
-                     size="40"></ngx-avatars>
-
-        <ion-label>
-          <p class="fw-semibold my-0">{{ membership.name() }}</p>
-          <p class="text-muted my-0">{{ membership.category?.name }}</p>
+  @if (memberships$ | async; as memberships) {
+    @if (memberships.length > 0) {
+      <ion-item-group>
+        @for (membership of memberships; track membership) {
+          <ion-item detail="true" (click)="viewProfileDetails(membership)">
+            <ngx-avatars slot="start" [src]="membership.member?.thumbnail()" [name]="membership.name()"
+            size="40"></ngx-avatars>
+            <ion-label>
+              <p class="fw-semibold my-0">{{ membership.name() }}</p>
+              <p class="text-muted my-0">{{ membership.category?.name }}</p>
+            </ion-label>
+          </ion-item>
+        }
+      </ion-item-group>
+    } @else {
+      <ion-item lines="none">
+        <ion-label class="ion-padding-vertical ion-text-center ion-text-wrap">
+          <h1>No Memberships Found</h1>
+          <p>Enter a member name or phone number to search the membership directory</p>
         </ion-label>
       </ion-item>
-    </ion-item-group>
-  </ng-container>
-
-  <ng-template #empty>
-    <ion-item lines="none">
-      <ion-label class="ion-padding-vertical ion-text-center ion-text-wrap">
-        <h1>No Memberships Found</h1>
-        <p>Enter a member name or phone number to search the membership directory</p>
-      </ion-label>
-    </ion-item>
-  </ng-template>
-
-  <ng-template #loading>
+    }
+  } @else {
     <ion-item>
       <ion-skeleton-text [animated]="true"></ion-skeleton-text>
     </ion-item>
     <ion-item>
       <ion-skeleton-text [animated]="true"></ion-skeleton-text>
     </ion-item>
-  </ng-template>
+  }
+
+
 </ion-list>
 
-<app-profile-details *ngIf="viewingProfile" (close)="viewingProfile = false" [membership]="selectedProfile"></app-profile-details>
+@if (viewingProfile) {
+  <app-profile-details (close)="viewingProfile = false" [membership]="selectedProfile"></app-profile-details>
+}

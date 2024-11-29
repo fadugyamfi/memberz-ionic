@@ -9,15 +9,26 @@ import { OrganisationMember } from '../../../shared/models/api/organisation-memb
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 import { AvatarModule } from 'ngx-avatars';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-profile-details',
     templateUrl: './profile-details.component.html',
     styleUrls: ['./profile-details.component.scss'],
     imports: [
-        IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonCard,
-        IonCardContent, AvatarModule, IonCardHeader, IonCardTitle, IonCardSubtitle, NgIf
+        IonModal,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonButtons,
+        IonButton,
+        IonContent,
+        IonCard,
+        IonCardContent,
+        AvatarModule,
+        IonCardHeader,
+        IonCardTitle,
+        IonCardSubtitle
     ]
 })
 export class ProfileDetailsComponent implements OnInit {

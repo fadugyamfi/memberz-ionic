@@ -5,60 +5,57 @@
   <ion-header>
     <ion-toolbar>
       <!-- <ion-buttons slot="start">
-        <ion-menu-button menu="main-content"></ion-menu-button>
-      </ion-buttons> -->
+      <ion-menu-button menu="main-content"></ion-menu-button>
+    </ion-buttons> -->
 
-      <ion-title>
-        <ion-label>
-          {{ 'Welcome' }} {{ user?.member?.first_name }}!
-        </ion-label>
-      </ion-title>
+    <ion-title>
+      <ion-label>
+        {{ 'Welcome' }} {{ user?.member?.first_name }}!
+      </ion-label>
+    </ion-title>
 
-      <ngx-avatars [src]="user?.member?.thumbnail()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding"
-                   routerLink="/tabs/pages/settings">
-      </ngx-avatars>
-    </ion-toolbar>
+    <ngx-avatars [src]="user?.member?.thumbnail()" [name]="user?.name()" slot="end" [size]="36" class="ion-padding"
+      routerLink="/tabs/pages/settings">
+    </ngx-avatars>
+  </ion-toolbar>
 
-  </ion-header>
+</ion-header>
 
-  <ion-content class="pb-50">
-    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+<ion-content class="pb-50">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-    <ng-container *ngIf="(memberships$ | async) as memberships; else loading">
-      <ion-list lines="full">
-
-        <ion-list-header lines="full">
-          <ion-label>Select an organisation to view membership details</ion-label>
-        </ion-list-header>
-
-        <ion-item detail="true" button *ngFor="let membership of memberships" (click)="loadMembership(membership)">
+  @if ((memberships$ | async); as memberships) {
+    <ion-list lines="full">
+      <ion-list-header lines="full">
+        <ion-label>Select an organisation to view membership details</ion-label>
+      </ion-list-header>
+      @for (membership of memberships; track membership) {
+        <ion-item detail="true" button (click)="loadMembership(membership)">
           <ngx-avatars slot="start" [src]="membership.organisation?.logo" [name]="membership.organisation?.name"
-                       size="40"></ngx-avatars>
-
+          size="40"></ngx-avatars>
           <ion-label>
             <h6 class="fw-semibold">{{ membership.organisation?.name }}</h6>
             <p class="mb-0">{{ membership.category?.name }}</p>
           </ion-label>
         </ion-item>
-      </ion-list>
-
-    </ng-container>
-
-    <ng-template #loading>
-      <div class="ion-padding ion-text-center ion-align-items-center">
-        <ion-spinner name="crescent" class="ion-margin-end"></ion-spinner>
-        <ion-text>Loading Your Memberships</ion-text>
-      </div>
-    </ng-template>
-
-    <div class="ion-padding">
-      <ion-button expand="block" routerLink="/discover">
-        Join An Organisation
-      </ion-button>
+      }
+    </ion-list>
+  } @else {
+    <div class="ion-padding ion-text-center ion-align-items-center">
+      <ion-spinner name="crescent" class="ion-margin-end"></ion-spinner>
+      <ion-text>Loading Your Memberships</ion-text>
     </div>
-  </ion-content>
+  }
+
+
+  <div class="ion-padding">
+    <ion-button expand="block" routerLink="/discover">
+      Join An Organisation
+    </ion-button>
+  </div>
+</ion-content>
 
 
 </div>

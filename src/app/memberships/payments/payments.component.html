@@ -2,59 +2,64 @@
   <ion-list-header lines="full">
     <ion-label>{{ 'Payments' | uppercase }}</ion-label>
 
-    <ion-button *ngIf="!refreshing" fill="clear" (click)="handleRefresh($event)">
-      <ion-icon name="refresh"></ion-icon>
-    </ion-button>
-    <ion-spinner name="crescent" *ngIf="refreshing" color="primary" class="me-2"></ion-spinner>
+    @if (!refreshing) {
+      <ion-button fill="clear" (click)="handleRefresh($event)">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+    }
+    @if (refreshing) {
+      <ion-spinner name="crescent" color="primary" class="me-2"></ion-spinner>
+    }
   </ion-list-header>
 
-  <ion-item-group *ngIf="(contributions$ | async) as contributions; else loading">
-    <ng-container *ngIf="contributions.length > 0; else emptyList">
-      <ion-item detail="true" *ngFor="let contribution of contributions">
-        <ion-label>
-          <h2>
-            {{ (contribution.contribution_type?.name || 'Unknown') | titlecase }}
-          </h2>
-          <p>
-            <span>
-              {{ contribution?.receipt_dt | date : 'mediumDate' }}
-            </span>
-
-            <span *ngIf="contribution.description">
-              <span class="px-1">&bull;</span>
-              {{ contribution.description }}
-            </span>
-
-            <span *ngIf="!contribution.description">
-              <span class="px-1">&bull;</span>
-              {{ contribution.receipt_no }}
-            </span>
-          </p>
-        </ion-label>
-        <ion-label slot="end" class="text-end">
-          <h2 class="fw-semibold">{{ contribution.amount | number : '1.2-2' }}</h2>
-          <p>{{ contribution.currency_code }}</p>
-        </ion-label>
-      </ion-item>
-    </ng-container>
-
-    <ng-template #emptyList>
-      <ion-item >
-        <ion-label>
-          <h2>No Recent Contributions Recorded</h2>
-        </ion-label>
-      </ion-item>
-
-    </ng-template>
-
-  </ion-item-group>
-
-  <ng-template #loading>
+  @if ((contributions$ | async); as contributions) {
+    <ion-item-group>
+      @if (contributions.length > 0) {
+        @for (contribution of contributions; track contribution) {
+          <ion-item detail="true">
+            <ion-label>
+              <h2>
+                {{ (contribution.contribution_type?.name || 'Unknown') | titlecase }}
+              </h2>
+              <p>
+                <span>
+                  {{ contribution?.receipt_dt | date : 'mediumDate' }}
+                </span>
+                @if (contribution.description) {
+                  <span>
+                    <span class="px-1">&bull;</span>
+                    {{ contribution.description }}
+                  </span>
+                }
+                @if (!contribution.description) {
+                  <span>
+                    <span class="px-1">&bull;</span>
+                    {{ contribution.receipt_no }}
+                  </span>
+                }
+              </p>
+            </ion-label>
+            <ion-label slot="end" class="text-end">
+              <h2 class="fw-semibold">{{ contribution.amount | number : '1.2-2' }}</h2>
+              <p>{{ contribution.currency_code }}</p>
+            </ion-label>
+          </ion-item>
+        }
+      } @else {
+        <ion-item >
+          <ion-label>
+            <h2>No Recent Contributions Recorded</h2>
+          </ion-label>
+        </ion-item>
+      }
+    </ion-item-group>
+  } @else {
     <ion-item>
       <ion-label>
         <ion-skeleton-text [animated]="true" style="width:50%"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true"></ion-skeleton-text>
       </ion-label>
     </ion-item>
-  </ng-template>
+  }
+
 </ion-list>

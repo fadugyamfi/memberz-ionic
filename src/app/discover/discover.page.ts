@@ -7,14 +7,14 @@ import { AuthService } from '../shared/services/api/auth.service';
 import { OrganisationService } from '../shared/services/api/organisation.service';
 import { IonRouterLink, IonHeader, IonBackButton, IonTitle, IonButton, IonContent, IonList, IonListHeader, IonSearchbar, IonItem, IonLabel, IonSpinner, IonText } from '@ionic/angular/standalone';
 import { MainMenuComponent } from '../shared/components/main-menu/main-menu.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { AvatarModule } from 'ngx-avatars';
 
 @Component({
     selector: 'app-discover',
     templateUrl: 'discover.page.html',
     styleUrls: ['discover.page.scss'],
-    imports: [MainMenuComponent, IonHeader, IonBackButton, IonTitle, NgIf, IonButton, RouterLink, IonContent, IonList, IonListHeader, IonSearchbar, NgFor, IonItem, AvatarModule, IonLabel, IonSpinner, IonText, AsyncPipe]
+    imports: [MainMenuComponent, IonHeader, IonBackButton, IonTitle, IonButton, RouterLink, IonContent, IonList, IonListHeader, IonSearchbar, IonItem, AvatarModule, IonLabel, IonSpinner, IonText, AsyncPipe]
 })
 export class DiscoverPage implements OnInit {
 

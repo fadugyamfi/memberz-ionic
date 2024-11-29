@@ -5,14 +5,14 @@ import { OrganisationMember } from '../../shared/models/api/organisation-member'
 import { OrganisationMemberGroup } from '../../shared/models/api/organisation-member-group';
 import { OrganisationMemberGroupService } from '../../shared/services/api/organisation-member-group.service';
 import { StorageService } from '../../shared/services/storage.service';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { IonItemGroup, IonItem, IonLabel, IonSkeletonText } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-membership-groups',
     templateUrl: './groups.component.html',
     styleUrls: ['./groups.component.scss'],
-    imports: [NgIf, IonItemGroup, NgFor, IonItem, IonLabel, IonSkeletonText, AsyncPipe]
+    imports: [IonItemGroup, IonItem, IonLabel, IonSkeletonText, AsyncPipe]
 })
 export class GroupsComponent implements OnInit {
 

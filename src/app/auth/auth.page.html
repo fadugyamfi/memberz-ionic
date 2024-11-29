@@ -35,8 +35,10 @@
         <ion-row>
           <ion-col>
             <ion-button expand="block" type="submit" (click)="doLogin()">
-              <ion-spinner *ngIf="authService.requesting" name="crescent" class="ion-margin-end"
-                           color="white"></ion-spinner>
+              @if (authService.requesting) {
+                <ion-spinner name="crescent" class="ion-margin-end"
+                color="white"></ion-spinner>
+              }
               <ion-text>Login</ion-text>
             </ion-button>
           </ion-col>

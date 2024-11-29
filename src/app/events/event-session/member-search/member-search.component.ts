@@ -8,14 +8,14 @@ import { OrganisationMemberService } from '../../../shared/services/api/organisa
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 import { addIcons } from 'ionicons';
 import { checkbox } from 'ionicons/icons';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { AvatarModule } from 'ngx-avatars';
 
 @Component({
     selector: 'app-member-search',
     templateUrl: './member-search.component.html',
     styleUrls: ['./member-search.component.scss'],
-    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonSearchbar, IonText, IonContent, IonList, NgIf, NgFor, IonItem, AvatarModule, IonLabel, IonIcon, IonSpinner, AsyncPipe]
+    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonSearchbar, IonText, IonContent, IonList, IonItem, AvatarModule, IonLabel, IonIcon, IonSpinner, AsyncPipe]
 })
 export class MemberSearchComponent implements OnInit {
 

@@ -4,14 +4,14 @@ import { OrganisationMember } from '../../shared/models/api/organisation-member'
 import { OrganisationMemberAnniversary } from '../../shared/models/api/organisation-member-anniversary';
 import { OrganisationMemberAnniversaryService } from '../../shared/services/api/organisation-member-anniversary.service';
 import { StorageService } from '../../shared/services/storage.service';
-import { NgIf, NgFor, AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { IonItemGroup, IonItem, IonLabel, IonSkeletonText } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-membership-anniversaries',
     templateUrl: './anniversaries.component.html',
     styleUrls: ['./anniversaries.component.scss'],
-    imports: [NgIf, IonItemGroup, NgFor, IonItem, IonLabel, IonSkeletonText, AsyncPipe, DatePipe]
+    imports: [IonItemGroup, IonItem, IonLabel, IonSkeletonText, AsyncPipe, DatePipe]
 })
 export class AnniversariesComponent implements OnInit {
 

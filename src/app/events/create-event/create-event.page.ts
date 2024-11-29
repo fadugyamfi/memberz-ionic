@@ -12,7 +12,7 @@ import { OrganisationMemberService } from '../../shared/services/api/organisatio
 import { OrganisationService } from '../../shared/services/api/organisation.service';
 import { StorageService } from '../../shared/services/storage.service';
 import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption, IonList, IonInput, IonNote, IonDatetimeButton, IonPopover, IonDatetime, IonTextarea } from '@ionic/angular/standalone';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 const SwAlert = Swal.mixin({
     heightAuto: false
@@ -22,7 +22,7 @@ const SwAlert = Swal.mixin({
     selector: 'app-create-event',
     templateUrl: './create-event.page.html',
     styleUrls: ['./create-event.page.scss'],
-    imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonContent, FormsModule, ReactiveFormsModule, IonItem, IonLabel, IonSelect, NgIf, NgFor, IonSelectOption, IonList, IonInput, IonNote, IonDatetimeButton, IonPopover, IonDatetime, IonTextarea, AsyncPipe]
+    imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonButton, IonContent, FormsModule, ReactiveFormsModule, IonItem, IonLabel, IonSelect, IonSelectOption, IonList, IonInput, IonNote, IonDatetimeButton, IonPopover, IonDatetime, IonTextarea, AsyncPipe]
 })
 export class CreateEventPage implements OnInit {
 

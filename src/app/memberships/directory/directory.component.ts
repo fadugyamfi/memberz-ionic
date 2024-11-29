@@ -3,7 +3,7 @@ import { IonSearchbar, IonHeader, IonToolbar, IonList, IonItemGroup, IonItem, Io
 import { Observable, of } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberService } from '../../shared/services/api/organisation-member.service';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { AvatarModule } from 'ngx-avatars';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 
@@ -12,9 +12,18 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
     templateUrl: './directory.component.html',
     styleUrls: ['./directory.component.scss'],
     imports: [
-        IonHeader, IonToolbar, IonSearchbar, IonList, NgIf, IonItemGroup, NgFor,
-        IonItem, AvatarModule, IonLabel, IonSkeletonText, ProfileDetailsComponent, AsyncPipe
-    ]
+    IonHeader,
+    IonToolbar,
+    IonSearchbar,
+    IonList,
+    IonItemGroup,
+    IonItem,
+    AvatarModule,
+    IonLabel,
+    IonSkeletonText,
+    ProfileDetailsComponent,
+    AsyncPipe
+]
 })
 export class DirectoryComponent implements OnInit {
 

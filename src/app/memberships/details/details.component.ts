@@ -15,7 +15,7 @@ import {
     IonAccordionGroup, IonAccordion, IonItem, IonIcon, IonList, IonListHeader
 } from '@ionic/angular/standalone';
 import { AvatarModule } from 'ngx-avatars';
-import { NgClass, NgIf, DatePipe } from '@angular/common';
+import { NgClass, DatePipe } from '@angular/common';
 import { DirectoryComponent } from '../directory/directory.component';
 import { QrCodeModule } from 'ng-qrcode';
 import { GroupsComponent } from '../groups/groups.component';
@@ -30,12 +30,35 @@ const SwAlert = Swal.mixin({
     templateUrl: './details.component.html',
     styleUrls: ['./details.component.scss'],
     imports: [
-        IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, AvatarModule, IonSegment,
-        IonSegmentButton, IonContent, NgClass, DirectoryComponent, IonCard, IonCardContent,
-        QrCodeModule, IonCardHeader, IonCardTitle, IonCardSubtitle, NgIf, IonLabel, IonAccordionGroup,
-        IonAccordion, IonItem, IonIcon, GroupsComponent, AnniversariesComponent, IonList, IonListHeader,
-        PaymentsComponent, DatePipe
-    ]
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
+    AvatarModule,
+    IonSegment,
+    IonSegmentButton,
+    IonContent,
+    NgClass,
+    DirectoryComponent,
+    IonCard,
+    IonCardContent,
+    QrCodeModule,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonLabel,
+    IonAccordionGroup,
+    IonAccordion,
+    IonItem,
+    IonIcon,
+    GroupsComponent,
+    AnniversariesComponent,
+    IonList,
+    IonListHeader,
+    PaymentsComponent,
+    DatePipe
+]
 })
 export class DetailsComponent implements OnInit {
 

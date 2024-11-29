@@ -8,7 +8,7 @@ import {
     IonCardContent, IonGrid, IonRow, IonCol, IonText
 } from '@ionic/angular/standalone';
 import { AvatarModule } from 'ngx-avatars';
-import { NgIf } from '@angular/common';
+
 import { QrCodeModule } from 'ng-qrcode';
 
 @Component({
@@ -16,9 +16,21 @@ import { QrCodeModule } from 'ng-qrcode';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
     imports: [
-        IonHeader, IonToolbar, IonButtons, IonBackButton, AvatarModule, IonTitle, IonContent,
-        NgIf, IonCard, IonCardContent, IonGrid, IonRow, IonCol, QrCodeModule, IonText
-    ]
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    AvatarModule,
+    IonTitle,
+    IonContent,
+    IonCard,
+    IonCardContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    QrCodeModule,
+    IonText
+]
 })
 export class DashboardComponent implements OnInit {
 

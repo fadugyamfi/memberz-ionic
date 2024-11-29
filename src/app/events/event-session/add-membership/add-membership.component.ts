@@ -11,13 +11,13 @@ import { OrganisationMemberCategoryService } from '../../../shared/services/api/
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
 import { StorageService } from '../../../shared/services/storage.service';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-add-membership',
     templateUrl: './add-membership.component.html',
     styleUrls: ['./add-membership.component.scss'],
-    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, FormsModule, ReactiveFormsModule, IonList, IonItem, IonLabel, IonSelect, NgIf, NgFor, IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner, AsyncPipe]
+    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, FormsModule, ReactiveFormsModule, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner, AsyncPipe]
 })
 export class AddMembershipComponent implements OnInit, OnDestroy {
 

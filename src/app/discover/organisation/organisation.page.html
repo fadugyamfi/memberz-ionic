@@ -41,6 +41,8 @@
 
   <ion-button expand="block" (click)="join()">Join</ion-button>
 
-  <p class="ion-padding-vertical" *ngIf="organisation?.short_description" [innerHTML]="organisation?.short_description"></p>
+  @if (organisation?.short_description) {
+    <p class="ion-padding-vertical" [innerHTML]="organisation?.short_description"></p>
+  }
 
 </ion-content>

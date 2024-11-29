@@ -13,17 +13,30 @@ import {
     IonList, IonItem, IonSpinner, IonText, IonButton
 } from '@ionic/angular/standalone';
 import { AvatarModule } from 'ngx-avatars';
-import { NgClass, NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NgClass, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-organisations',
     templateUrl: './organisations.page.html',
     styleUrls: ['./organisations.page.scss'],
     imports: [
-        MainMenuComponent, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle,
-        IonLabel, AvatarModule, IonContent, NgClass, NgIf, IonList, NgFor, IonItem, IonSpinner,
-        IonText, IonButton, AsyncPipe
-    ]
+    MainMenuComponent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonLabel,
+    AvatarModule,
+    IonContent,
+    NgClass,
+    IonList,
+    IonItem,
+    IonSpinner,
+    IonText,
+    IonButton,
+    AsyncPipe
+]
 })
 export class OrganisationsPage implements OnInit {
 

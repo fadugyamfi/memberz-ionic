@@ -5,13 +5,13 @@ import { AuthService } from '../shared/services/api/auth.service';
 import { addIcons } from 'ionicons';
 import { helpCircle, pencil } from 'ionicons/icons';
 import { IonRouterLink, IonHeader, IonBackButton, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton, IonSpinner, IonText, IonList, IonIcon, IonLabel } from '@ionic/angular/standalone';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.page.html',
     styleUrls: ['./auth.page.scss'],
-    imports: [IonHeader, IonBackButton, RouterLink, IonTitle, IonContent, FormsModule, ReactiveFormsModule, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton, NgIf, IonSpinner, IonText, IonList, IonIcon, IonLabel]
+    imports: [IonHeader, IonBackButton, RouterLink, IonTitle, IonContent, FormsModule, ReactiveFormsModule, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton, IonSpinner, IonText, IonList, IonIcon, IonLabel]
 })
 export class AuthPage implements OnInit {
 

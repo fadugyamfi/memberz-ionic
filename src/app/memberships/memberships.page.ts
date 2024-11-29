@@ -13,17 +13,30 @@ import {
     IonRefresherContent, IonList, IonListHeader, IonItem, IonSpinner, IonText, IonButton
 } from '@ionic/angular/standalone';
 import { AvatarModule } from 'ngx-avatars';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-memberships',
     templateUrl: './memberships.page.html',
     styleUrls: ['./memberships.page.scss'],
     imports: [
-        IonHeader, IonToolbar, IonTitle, IonLabel, AvatarModule, RouterLink, IonContent,
-        IonRefresher, IonRefresherContent, NgIf, IonList, IonListHeader, NgFor, IonItem,
-        IonSpinner, IonText, IonButton, AsyncPipe
-    ]
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonLabel,
+    AvatarModule,
+    RouterLink,
+    IonContent,
+    IonRefresher,
+    IonRefresherContent,
+    IonList,
+    IonListHeader,
+    IonItem,
+    IonSpinner,
+    IonText,
+    IonButton,
+    AsyncPipe
+]
 })
 export class MembershipsPage implements OnInit, OnDestroy {
 

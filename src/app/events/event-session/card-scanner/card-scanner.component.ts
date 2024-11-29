@@ -3,13 +3,13 @@ import { Component, EventEmitter, HostListener, OnInit, Output, ViewChild } from
 import { IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonSpinner } from '@ionic/angular/standalone';
 import { NgxScannerQrcodeComponent, ScannerQRCodeResult, NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-card-scanner',
     templateUrl: './card-scanner.component.html',
     styleUrls: ['./card-scanner.component.scss'],
-    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, NgIf, IonSpinner, NgxScannerQrcodeModule]
+    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonSpinner, NgxScannerQrcodeModule]
 })
 export class CardScannerComponent implements OnInit {
 

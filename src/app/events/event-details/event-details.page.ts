@@ -10,13 +10,13 @@ import { OrganisationService } from '../../shared/services/api/organisation.serv
 import { addIcons } from 'ionicons';
 import { addCircle } from 'ionicons/icons';
 import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonLabel, IonButton, IonIcon, IonText, IonItem, IonBadge } from '@ionic/angular/standalone';
-import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-event-details',
     templateUrl: './event-details.page.html',
     styleUrls: ['./event-details.page.scss'],
-    imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonCard, NgIf, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonLabel, IonButton, IonIcon, IonText, NgFor, IonItem, IonBadge]
+    imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonListHeader, IonLabel, IonButton, IonIcon, IonText, IonItem, IonBadge]
 })
 export class EventDetailsPage implements OnInit {
 
