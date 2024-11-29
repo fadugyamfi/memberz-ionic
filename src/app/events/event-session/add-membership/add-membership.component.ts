@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild, input } from '@angular/core';
-import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonModal, IonSearchbar, ModalController, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner } from '@ionic/angular/standalone';
-import { fromEvent, Observable, of, Subscription, tap } from 'rxjs';
-import { OrganisationEvent } from '../../../shared/models/api/organisation-event';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild, input, output } from '@angular/core';
+import { FormControl, FormGroup, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+    IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons,
+    IonButton, IonContent, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput,
+    IonDatetimeButton, IonPopover, IonDatetime, IonSpinner
+} from '@ionic/angular/standalone';
+import { Observable, of, tap } from 'rxjs';
 import { OrganisationEventSession } from '../../../shared/models/api/organisation-event-session';
 import { OrganisationMember } from '../../../shared/models/api/organisation-member';
 import { OrganisationMemberCategory } from '../../../shared/models/api/organisation-member-category';
@@ -17,15 +20,19 @@ import { AsyncPipe } from '@angular/common';
     selector: 'app-add-membership',
     templateUrl: './add-membership.component.html',
     styleUrls: ['./add-membership.component.scss'],
-    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, FormsModule, ReactiveFormsModule, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner, AsyncPipe]
+    imports: [
+        IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton,
+        IonContent, FormsModule, ReactiveFormsModule, IonList, IonItem, IonLabel, IonSelect,
+        IonSelectOption, IonInput, IonDatetimeButton, IonPopover, IonDatetime, IonSpinner, AsyncPipe
+    ]
 })
 export class AddMembershipComponent implements OnInit, OnDestroy {
 
     @ViewChild('ionModal') modal: IonModal;
     @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
 
-    @Output() close: EventEmitter<any> = new EventEmitter();
-    @Output() register: EventEmitter<any> = new EventEmitter();
+    readonly close = output();
+    readonly register = output<OrganisationMember>();
 
     readonly eventSession = input<OrganisationEventSession>(undefined);
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, output } from '@angular/core';
 import { IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonSpinner } from '@ionic/angular/standalone';
 import { NgxScannerQrcodeComponent, ScannerQRCodeResult, NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { ModalBackButtonService } from '../../../shared/services/modal-back-button.service';
@@ -21,8 +21,8 @@ export class CardScannerComponent implements OnInit {
     public scanning = false;
     public open = true;
 
-    @Output() close: EventEmitter<any> = new EventEmitter();
-    @Output() scan: EventEmitter<string> = new EventEmitter();
+    readonly close = output();
+    readonly scan = output<string>();
 
     constructor(
         private modalBackButton: ModalBackButtonService

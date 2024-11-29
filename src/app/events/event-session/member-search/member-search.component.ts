@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { IonInput, IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonText, IonContent, IonList, IonItem, IonLabel, IonIcon, IonSpinner } from '@ionic/angular/standalone';
+import { Component, HostListener, OnInit, ViewChild, output } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
+import {
+    IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons,
+    IonButton, IonText, IonContent, IonList, IonItem, IonLabel, IonIcon, IonSpinner
+} from '@ionic/angular/standalone';
 import { Observable, of } from 'rxjs';
 import { OrganisationMember } from '../../../shared/models/api/organisation-member';
 import { OrganisationMemberService } from '../../../shared/services/api/organisation-member.service';
@@ -15,7 +18,10 @@ import { AvatarModule } from 'ngx-avatars';
     selector: 'app-member-search',
     templateUrl: './member-search.component.html',
     styleUrls: ['./member-search.component.scss'],
-    imports: [IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonSearchbar, IonText, IonContent, IonList, IonItem, AvatarModule, IonLabel, IonIcon, IonSpinner, AsyncPipe]
+    imports: [
+        IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonSearchbar,
+        IonText, IonContent, IonList, IonItem, AvatarModule, IonLabel, IonIcon, IonSpinner, AsyncPipe
+    ]
 })
 export class MemberSearchComponent implements OnInit {
 
@@ -24,8 +30,8 @@ export class MemberSearchComponent implements OnInit {
     @ViewChild('ionModal') modal: IonModal;
     @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
 
-    @Output() close: EventEmitter<any> = new EventEmitter();
-    @Output() register: EventEmitter<any> = new EventEmitter();
+    readonly close = output();
+    readonly register = output<any>();
 
     public memberships$: Observable<OrganisationMember[]> = of([]);
     public open = true;

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input, output } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberGroup } from '../../shared/models/api/organisation-member-group';
@@ -19,7 +19,7 @@ export class GroupsComponent implements OnInit {
     public readonly membership = input<OrganisationMember>(undefined);
     public memberGroups$: Observable<OrganisationMemberGroup[]>;
 
-    @Output() public load = new EventEmitter();
+    public readonly load = output<any>();
     public cacheKey = '';
 
     constructor(

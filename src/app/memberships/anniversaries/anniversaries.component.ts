@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input, output } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { OrganisationMember } from '../../shared/models/api/organisation-member';
 import { OrganisationMemberAnniversary } from '../../shared/models/api/organisation-member-anniversary';
@@ -18,7 +18,7 @@ export class AnniversariesComponent implements OnInit {
     public readonly membership = input<OrganisationMember>(undefined);
     public anniversaries$: Observable<OrganisationMemberAnniversary[]>;
 
-    @Output() load = new EventEmitter<any>();
+    readonly load = output<any>();
 
     public cacheKey: string;
 

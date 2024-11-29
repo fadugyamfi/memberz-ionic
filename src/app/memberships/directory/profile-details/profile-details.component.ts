@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, OnInit, Output, input, viewChild } from '@angular/core';
+import { Component, HostListener, OnInit, input, viewChild, output } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import {
     IonModal, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton,
@@ -37,7 +37,7 @@ export class ProfileDetailsComponent implements OnInit {
 
     readonly modal = viewChild<IonModal>('ionModal');
 
-    @Output() close: EventEmitter<any> = new EventEmitter();
+    readonly close = output();
     readonly membership = input<OrganisationMember>(undefined);
 
     public memberships$: Observable<OrganisationMember[]> = of([]);
