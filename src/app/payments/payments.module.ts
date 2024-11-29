@@ -11,7 +11,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel
     imports: [
         CommonModule,
         FormsModule,
-        RouterModule.forChild([{ path: '', component: PaymentsPage }]),
+        RouterModule.forChild([{ path: '', loadComponent: () => import('./payments.page').then(m => m.PaymentsPage) }]),
         PaymentsPageRoutingModule,
         IonHeader,
         IonToolbar,

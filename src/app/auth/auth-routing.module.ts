@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserNotLoggedInGuard } from '../shared/guards/user-not-logged-in.guard';
 
-import { AuthPage } from './auth.page';
+
 
 const routes: Routes = [
   {
     path: 'login',
-    component: AuthPage,
+    loadComponent: () => import('./auth.page').then(m => m.AuthPage),
     canActivate: [UserNotLoggedInGuard]
   },
   {

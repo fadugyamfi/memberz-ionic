@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ResetPasswordPage } from './reset-password.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: ResetPasswordPage
+    loadComponent: () => import('./reset-password.page').then(m => m.ResetPasswordPage)
   }
 ];
 

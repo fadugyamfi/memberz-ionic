@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EventSessionPage } from './event-session.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: EventSessionPage
+    loadComponent: () => import('./event-session.page').then(m => m.EventSessionPage)
   }
 ];
 

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TwoFactorAuthPage } from './two-factor-auth.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: TwoFactorAuthPage
+    loadComponent: () => import('./two-factor-auth.page').then(m => m.TwoFactorAuthPage)
   }
 ];
 

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { OrganisationsPage } from './organisations.page';
+
+
 
 const routes: Routes = [
   {
     path: '',
-    component: OrganisationsPage
+    loadComponent: () => import('./organisations.page').then(m => m.OrganisationsPage)
   },
   {
     path: ':id',
-    component: DashboardComponent
+    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent)
   }
 ];
 
