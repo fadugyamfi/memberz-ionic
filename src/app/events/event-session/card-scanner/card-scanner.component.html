@@ -11,10 +11,12 @@
     </ion-header>
 
     <ion-content>
-      <p class="ion-text-center" *ngIf="scanner.isLoading">
-        <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
-        Readying Scanner
-      </p>
+      @if (scanner.isLoading) {
+        <p class="ion-text-center">
+          <ion-spinner name="crescent" class="ion-margin-end" color="tertiary"></ion-spinner>
+          Readying Scanner
+        </p>
+      }
 
       <ngx-scanner-qrcode #scanner (event)="onCodeScanned($event)" ></ngx-scanner-qrcode>
 

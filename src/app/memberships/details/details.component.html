@@ -7,7 +7,7 @@
     <ion-title size="small">{{ organisation?.name }}</ion-title>
 
     <ngx-avatars slot="end" [src]="organisation?.logo" [name]="organisation?.name" size="40" class="me-3"
-                 [round]="true"></ngx-avatars>
+    [round]="true"></ngx-avatars>
   </ion-toolbar>
 
 
@@ -43,10 +43,14 @@
       <ion-card-subtitle>Category: {{ membership?.category?.name }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="text-center">
-      <ion-label *ngIf="!membership.approved" color="danger">Pending Approval</ion-label>
-      <ion-label *ngIf="membership.approved">
-        Member Since: {{ (membership.membership_start_dt || membership.created) | date: 'mediumDate' }}
-      </ion-label>
+      @if (!membership.approved) {
+        <ion-label color="danger">Pending Approval</ion-label>
+      }
+      @if (membership.approved) {
+        <ion-label>
+          Member Since: {{ (membership.membership_start_dt || membership.created) | date: 'mediumDate' }}
+        </ion-label>
+      }
     </ion-card-content>
   </ion-card>
 

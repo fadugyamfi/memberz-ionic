@@ -1,30 +1,37 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit, input } from '@angular/core';
 import { AuthService } from '../../services/api/auth.service';
 import { StorageService } from '../../services/storage.service';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-main-menu',
-  templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.scss'],
-  standalone: true,
-  imports: [
-    IonicModule
-  ]
+    selector: 'app-main-menu',
+    templateUrl: './main-menu.component.html',
+    styleUrls: ['./main-menu.component.scss'],
+    standalone: true,
+    imports: [
+        IonMenu,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonContent,
+        IonList,
+        IonItem,
+        IonLabel
+    ]
 })
 export class MainMenuComponent implements OnInit {
 
-  @Input() contentId = '';
+    readonly contentId = input('');
 
-  constructor(
-    public authService: AuthService,
-    public storage: StorageService
-  ) { }
+    constructor(
+        public authService: AuthService,
+        public storage: StorageService
+    ) { }
 
-  ngOnInit() {}
+    ngOnInit() { }
 
-  doLogout() {
-    this.authService.logout();
-    this.storage.engine.clear();
-  }
+    doLogout() {
+        this.authService.logout();
+        this.storage.engine.clear();
+    }
 }

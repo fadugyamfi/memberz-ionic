@@ -11,14 +11,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="shadow-sm" *ngIf="membership">
+  @if (membership) {
+    <ion-card class="shadow-sm">
       <ion-card-content class="ion-no-padding">
         <ion-grid>
           <ion-row>
             <ion-col size="3">
               <qr-code  [value]="membership?.uuid" size="80" errorCorrectionLevel="M"></qr-code>
             </ion-col>
-
             <ion-col class="ion-padding-top">
               <div class="fw-semibold text-dark">{{ membership.organisation?.name }}</div>
               <div class="">{{ membership.category?.name }}</div>
@@ -26,9 +26,8 @@
               <div>Expires: <ion-text color="success">NEVER</ion-text></div>
             </ion-col>
           </ion-row>
-
         </ion-grid>
       </ion-card-content>
-
-  </ion-card>
+    </ion-card>
+  }
 </ion-content>

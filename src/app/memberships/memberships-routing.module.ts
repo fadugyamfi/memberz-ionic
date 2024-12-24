@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DetailsComponent } from './details/details.component';
 
-import { MembershipsPage } from './memberships.page';
+
+
 
 const routes: Routes = [
   {
     path: '',
-    component: MembershipsPage
+    loadComponent: () => import('./memberships.page').then(m => m.MembershipsPage)
   },
   {
     path: ':id',
-    component: DetailsComponent
+    loadComponent: () => import('./details/details.component').then(m => m.DetailsComponent)
   }
 ];
 

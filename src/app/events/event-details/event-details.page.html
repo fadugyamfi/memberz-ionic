@@ -10,7 +10,9 @@
 
 <ion-content>
   <ion-card class="shadow-none">
-    <img *ngIf="event?.photo" [src]="event?.photo_url" />
+    @if (event?.photo) {
+      <img [src]="event?.photo_url" />
+    }
 
     <ion-card-header>
       <ion-card-title>{{ event?.event_name }}</ion-card-title>
@@ -35,12 +37,14 @@
       </ion-button>
     </ion-list-header>
 
-    <ion-item detail="true" button *ngFor="let session of event?.sessions" (click)="setAttendanceSession(session)">
-      <ion-label>{{ session.session_name }}</ion-label>
-      <ion-badge slot="end">
-        {{ session.attendees_count || 0 }}
-      </ion-badge>
-    </ion-item>
+    @for (session of event?.sessions; track session) {
+      <ion-item detail="true" button (click)="setAttendanceSession(session)">
+        <ion-label>{{ session.session_name }}</ion-label>
+        <ion-badge slot="end">
+          {{ session.attendees_count || 0 }}
+        </ion-badge>
+      </ion-item>
+    }
   </ion-list>
 
 </ion-content>

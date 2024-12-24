@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VerifyOtpPage } from './verify-otp.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: VerifyOtpPage
+    loadComponent: () => import('./verify-otp.page').then(m => m.VerifyOtpPage)
   }
 ];
 
