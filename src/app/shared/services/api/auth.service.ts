@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { OrganisationService } from './organisation.service';
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastController } from '@ionic/angular/standalone';
 
 const Alert = Swal.mixin({
   heightAuto: false
@@ -43,7 +44,8 @@ export class AuthService extends APIService<MemberAccount> {
     public storage: StorageService,
     public router: Router,
     public organisationService: OrganisationService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public toastController: ToastController
   ) {
     super(http, events, storage);
 
@@ -190,8 +192,22 @@ export class AuthService extends APIService<MemberAccount> {
         );
         this.router.navigate(['/auth/login']);
       },
-      error: () => {
-        console.log('Error');
+      error: async (res) => {
+        console.log('Error', res);
+        const toast = await this.toastController.create({
+          message: res.error?.message,
+          duration: 4000,
+          position: 'bottom',
+          color: 'danger'
+        });
+
+        await toast.present();
+
+        // Alert.fire(
+        //   this.translate.instant('Validation Error'),
+        //   this.translate.instant(res.error?.message),
+        //   'error'
+        // );
         this.requesting = false;
       }
     });

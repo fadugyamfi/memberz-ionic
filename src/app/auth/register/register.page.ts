@@ -3,13 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../shared/services/api/auth.service';
 import { MemberAccountService } from '../../shared/services/api/member-account.service';
-import { IonHeader, IonBackButton, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton } from '@ionic/angular/standalone';
+import {
+    IonHeader, IonBackButton, IonTitle, IonContent, IonInput, IonButton, IonFooter
+} from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.page.html',
     styleUrls: ['./register.page.scss'],
-    imports: [IonHeader, IonBackButton, IonTitle, IonContent, FormsModule, ReactiveFormsModule, IonGrid, IonRow, IonCol, IonItem, IonInput, IonButton]
+    imports: [
+        IonHeader, IonBackButton, IonTitle, IonContent, FormsModule, ReactiveFormsModule,
+        IonInput, IonButton, IonFooter
+    ]
 })
 export class RegisterPage implements OnInit {
 

@@ -14,58 +14,39 @@
 
     <form [formGroup]="loginForm" class="mx-4 my-5">
 
-      <ion-grid class="login-block">
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-col>
-            <ion-item>
-              <ion-input label="Mobile Number" type="tel" labelPlacement="floating" placeholder="+23324010100" formControlName="username"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      <section>
+        <ion-input fill="outline" label="Mobile Number" type="tel" labelPlacement="stacked" placeholder="+23324010100"
+          formControlName="username" shape="round"></ion-input>
 
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-col>
-            <ion-item>
-              <!-- <ion-label position="stacked">Password</ion-label> -->
-              <ion-input label="Password" labelPlacement="floating" type="password" placeholder="Password" formControlName="password"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+        <br />
 
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" type="submit" (click)="doLogin()">
-              @if (authService.requesting) {
-                <ion-spinner name="crescent" class="ion-margin-end"
-                color="white"></ion-spinner>
-              }
-              <ion-text>Login</ion-text>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-input fill="outline" label="Password" type="password" labelPlacement="stacked"
+          placeholder="Enter your password" formControlName="password" shape="round">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
 
-      <div class="w-80">
+        <br />
 
+        <ion-button expand="block" type="submit" shape="round" (click)="doLogin()">
+          @if (authService.requesting) {
+          <ion-spinner name="crescent" class="ion-margin-end" color="white"></ion-spinner>
+          }
+          <ion-text>Login</ion-text>
+        </ion-button>
 
-        <ion-list class="mt-4">
-          <ion-item button lines="true" detail="true" routerLink="/auth/forgot-password">
-            <ion-icon slot="start" name="help-circle"></ion-icon>
-            <ion-label>Forgot Password?</ion-label>
-          </ion-item>
-          <ion-item button lines="none" detail="true" routerLink="/auth/register">
-            <ion-icon slot="start" name="pencil"></ion-icon>
-            <ion-label>Sign Up</ion-label>
-          </ion-item>
+        <br />
 
-          <!-- <ion-item-divider></ion-item-divider>
+        <p>
+          <ion-router-link routerLink="/auth/forgot-password"
+            class="d-flex ion-justify-content-center ion-align-items-center ion-padding"
+          >
+            <ion-icon color="primary" name="help-circle"></ion-icon>
+            <ion-text color="primary">Forgot Password?</ion-text>
+          </ion-router-link>
+        </p>
 
-          <ion-item button lines="none" detail="true" routerLink="/discover">
-            <ion-icon slot="start" name="globe"></ion-icon>
-            <ion-label>Discover Organizations</ion-label>
-          </ion-item> -->
-        </ion-list>
-      </div>
+      </section>
+
     </form>
 
 
@@ -75,3 +56,12 @@
 
 
 </ion-content>
+
+<ion-footer class="d-flex ion-justify-content-center ion-no-border ion-padding">
+  <p>
+    <ion-text class="ion-margin-end">Don't have an account?</ion-text>
+    <ion-router-link routerLink="/auth/register">
+      <ion-text color="primary">Sign Up</ion-text>
+    </ion-router-link>
+  </p>
+</ion-footer>

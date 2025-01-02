@@ -13,93 +13,97 @@
 
   <ion-toolbar>
     <ion-segment value="membership" (ionChange)="setContent($event)">
-      <ion-segment-button value="directory">
+      <ion-segment-button value="directory" content-id="directory">
         Directory
       </ion-segment-button>
 
-      <ion-segment-button value="membership">
+      <ion-segment-button value="membership" content-id="membership">
         Membership
       </ion-segment-button>
 
-      <ion-segment-button value="payments">
+      <ion-segment-button value="payments" content-id="payments">
         Payments
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [ngClass]="{ 'ion-hide': !showDirectory() }">
-  <app-membership-directory [membership]="membership"></app-membership-directory>
-</ion-content>
-
-
-<ion-content [ngClass]="{ 'ion-hide': !showMembership() }">
-  <ion-card class="shadow-sm">
-    <ion-card-content class="d-flex ion-justify-content-center">
-      <qr-code [value]="membership?.uuid" size="120" errorCorrectionLevel="M"></qr-code>
-    </ion-card-content>
-    <ion-card-header class="text-center pt-0">
-      <ion-card-title>Membership No: {{ membership?.organisation_no }}</ion-card-title>
-      <ion-card-subtitle>Category: {{ membership?.category?.name }}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content class="text-center">
-      @if (!membership.approved) {
-        <ion-label color="danger">Pending Approval</ion-label>
-      }
-      @if (membership.approved) {
+<ion-segment-view>
+  <ion-segment-content id="directory">
+    <app-membership-directory [membership]="membership"></app-membership-directory>
+  </ion-segment-content>
+  
+  
+  <ion-segment-content id="membership">
+    <ion-card class="shadow-sm">
+      <ion-card-content class="d-flex ion-justify-content-center">
+        <qr-code [value]="membership?.uuid" size="120" errorCorrectionLevel="M"></qr-code>
+      </ion-card-content>
+      <ion-card-header class="text-center pt-0">
+        <ion-card-title>Membership No: {{ membership?.organisation_no }}</ion-card-title>
+        <ion-card-subtitle>Category: {{ membership?.category?.name }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="text-center">
+        @if (!membership.approved) {
+          <ion-label color="danger">Pending Approval</ion-label>
+        }
+        @if (membership.approved) {
+          <ion-label>
+            Member Since: {{ (membership.membership_start_dt || membership.created) | date: 'mediumDate' }}
+          </ion-label>
+        }
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-accordion-group>
+      <ion-accordion value="groups">
+        <ion-item slot="header" color="light">
+          <ion-icon name="people-outline" class="me-2"></ion-icon>
+          <ion-label>Your Groups ({{ groups?.length }})</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <app-membership-groups [membership]="membership" (load)="groups = $event"></app-membership-groups>
+        </div>
+      </ion-accordion>
+  
+      <!-- Anniversaries Group -->
+      <ion-accordion value="anniversaries">
+        <ion-item slot="header" color="light">
+          <ion-icon name="calendar-outline" class="me-2"></ion-icon>
+          <ion-label>Your Anniversaries ({{ anniversaries?.length }})</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <app-membership-anniversaries [membership]="membership" (load)="anniversaries = $event"></app-membership-anniversaries>
+        </div>
+      </ion-accordion>
+  
+    </ion-accordion-group>
+  
+    <ion-list lines="full">
+      <ion-list-header>
+        <b>Membership Settings</b>
+      </ion-list-header>
+      <ion-item button (click)="confirnCancelMembership()" [disabled]="true">
         <ion-label>
-          Member Since: {{ (membership.membership_start_dt || membership.created) | date: 'mediumDate' }}
+          Renew Membership
+          <p>Pay to renew membership</p>
         </ion-label>
-      }
-    </ion-card-content>
-  </ion-card>
-
-  <ion-accordion-group>
-    <ion-accordion value="groups">
-      <ion-item slot="header" color="light">
-        <ion-icon name="people-outline" class="me-2"></ion-icon>
-        <ion-label>Your Groups ({{ groups?.length }})</ion-label>
+        <ion-icon icon="card" slot="end"></ion-icon>
       </ion-item>
-      <div class="ion-padding" slot="content">
-        <app-membership-groups [membership]="membership" (load)="groups = $event"></app-membership-groups>
-      </div>
-    </ion-accordion>
-
-    <!-- Anniversaries Group -->
-    <ion-accordion value="anniversaries">
-      <ion-item slot="header" color="light">
-        <ion-icon name="calendar-outline" class="me-2"></ion-icon>
-        <ion-label>Your Anniversaries ({{ anniversaries?.length }})</ion-label>
+      <ion-item button (click)="confirnCancelMembership()">
+        <ion-label color="danger">
+          Cancel Membership
+          <p>End your membership with this organisation</p>
+        </ion-label>
+        <ion-icon color="danger" icon="trash" slot="end"></ion-icon>
       </ion-item>
-      <div class="ion-padding" slot="content">
-        <app-membership-anniversaries [membership]="membership" (load)="anniversaries = $event"></app-membership-anniversaries>
-      </div>
-    </ion-accordion>
+    </ion-list>
+  
+  </ion-segment-content>
+  
+  <ion-segment-content id="payments">
+    <app-membership-payments [membership]="membership"></app-membership-payments>
+  </ion-segment-content>
+</ion-segment-view>
 
-  </ion-accordion-group>
 
-  <ion-list lines="full">
-    <ion-list-header>
-      <b>Membership Settings</b>
-    </ion-list-header>
-    <ion-item button (click)="confirnCancelMembership()" [disabled]="true">
-      <ion-label>
-        Renew Membership
-        <p>Pay to renew membership</p>
-      </ion-label>
-      <ion-icon icon="card" slot="end"></ion-icon>
-    </ion-item>
-    <ion-item button (click)="confirnCancelMembership()">
-      <ion-label color="danger">
-        Cancel Membership
-        <p>End your membership with this organisation</p>
-      </ion-label>
-      <ion-icon color="danger" icon="trash" slot="end"></ion-icon>
-    </ion-item>
-  </ion-list>
-
-</ion-content>
-
-<ion-content [ngClass]="{ 'ion-hide': !showPayments() }">
-  <app-membership-payments [membership]="membership"></app-membership-payments>
-</ion-content>

@@ -11,8 +11,8 @@ import { addIcons } from 'ionicons';
 import { peopleOutline, calendarOutline, card, trash } from 'ionicons/icons';
 import {
     IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonSegment, IonSegmentButton,
-    IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonLabel,
-    IonAccordionGroup, IonAccordion, IonItem, IonIcon, IonList, IonListHeader
+    IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonLabel,
+    IonAccordionGroup, IonAccordion, IonItem, IonIcon, IonList, IonListHeader, IonSegmentContent, IonSegmentView
 } from '@ionic/angular/standalone';
 import { AvatarModule } from 'ngx-avatars';
 import { NgClass, DatePipe } from '@angular/common';
@@ -38,8 +38,8 @@ const SwAlert = Swal.mixin({
     AvatarModule,
     IonSegment,
     IonSegmentButton,
-    IonContent,
-    NgClass,
+    IonSegmentContent,
+    IonSegmentView,
     DirectoryComponent,
     IonCard,
     IonCardContent,
